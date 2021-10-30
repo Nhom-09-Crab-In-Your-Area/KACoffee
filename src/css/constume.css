@@ -293,3 +293,9 @@ a:active {
     color: darkgray;
     padding: 5px;
 }
+.p-2 {
+    width: 45%;
+}
+.help-block {
+    color: #d8363a;
+}
