@@ -16,9 +16,14 @@ body {
     .dropdown-menu.about {
         width: 15vw;
     }
+
     .dropdown-menu {
         left: 10px;
         border-top: 1px solid #c4c3c3 !important;
+    }
+
+    .nav-item:hover .dropdown-menu {
+        display: block;
     }
 
     .footer-contact-info .contact {
@@ -52,8 +57,6 @@ body {
     .dropdown-menu {
         background: none !important;
         border: none;
-    }
-    .dropdown-menu .row div[class^='col'] {
     }
 }
 
