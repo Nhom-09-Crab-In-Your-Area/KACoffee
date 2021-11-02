@@ -30,13 +30,13 @@
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                                 
-                                <input type="email" id="email" placeholder="Email" class="form-control" name= "email">
-                             </div>
+                                <input type="email" id="email_login" placeholder="Email" class="form-control" name= "email">
+                            </div>
             
                             <!-- Password input -->
                             <div class="form-outline mb-4">
                                 
-                                <input type="password" id="password" placeholder="Password" class="form-control">
+                                <input type="password" id="password_login" placeholder="Password" class="form-control">
                             
                             </div>
             
@@ -52,7 +52,13 @@
                             </div>
             
                             <!-- Submit button -->
-                            <button onclick= "login_sumit" type="submit" class="btn btn-danger">Sign in</button>
+                            <button id="submit_login" type="submit" class="btn btn-danger">Sign in</button>
+                            <script>
+                                document.getElementById("submit_login").addEventListener("click", ()=>{
+                                    console.log('test this shit');
+                                    console.log(document.getElementById("email_login").value);
+                                });
+                            </script>
                             <p class="text-center">OR</p>
                             <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
                                 <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
@@ -60,12 +66,7 @@
                             <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!" role="button">
                                 <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
 
-                            <script>
-                            //submit login info
-                            function login_submit() {
-                                console.log('test');
-                            }
-                            </script>
+                            
 
                             </div>
                         </div>
@@ -92,12 +93,12 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Password</label>
                                 <label class="help-block" for="form1Example23">*</label>
-                                <input type="password" id="password" placeholder="Password" class="form-control">
+                                <input type="password" id="password_forget" placeholder="Password" class="form-control">
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Confirm Password</label>
                                 <label class="help-block" for="form1Example23">*</label>
-                                <input type="password" id="password" placeholder="Password" class="form-control">
+                                <input type="password" id="password_forget_cf" placeholder="Password" class="form-control">
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Phone number </label>
@@ -118,10 +119,10 @@
             {{>footer}}   
 
 
-        <script src="vendor/jquery/jquery.min.js"></script>
+        {{! <script src="vendor/jquery/jquery.min.js"></script>
         <script src="js/main.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrap .com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>    
+        <script src="https://stackpath.bootstrap .com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>     }}
     </body>
 </html>
