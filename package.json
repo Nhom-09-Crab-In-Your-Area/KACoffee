@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js -e js,mustache,css,html"
+    "start": "node src/app/app.js",
+    "dev": "nodemon src/app/app.js -e js,mustache,css,html"
   },
   "keywords": [],
   "author": "",
