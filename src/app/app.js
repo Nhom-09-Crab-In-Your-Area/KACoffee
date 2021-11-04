@@ -1,3 +1,4 @@
+const XMLHttpRequest = require('xhr2');
 const express = require("express");
 var mustacheExpress = require("mustache-express");
 const path = require("path");
