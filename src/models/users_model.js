@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const users = new Schema({
-    email: { type: String, default: ''},
+    email: { type: String, default: '', unique: true, required: true},
     phone: { type: String, default: ''},
-    fullname: { type: String, default: ''},
+    fullname: { type: String, default: '', unique: true, required: true},
     roles: {type: Array, default: []},
     status: { type: String, default: 'noactive'},
     type_regis: { type: String, default: 'WE'},
