@@ -3,8 +3,11 @@ var mustacheExpress = require("mustache-express");
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
-const fs = require('fs');
+const connectDB = require('../dbConfig/connectDB')
 const register = require('./register');
+
+
+
 app.engine("mustache", mustacheExpress());
 
 app.set("view engine", "mustache");
@@ -29,6 +32,9 @@ app.get('/login', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+//connect db
+connectDB();
 
 //utils
 register(app);

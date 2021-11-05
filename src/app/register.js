@@ -1,13 +1,20 @@
 
-const express = require('express')
+const express = require('express');
+const userModel = require('../models/users_model');
 
-module.exports = (app)=> {  
-    app.use(express.json())
-    app.use(express.urlencoded())
+module.exports =(app)=> {  
+    app.use(express.json());
+    app.use(express.urlencoded({extended: true}));
     app.route('/addUser')
         .post((req, res)=> {
-            console.log(req.body);
-            console.log(typeof(req.body));
+            try{
+                let user = new userModel(req.body)
+                user.save();
+                console.log('Inserted new user');
+            }
+            catch (err){
+                res.status(500).send(error);
+            }
             res.end();
         }
     )
