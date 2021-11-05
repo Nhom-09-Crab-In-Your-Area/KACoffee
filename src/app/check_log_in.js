@@ -1,16 +1,19 @@
 const express = require('express');
+const authentication = require('../models/authentication_model')
+const users = require('../models/users_model');
+let check = (info) =>{
+   
+}
 
-
-module.exports =(app)=> {  
+module.exports = (app)=> {  
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
     app.route('/checkLogin')
         .post((req, res)=> {
             try{
-                //insert Users collection
+                //check log in info
 
-                //insert Authentication collection 
-                
+                console.log(authentication);
                 
             }
             catch (err){

@@ -1,7 +1,7 @@
 
 const express = require('express');
 const userModel = require('../models/users_model');
-const authentication = require('../models/authentication');
+const authentication = require('../models/authentication_model');
 module.exports = (app)=> {  
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
