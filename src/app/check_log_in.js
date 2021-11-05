@@ -13,7 +13,6 @@ module.exports = (app)=> {
             try{
                 //check log in info
 
-                console.log(authentication);
                 
             }
             catch (err){
