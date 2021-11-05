@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const connectDB = require('../dbConfig/connectDB')
 const register = require('./register');
-
+const check_log_in = require('./check_log_in');
 
 
 app.engine("mustache", mustacheExpress());
@@ -37,4 +37,5 @@ app.listen(port, () => {
 connectDB();
 
 //utils
-register(app);
+register(app); //route: /addUser
+check_log_in(app); //route: /checkLogin
