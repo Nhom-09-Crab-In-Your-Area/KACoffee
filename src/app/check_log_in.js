@@ -1,21 +1,5 @@
 const express = require('express');
 const authenticationModel = require('../models/authentication_model')
-const usersModel = require('../models/users_model');
-
-let findId = (email) =>{
-    let query = usersModel.find({'email': email});
-    id = query.select('userId');
-    return id;
-}
-
-let check_password = (info) =>{
-   id = findId(info.email);
-   if (id == null) return 'not exist';
-   let query = authenticationModel.find({'email': email});
-   password = query.select('password');
-   if (password == info.password) return 'password correct';
-   else return 'password not correct';
-}
 
 module.exports = (app)=> {  
     app.use(express.json());
@@ -24,12 +8,22 @@ module.exports = (app)=> {
         .post((req, res)=> {
             try{
                 //check log in info  
-                res.send(check_password(req.body));
+                authenticationModel.find({'email': req.body.email}, (err, account)=>{
+                    if (err) throw err;
+                    if (account == null) res.send('email not exist');
+                    else{
+                        if (account.password == req.body.password){
+                            res.send('log in accepted');
+                        }
+                        else{
+                            res.send('wrong password');
+                        }
+                    }
+                })
             }
             catch (err){
-                res.status(500).send(error);
+                res.status(500).send(err);
             }
-            res.end();
         }
     )
 };

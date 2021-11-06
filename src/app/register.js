@@ -6,11 +6,12 @@ const authenticationModel = require('../models/authentication_model');
 let email_check = false;
 let phone_check = false;
 let check_conflict = (info)=>{
-    let conflict = [];
-    userModel.find({'email': info.email}, (_, email)=>{
+    userModel.find({'email': info.email}, (err, email)=>{
+        if (err) throw err;
         if (email != null) email_check = true;
     });
-    userModel.find({'phone': info.phone}, (_, phone)=>{
+    userModel.find({'phone': info.phone}, (err, phone)=>{
+        if (err) throw err;
         if (phone != null) phone_check = true;
     });
 };
@@ -34,7 +35,6 @@ module.exports = (app)=> {
                 }
                 if(!phone_check && !email_check){
                     //insert Users collection
-
                     userModel.create({
                         'last name': account['last name'],
                         'first name': account['first name'],
@@ -57,7 +57,6 @@ module.exports = (app)=> {
             catch (err){
                 res.status(500).send(err);
             }
-            res.end();
         }
     )
 };
