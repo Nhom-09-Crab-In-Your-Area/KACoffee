@@ -9,5 +9,4 @@ let userSchema = new Schema({
     'address': {type: String, default: ''}
 }, {collection: 'Users'});
 
-
 module.exports = mongoose.model('Users', userSchema);

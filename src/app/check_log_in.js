@@ -8,7 +8,7 @@ module.exports = (app)=> {
         .post((req, res)=> {
             try{
                 //check log in info  
-                authenticationModel.find({'email': req.body.email}, (err, account)=>{
+                authenticationModel.findOne({'email': req.body.email}, (err, account)=>{
                     if (err) throw err;
                     if (account == null) res.send('email not exist');
                     else{
