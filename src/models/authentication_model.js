@@ -6,8 +6,6 @@ let authenticationdSchema = new Schema({
     'password': {type: String}
 }, {collection: 'Authentication'} );
 
-
-
 module.exports = mongoose.model('Authentication', authenticationdSchema);
 
 
