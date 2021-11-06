@@ -3,10 +3,16 @@ const express = require('express');
 const userModel = require('../models/users_model');
 const authenticationModel = require('../models/authentication_model');
 
-let check_conflict = ()=>{
-    //implement
-
-
+let email_check = false;
+let phone_check = false;
+let check_conflict = (info)=>{
+    let conflict = [];
+    userModel.find({'email': info.email}, (_, email)=>{
+        if (email != null) email_check = true;
+    });
+    userModel.find({'phone': info.phone}, (_, phone)=>{
+        if (phone != null) phone_check = true;
+    });
 };
 
 
@@ -16,45 +22,40 @@ module.exports = (app)=> {
     app.route('/addUser')
         .post((req, res)=> {
             try{
-
-                let input = req.body;
-                //insert Users collection
-                //need to check conflict
-
-                userModel.count({}, function( err, count){
-                    if (err) throw err;
-                    else{
-                        let new_user = {
-                            'name': input.body,
-                            'email': input.email,
-                            'phone': input.phone,
-                            'address': input.address,
-                            'userId': count
-                        }
-                    }  
-                })
-                
-                //if not conflict
-                //insert Authentication collection 
-                if(!check_conflict()){
-                    let new_au = {
-                        'userId': new_user.userId,
-                        'password': input.password
-                    }
-                    let save_user = new userModel(new_user);
-                    save_user.save();
-                    let save_au = new authenticationModel(new_au);
-                    save_au.save();
-                    res.send({'message': 'Inserted'});    
+                let account = req.body;
+                check_conflict(account);
+                //check email
+                if (email_check){
+                    res.send('email existed');
                 }
-                
-                //if conflict 
-                else{
-                    res.send({'message': 'Already exist'});
+                //check phone
+                if (phone_check){
+                    res.send('phone existed');
                 }
+                if(!phone_check && !email_check){
+                    //insert Users collection
+
+                    userModel.create({
+                        'last name': account['last name'],
+                        'first name': account['first name'],
+                        'phone': account.phone,
+                        'email': account.email,
+                        'address': account.address
+                    });
+
+                    //insert Authentication collection
+                    authenticationModel.create({
+                        'email': account.email,
+                        'password': account.password
+                    })
+
+                    res.send('account added');
+                }
+                email_check = false;
+                phone_check = false;
             }
             catch (err){
-                res.status(500).send(error);
+                res.status(500).send(err);
             }
             res.end();
         }

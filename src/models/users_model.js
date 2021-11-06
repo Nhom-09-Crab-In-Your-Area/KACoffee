@@ -3,12 +3,10 @@ const Schema = mongoose.Schema
 
 let userSchema = new Schema({
     'email': {type: String, default: '' },
-    'name': {    
-        'first name': {type: String, default: ''},
-        'last name': {type: String, default:''}
-    },
-    'phone': {type: String, default:'' },
-    'userID': {type: String, default: ''}
+    'first name': {type: String},
+    'last name': {type: String},
+    'phone': {type: String},
+    'address': {type: String, default: ''}
 }, {collection: 'Users'});
 
 
