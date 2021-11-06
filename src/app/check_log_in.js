@@ -1,8 +1,20 @@
 const express = require('express');
-const authentication = require('../models/authentication_model')
-const users = require('../models/users_model');
-let check = (info) =>{
-   
+const authenticationModel = require('../models/authentication_model')
+const usersModel = require('../models/users_model');
+
+let findId = (email) =>{
+    let query = usersModel.find({'email': email});
+    id = query.select('userId');
+    return id;
+}
+
+let check_password = (info) =>{
+   id = findId(info.email);
+   if (id == null) return 'not exist';
+   let query = authenticationModel.find({'email': email});
+   password = query.select('password');
+   if (password == info.password) return 'password correct';
+   else return 'passpword not correct';
 }
 
 module.exports = (app)=> {  
@@ -11,9 +23,8 @@ module.exports = (app)=> {
     app.route('/checkLogin')
         .post((req, res)=> {
             try{
-                //check log in info
-
-                
+                //check log in info  
+                res.send(check_password(req.body));
             }
             catch (err){
                 res.status(500).send(error);
