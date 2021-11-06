@@ -7,7 +7,7 @@ let authenticationdSchema = new Schema({
 }, {collection: 'Authentication'} );
 
 
-authenticationdSchema.index({'userId': 1})
+
 module.exports = mongoose.model('Authentication', authenticationdSchema);
 
 

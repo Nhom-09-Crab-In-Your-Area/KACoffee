@@ -14,7 +14,7 @@ let check_password = (info) =>{
    let query = authenticationModel.find({'email': email});
    password = query.select('password');
    if (password == info.password) return 'password correct';
-   else return 'passpword not correct';
+   else return 'password not correct';
 }
 
 module.exports = (app)=> {  

@@ -11,5 +11,5 @@ let userSchema = new Schema({
     'userID': {type: String, default: ''}
 }, {collection: 'Users'});
 
-userSchema.index({email:1});
+
 module.exports = mongoose.model('Users', userSchema);
