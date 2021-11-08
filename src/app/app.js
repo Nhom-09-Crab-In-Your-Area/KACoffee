@@ -1,12 +1,14 @@
 const express = require('express');
+const morgan = require('morgan')
 var mustacheExpress = require("mustache-express");
+
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 const connectDB = require('../dbConfig/connectDB')
 const register = require('./register');
 const check_log_in = require('./check_log_in');
-
+const edit_info = require('./about_data');
 
 app.engine("mustache", mustacheExpress());
 
@@ -17,7 +19,7 @@ app.engine(
   "mustache",
   mustacheExpress(path.join(__dirname, "../../views/partials"), ".mustache")
 );
-
+app.use(morgan('dev')) // show all response
 app.use(express.static(path.join(__dirname, "../../public")));
 
 //render 
@@ -39,3 +41,4 @@ connectDB();
 //utils
 register(app); //route: /addUser
 check_log_in(app); //route: /checkLogin
+edit_info(app); // route: /data
