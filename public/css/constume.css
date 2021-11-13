@@ -319,3 +319,130 @@ a:active {
 .navbut:hover {
     cursor: pointer;
 }
+
+
+
+/* Phan CSS cua Ha nha :((( */
+
+#sp {
+    padding-top: 7px;
+    margin-left: 20px;
+    color: rgb(189, 107, 9);
+}
+.ho {
+    display: inline-block;
+}
+#Home {
+    text-decoration-line: underline;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: large;
+    color: black;
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+#home {   
+    width: 100%;
+    float: left;
+    height: 40px;
+    margin: 35px 0 0 100px;
+}
+
+
+.fil {
+    display: inline-block; 
+    list-style: none;
+}
+ul.fil-li {
+    display: flex;  
+}
+
+#filter {
+    width: 40%;
+    margin: 80px 0 0 8%;
+    font-size: larger;
+}
+
+.product-grids-all {
+    width: 100%;
+    padding: 5%;
+    background-color: rgb(254, 235, 230);
+    margin-bottom: 5%;
+}
+.product-item {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom:50px;
+    padding: 15px;
+    margin-left: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+.add {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+ul.products {
+    display: flex; 
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+ul.products-li {
+    flex-basis: 25%;  
+    display: flex;  
+}
+ul.products li img {
+   border-radius: 7px;
+}
+.image {
+    margin-bottom: 20px;
+    width: 240px;
+    height:250px;
+    justify-content: center;
+}
+.img {
+    margin: auto 0;
+}
+.Soluong {
+    font-size:large;
+}
+.num {
+    width: 100px;
+    float: right;
+    font-size: large;
+    text-align: center;
+}
+ul.fil {
+    width: 100%;
+    display : flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+}
+ul.fil-li {
+    flex-basis: 25%;
+}
+
+div.stars {
+    display: inline-block;
+  }
+   
+  input.star { display: none; }
+   
+  label.star {
+    float: right;
+    padding: 5px;
+    font-size: 16px;
+    color: #444;
+    transition: all .2s;
+  }
+   
+  label.star {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+   
