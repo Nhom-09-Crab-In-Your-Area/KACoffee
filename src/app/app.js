@@ -45,7 +45,7 @@ app.listen(port, () => {
 connectDB();
 
 //utils
-register(app); //route: /addCustomer, /addAdmin, /addEmployee
+register(app); //route: /addCustomer, /addEmployee
 log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 edit_info(app); // route: /data
