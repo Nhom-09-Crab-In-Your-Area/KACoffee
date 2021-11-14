@@ -4,7 +4,7 @@ const userModel = require('../models/users_model');
 const authenticationModel = require('../models/authentication_model');
 account_type = function(route){
     if(route == '/addCustomer') return 'Customer';
-    if(route == '/addAdmin') return 'addAdmin';
+    if(route == '/addAdmin') return 'Admin';
     if(route == '/addEmployee') return 'Employee';
 }
 regis_route = function (app, route){
@@ -22,18 +22,20 @@ regis_route = function (app, route){
                         //check phone
                         userModel.findOne({'phone': info.phone}, (err, account)=>{
                             if (err) throw err;
-                            if (account != null) res.send('phone existed');
+                            
+                            
+                            if (account != null) res.send('phone existed')
                             else{
                                 //insert Users collection
-                            userModel.create({
-                                'last name': info['last name'],
-                                'first name': info['first name'],
-                                'phone': info.phone,
-                                'email': info.email,
-                                'address': info.address,
-                                'account type': account_type(route)
+                                userModel.create({
+                                    'last name': info['last name'],
+                                    'first name': info['first name'],
+                                    'phone': info.phone,
+                                    'email': info.email,
+                                    'address': info.address,
+                                    'account type': account_type(route)
                             });
-
+                            
                             //insert Authentication collection
                             authenticationModel.create({
                                 'email': info.email,
@@ -56,7 +58,7 @@ regis_route = function (app, route){
 }
 
 
-module.exports.addCusomer = (app)=> {  
+module.exports = (app)=> {  
     regis_route(app, '/addCustomer');
     regis_route(app, '/addEmployee');
     regis_route(app, '/addAdmin');

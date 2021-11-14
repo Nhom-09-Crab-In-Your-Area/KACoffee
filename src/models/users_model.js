@@ -6,7 +6,8 @@ let userSchema = new Schema({
     'first name': {type: String},
     'last name': {type: String},
     'phone': {type: String},
-    'address': {type: String, default: ''}
+    'address': {type: String, default: ''},
+    'account type': {type: String, default: ''}
 }, {collection: 'Users'});
 
 module.exports = mongoose.model('Users', userSchema);
