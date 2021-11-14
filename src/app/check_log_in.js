@@ -13,6 +13,8 @@ module.exports = (app)=> {
                     if (account == null) res.send('email not exist');
                     else{
                         if (account.password == req.body.password){
+                            req.session.UserEmail = req.body.email;
+                            req.session.UserType = null;
                             res.send('log in accepted');
                         }
                         else{

@@ -2,11 +2,13 @@
 const express = require('express');
 const userModel = require('../models/users_model');
 const authenticationModel = require('../models/authentication_model');
-
-module.exports = (app)=> {  
-    app.use(express.json());
-    app.use(express.urlencoded({extended: true}));
-    app.route('/addUser')
+account_type = function(route){
+    if(route == '/addCustomer') return 'Customer';
+    if(route == '/addAdmin') return 'addAdmin';
+    if(route == '/addEmployee') return 'Employee';
+}
+regis_route = function (app, route){
+    app.route(route)
         .post((req, res)=> {
             
             try{
@@ -28,7 +30,8 @@ module.exports = (app)=> {
                                 'first name': info['first name'],
                                 'phone': info.phone,
                                 'email': info.email,
-                                'address': info.address
+                                'address': info.address,
+                                'account type': account_type(route)
                             });
 
                             //insert Authentication collection
@@ -49,4 +52,12 @@ module.exports = (app)=> {
             }
         }
     )
+
+}
+
+
+module.exports.addCusomer = (app)=> {  
+    regis_route(app, '/addCustomer');
+    regis_route(app, '/addEmployee');
+    regis_route(app, '/addAdmin');
 };

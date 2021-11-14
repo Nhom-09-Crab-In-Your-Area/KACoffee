@@ -9,16 +9,22 @@ const connectDB = require('../dbConfig/connectDB')
 const register = require('./register');
 const check_log_in = require('./check_log_in');
 const edit_info = require('./about_data');
+const session_config = require('./session_config');
+
 
 app.engine("mustache", mustacheExpress());
 
 app.set("view engine", "mustache");
 app.set("views", path.join(__dirname, "../../views"));
+session_config(app); //session configuration
+
 
 app.engine(
   "mustache",
   mustacheExpress(path.join(__dirname, "../../views/partials"), ".mustache")
 );
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev')) // show all response
 app.use(express.static(path.join(__dirname, "../../public")));
 
