@@ -1,5 +1,5 @@
 
-const express = require('express');
+
 const userModel = require('../models/users_model');
 const authenticationModel = require('../models/authentication_model');
 const employeeModel = require('../models/employees_model');
@@ -51,20 +51,23 @@ regis_route = function (app, route){
                                     'email': info.email,
                                     'address': info.address,
                                 }
+                                //insert Authentication collection
+                                 new_authen = {
+                                    'email': info.email,
+                                    'password': info.password,
+                                    'account type': acc_type
+                                };
 
                                 if(acc_type == 'Employee'){
                                     new_account['storeID'] = info.storeID;
                                     new_account['account type'] = 'Employee';
                                 }
-                                Model.create(new_account);
-                            
-                            //insert Authentication collection
-                            authenticationModel.create({
-                                'email': info.email,
-                                'password': info.password
-                            })
 
-                            res.send('account added');
+                                //save to database
+                                Model.create(new_account);
+                                authenticationModel.create(new_authen);
+
+                                res.send('account added');
                             }
                         });
                     }

@@ -11,8 +11,8 @@ module.exports = (app)=> {
                     if (account == null) res.send('email not exist');
                     else{
                         if (account.password == req.body.password){
-                            req.session.UserEmail = req.body.email;
-                            req.session.UserType = null;
+                            req.session.UserEmail = account.email;
+                            req.session['account type'] = account['account type'];
                             res.send('log in accepted');
                         }
                         else{
