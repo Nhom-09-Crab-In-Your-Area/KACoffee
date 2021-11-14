@@ -7,10 +7,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 const connectDB = require('../dbConfig/connectDB')
 const register = require('./register');
-const check_log_in = require('./check_log_in');
+const log_in = require('./log_in');
 const edit_info = require('./about_data');
 const session_config = require('./session_config');
-
+const log_out = require('./log_out');
 
 app.engine("mustache", mustacheExpress());
 
@@ -45,6 +45,7 @@ app.listen(port, () => {
 connectDB();
 
 //utils
-register(app); //route: /addUser
-check_log_in(app); //route: /checkLogin
+register(app); //route: /addCustomer, /addAdmin, /addEmployee
+log_in(app); //route: /log_in
+log_out(app); //route: /log_out
 edit_info(app); // route: /data

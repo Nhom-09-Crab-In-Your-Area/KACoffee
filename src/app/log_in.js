@@ -2,9 +2,7 @@ const express = require('express');
 const authenticationModel = require('../models/authentication_model')
 
 module.exports = (app)=> {  
-    app.use(express.json());
-    app.use(express.urlencoded({extended: true}));
-    app.route('/checkLogin')
+    app.route('/log_in')
         .post((req, res)=> {
             try{
                 //check log in info  
