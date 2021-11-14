@@ -41,7 +41,7 @@ module.exports = function(app){
                 if(err) res.status(500).json(err)
                 else if(account != null) res.send("Phone exists")
                 else{
-                    userModel.update(
+                    userModel.updateOne(
                         {_id: info.id}
                         , {'address': info.address, 'phone': info.phone, 'last name': info['last name'], 'first name': info['first name'] }
                         , function(err, user){
