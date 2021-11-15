@@ -1,5 +1,5 @@
 const userModel = require("../models/users_model")
-
+const employeeModel = require('../models/employees_model');
 // admin
 function getAllInfo(res){
     userModel.find(function(err, user){
@@ -13,17 +13,41 @@ function getAllInfo(res){
 }
 
 function getInfo(req, res){
-    userModel.findOne({email : req.session.UserEmail}, function(err, user){
-        if(err){
-            res.status(500).json(err)
-        }
-        if(user == null){
-            res.redirect("/")
-        }
-        else{
-            res.json(user)
-        }
-    })
+    if(req.session['account type'] == 'Customer'){
+        userModel.findOne({email : req.session.UserEmail}, function(err, account){
+            if(err){
+                res.status(500).json(err)
+            }
+            else if(account == null){
+                res.redirect("/")
+            }
+            else{
+                res.json(account)
+            }
+        })
+    }
+    else{
+        employeeModel.findOne({email : req.session.UserEmail}, function(err, account){
+            if(err){
+                res.status(500).json(err)
+            }
+            else if(account == null){
+                res.redirect("/")
+            }
+            else if(req.session['account type'] == 'Admin'){
+                // personal info
+                res.json(account)
+                // employee info
+
+            }
+            else if(req.session['account type'] == 'Employee'){
+                // personal info
+                res.json(account)
+                // phone and email's admin
+                
+            }
+        })
+    }
 }
 
 module.exports = function(app){

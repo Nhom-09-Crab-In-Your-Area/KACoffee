@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 const connectDB = require('../dbConfig/connectDB')
 const register = require('./register');
 const log_in = require('./log_in');
-const edit_info = require('./about_data');
+const edit_info = require('./account_info');
 const session_config = require('./session_config');
 const log_out = require('./log_out');
 
