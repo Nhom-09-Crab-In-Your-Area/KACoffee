@@ -1,8 +1,8 @@
 let log_out = (app) => {
     app.route('/log_out')
-        .post( (req, res)=>{
+        .get( (req, res)=>{
             req.session.destroy((error) => {
-                if (error) throw error;
+                if (error) res.status(500).json(err);
                 res.redirect('/');
             });
         })
