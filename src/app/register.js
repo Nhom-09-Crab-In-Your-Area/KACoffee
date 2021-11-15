@@ -21,7 +21,7 @@ regis_route = function (app, route){
                 if (acc_type == 'Employee'){
                     //check authority
                     if (req.session.AccountType != 'Admin'){
-                        res.send('Only Admin can create employee account');
+                        res.send(JSON.stringify('Only Admin can create employee account'));
                         return;
                     }
                     Model = employeeModel;
@@ -32,7 +32,7 @@ regis_route = function (app, route){
                 Model.findOne({'email': info.email}, (err, account)=>{
                     
                     if (err) throw err;
-                    if (account != null) res.send('email existed');
+                    if (account != null) res.send(JSON.stringify('email existed'));
                     else{
 
                       
@@ -41,7 +41,7 @@ regis_route = function (app, route){
                             if (err) throw err;
                             
                             
-                            if (account != null) res.send('phone existed')
+                            if (account != null) res.send(JSON.stringify('phone existed'));
                             else{
                                 //insert Users/Employees collection
                                 new_account = {
@@ -67,7 +67,7 @@ regis_route = function (app, route){
                                 Model.create(new_account);
                                 authenticationModel.create(new_authen);
 
-                                res.send('account added');
+                                res.send(JSON.stringify('account added'));
                             }
                         });
                     }
@@ -75,7 +75,7 @@ regis_route = function (app, route){
 
             }
             catch (err){
-                res.status(500).send(err);
+                res.status(500).send(JSON.stringify(err));
             }
         }
     )
