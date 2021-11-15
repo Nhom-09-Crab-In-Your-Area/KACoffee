@@ -1,17 +1,17 @@
-const express = require('express');
-const morgan = require('morgan')
+const express = require("express");
+const morgan = require("morgan");
 var mustacheExpress = require("mustache-express");
 
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
-const connectDB = require('../dbConfig/connectDB')
-const register = require('./register');
-const log_in = require('./log_in');
-const edit_info = require('./alter_data/account_info');
-const session_config = require('./session_config');
-const log_out = require('./log_out');
-const remove_employee = require('./alter_data/remove_employee');
+const connectDB = require("../dbConfig/connectDB");
+const register = require("./register");
+const log_in = require("./log_in");
+const edit_info = require("./alter_data/account_info");
+const session_config = require("./session_config");
+const log_out = require("./log_out");
+const remove_employee = require("./alter_data/remove_employee");
 
 app.engine("mustache", mustacheExpress());
 
@@ -19,23 +19,26 @@ app.set("view engine", "mustache");
 app.set("views", path.join(__dirname, "../../views"));
 session_config(app); //session configuration
 
-
 app.engine(
   "mustache",
   mustacheExpress(path.join(__dirname, "../../views/partials"), ".mustache")
 );
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(morgan('dev')) // show all response
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev")); // show all response
 app.use(express.static(path.join(__dirname, "../../public")));
 
-//render 
+//render
 app.get("/", (req, res) => {
-  res.render(path.join(__dirname + '/../../views/index'), { name: "Anh" });
+  res.render(path.join(__dirname + "/../../views/index"), { name: "Anh" });
 });
 
-app.get('/login', (req, res) => {
-  res.render(path.join(__dirname + '/../../views/login'), {});
+app.get("/login", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/login"), {});
+});
+
+app.get("/product", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/product"), {});
 });
 
 app.listen(port, () => {

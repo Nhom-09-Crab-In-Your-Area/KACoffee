@@ -320,8 +320,6 @@ a:active {
     cursor: pointer;
 }
 
-
-
 /* Phan CSS cua Ha nha :((( */
 
 #sp {
@@ -445,4 +443,39 @@ div.stars {
     color: #FD4;
     transition: all .25s;
 }
-   
+.login {
+    position: relative;
+}
+
+.login .logindropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #c4c3c3;
+    width: 200px;
+    left: -100px;
+    padding: 10px;
+}
+
+.login a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.login:hover {
+    cursor: pointer;
+}
+
+.login:hover .logindropdown {
+    display: block;
+}
+
+.loginclicked {
+    display: block !important;
+    cursor: pointer;
+}
+
+.login .logindropdown button {
+    background-color: white;
+}
