@@ -1,12 +1,11 @@
-const express = require('express');
+const express = require("express");
 var mustacheExpress = require("mustache-express");
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
-const connectDB = require('../dbConfig/connectDB')
-const register = require('./register');
-const check_log_in = require('./check_log_in');
-
+const connectDB = require("../dbConfig/connectDB");
+const register = require("./register");
+const check_log_in = require("./check_log_in");
 
 app.engine("mustache", mustacheExpress());
 
@@ -20,13 +19,17 @@ app.engine(
 
 app.use(express.static(path.join(__dirname, "../../public")));
 
-//render 
+//render
 app.get("/", (req, res) => {
-  res.render(path.join(__dirname + '/../../views/index'), { name: "Anh" });
+  res.render(path.join(__dirname + "/../../views/index"), { name: "Anh" });
 });
 
-app.get('/login', (req, res) => {
-  res.render(path.join(__dirname + '/../../views/login'), {});
+app.get("/login", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/login"), {});
+});
+
+app.get("/product", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/product"), {});
 });
 
 app.listen(port, () => {
