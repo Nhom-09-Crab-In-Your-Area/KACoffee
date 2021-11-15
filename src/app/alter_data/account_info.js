@@ -1,5 +1,5 @@
-const userModel = require("../models/users_model")
-const employeeModel = require('../models/employees_model');
+const userModel = require("../../models/users_model")
+const employeeModel = require('../../models/employees_model');
 // admin
 function getAllInfo(res){
     userModel.find(function(err, user){
@@ -34,13 +34,13 @@ function getInfo(req, res){
             else if(account == null){
                 res.redirect("/")
             }
-            else if(req.session['account type'] == 'Admin'){
+            else if(req.session.AccountType == 'Admin'){
                 // personal info
                 res.json(account)
                 // employee info
 
             }
-            else if(req.session['account type'] == 'Employee'){
+            else if(req.session.AccountType == 'Employee'){
                 // personal info
                 res.json(account)
                 // phone and email's admin
