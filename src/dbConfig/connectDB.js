@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
 //need to be creditial
-const url = `mongodb+srv://dbAdminAuto:weeabooconnect@cluster0.x2zsu.mongodb.net/KACoffeeDB?retryWrites=true&w=majority`
+const config = require('./config');
+const url = config.url;
 
 const connectionParams={
     useNewUrlParser: true
 }
+
 let connect = ()=>{
     console.log('Connecting...')
     mongoose.connect(url,connectionParams)
