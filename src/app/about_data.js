@@ -1,5 +1,6 @@
 const userModel = require("../models/users_model")
 
+// admin
 function getAllInfo(res){
     userModel.find(function(err, user){
         if(err){
@@ -10,10 +11,14 @@ function getAllInfo(res){
         }
     })
 }
+
 function getInfo(req, res){
-    userModel.findById({_id : req.body.id}, function(err, user){
+    userModel.findOne({email : req.session.UserEmail}, function(err, user){
         if(err){
             res.status(500).json(err)
+        }
+        if(user == null){
+            res.redirect("/")
         }
         else{
             res.json(user)
@@ -23,15 +28,15 @@ function getInfo(req, res){
 
 module.exports = function(app){
     // dev
-    app.get("/data/all", function(req,res){
+    app.get("/account/all", function(req,res){
         getAllInfo(res)
     })
 
-    app.post("/data/getById", function(req,res){
+    app.get("/account/profile", function(req,res){
         getInfo(req,res)
     })
 
-    app.put("/data/edit", function(req,res){
+    app.put("/account/edit", function(req,res){
         var info = req.body
         if(!info.id){
             return res.status(500).send("ID is required")
