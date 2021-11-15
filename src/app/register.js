@@ -20,7 +20,7 @@ regis_route = function (app, route){
                 } 
                 if (acc_type == 'Employee'){
                     //check authority
-                    if (req.session.account_type != 'Admin'){
+                    if (req.session.AccountType != 'Admin'){
                         res.send('Only Admin can create employee account');
                         return;
                     }
