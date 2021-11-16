@@ -15,14 +15,13 @@ store.on('error', function(error) {
     console.log(error);
 });
 
-module.exports = (app) => {
-    app.use(cookieParser());
+module.exports.init = (app) => {
     app.use(session({
         genid: function(req) {
-            return shortid.generate();
+            return shortid.generate();;
         },
         secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-        saveUninitialized: false,
+        saveUninitialized: true,
         cookie: { maxAge: _2hours,
                   //secure need to be set to true when implement
                   secure: false,
@@ -34,8 +33,5 @@ module.exports = (app) => {
         
 
     }));
-    
-
 }
-
-
+module.exports.session_store = store;
