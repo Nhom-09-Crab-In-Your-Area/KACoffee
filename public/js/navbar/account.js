@@ -38,6 +38,5 @@ fetch(url, { method: 'GET' })
         else return res.json()
     })
     .then((data) => {
-        console.log(data)
-        //customerHandler(data.first_name)
+        customerHandler(data['first name'])
     })
