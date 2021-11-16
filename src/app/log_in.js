@@ -1,10 +1,8 @@
-const express = require('express');
+
 const authenticationModel = require('../models/authentication_model')
 
 module.exports = (app)=> {  
-    app.use(express.json());
-    app.use(express.urlencoded({extended: true}));
-    app.route('/checkLogin')
+    app.route('/log_in')
         .post((req, res)=> {
             try{
                 //check log in info  
@@ -13,6 +11,8 @@ module.exports = (app)=> {
                     if (account == null) res.send('email not exist');
                     else{
                         if (account.password == req.body.password){
+                            req.session.UserEmail = account.email;
+                            req.session['account type'] = account['account type'];
                             res.send('log in accepted');
                         }
                         else{

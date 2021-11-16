@@ -1,43 +1,73 @@
 
-const express = require('express');
+
 const userModel = require('../models/users_model');
 const authenticationModel = require('../models/authentication_model');
+const employeeModel = require('../models/employees_model');
 
-module.exports = (app)=> {  
-    app.use(express.json());
-    app.use(express.urlencoded({extended: true}));
-    app.route('/addUser')
+account_type = function(route){
+    if(route == '/addCustomer') return 'Customer';
+    if(route == '/addEmployee') return 'Employee';
+}
+regis_route = function (app, route){
+    app.route(route)
         .post((req, res)=> {
             
             try{
                 let info = req.body;
+                acc_type = account_type(route);
+                if (acc_type == 'Customer'){
+                    Model = userModel;
+                } 
+                if (acc_type == 'Employee'){
+                    //check authority
+                    if (req.session.account_type != 'Admin'){
+                        res.send('Only Admin can create employee account');
+                        return;
+                    }
+                    Model = employeeModel;
+                }
+
+
                 //check email
-                userModel.findOne({'email': info.email}, (err, account)=>{
+                Model.findOne({'email': info.email}, (err, account)=>{
                     
                     if (err) throw err;
                     if (account != null) res.send('email existed');
                     else{
+
+                      
                         //check phone
-                        userModel.findOne({'phone': info.phone}, (err, account)=>{
+                        Model.findOne({'phone': info.phone}, (err, account)=>{
                             if (err) throw err;
-                            if (account != null) res.send('phone existed');
+                            
+                            
+                            if (account != null) res.send('phone existed')
                             else{
-                                //insert Users collection
-                            userModel.create({
-                                'last name': info['last name'],
-                                'first name': info['first name'],
-                                'phone': info.phone,
-                                'email': info.email,
-                                'address': info.address
-                            });
+                                //insert Users/Employees collection
+                                new_account = {
+                                    'last name': info['last name'],
+                                    'first name': info['first name'],
+                                    'phone': info.phone,
+                                    'email': info.email,
+                                    'address': info.address,
+                                }
+                                //insert Authentication collection
+                                 new_authen = {
+                                    'email': info.email,
+                                    'password': info.password,
+                                    'account type': acc_type
+                                };
 
-                            //insert Authentication collection
-                            authenticationModel.create({
-                                'email': info.email,
-                                'password': info.password
-                            })
+                                if(acc_type == 'Employee'){
+                                    new_account['storeID'] = info.storeID;
+                                    new_account['account type'] = 'Employee';
+                                }
 
-                            res.send('account added');
+                                //save to database
+                                Model.create(new_account);
+                                authenticationModel.create(new_authen);
+
+                                res.send('account added');
                             }
                         });
                     }
@@ -49,4 +79,11 @@ module.exports = (app)=> {
             }
         }
     )
+
+}
+
+
+module.exports = (app)=> {  
+    regis_route(app, '/addCustomer');
+    regis_route(app, '/addEmployee');
 };
