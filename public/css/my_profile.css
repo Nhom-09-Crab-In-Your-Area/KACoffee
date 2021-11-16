@@ -20,11 +20,6 @@
     margin: 10px;
 }
 
-.account-menu div {
-    padding: 2px;
-    margin: 2px;
-}
-
 .info-container {
     margin-bottom: 20px;
 }
@@ -38,6 +33,10 @@
 .info-container .row * {
     margin-top: 7px;
     margin-bottom: 7px;
+}
+
+.address {
+    overflow: auto;
 }
 
 .info-container .btn-cnt {
