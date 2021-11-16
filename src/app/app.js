@@ -8,10 +8,10 @@ const port = process.env.PORT || 3000;
 const connectDB = require("../dbConfig/connectDB");
 const register = require("./register");
 const log_in = require("./log_in");
-const edit_info = require("./alter_data/account_info");
+const edit_info = require("./alter_data/account_utils");
 const session_config = require("./session_config");
 const log_out = require("./log_out");
-const remove_employee = require("./alter_data/remove_employee");
+const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
 const authen = require('./authentication');
 
@@ -60,7 +60,7 @@ register(app); //route: /addCustomer, /addEmployee
 log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 edit_info(app); // route: /data
-remove_employee(app); //route: /remove_employee
+account_utils(app);
 product(app)
 authen(app); //authentication
 
