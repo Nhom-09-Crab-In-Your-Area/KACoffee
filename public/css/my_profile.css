@@ -7,6 +7,10 @@
         padding: 0px !important;
         margin: 0px !important;
     }
+
+    .account-menu .active {
+        background-color: rgb(201, 200, 200);
+    }
 }
 
 .title {
@@ -15,9 +19,17 @@
 }
 
 .account-menu {
-    background-color: rgb(173, 173, 173);
+    background-color: rgb(245, 245, 245);
     padding: 10px;
     margin: 10px;
+}
+
+.account-menu .active {
+    font-weight: bold;
+}
+
+.account-menu div {
+    cursor: pointer;
 }
 
 .info-container {
@@ -42,4 +54,9 @@
 .info-container .btn-cnt {
     margin-top: 14px;
     margin-bottom: 7px;
+}
+.info-container .btn-cnt button {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 1px solid rgb(155, 155, 155);
 }
