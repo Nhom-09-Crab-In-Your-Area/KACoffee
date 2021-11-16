@@ -1,53 +1,47 @@
 const userModel = require("../../models/users_model");
 const employeeModel = require("../../models/employees_model");
 // admin
-function getAllInfo(res) {
-  userModel.find(function (err, user) {
-    if (err) {
-      res.status(500).json(err);
-    } else {
-      res.json(user);
-    }
-  });
+function getAllInfo(res){
+    userModel.find(function(err, user){
+        if(err){
+            res.status(500).json(err)
+        }
+        else{
+            res.json(user)
+        }
+    })
 }
 
-function getInfo(req, res) {
-  if (req.session["account type"] == null) {
-    res.status(404).json();
-  } else if (req.session["account type"] == "Customer") {
-    userModel.findOne(
-      { email: req.session.UserEmail },
-      function (err, account) {
-        if (err) {
-          res.status(500).json(err);
-        } else if (account == null) {
-          res.status(404).json();
-        } else {
-          res.json(account);
-        }
-      }
-    );
-  } else {
-    employeeModel.findOne(
-      { email: req.session.UserEmail },
-      function (err, account) {
-        if (err) {
-          res.status(500).json(err);
-        } else if (account == null) {
-          res.status(404).json();
-        } else if (req.session.AccountType == "Admin") {
-          // personal info
-          res.json(account);
-          // employee info
-        } else if (req.session.AccountType == "Employee") {
-          // personal info
-          res.json(account);
-          // phone and email's admin
-        }
-      }
-    );
-  }
-}
+function getInfo(req, res){
+    if(req.session['account type'] == null){
+        res.status(404).json()
+    }
+    else if(req.session['account type'] == 'Customer'){
+        userModel.findOne({email : req.session.UserEmail}, function(err, account){
+            if(err){
+                res.status(500).json(err)
+            }
+            else if(account == null){
+                res.status(404).json()
+            }
+            else{
+                res.json(account)
+            }
+        })
+    }
+    else{
+        employeeModel.findOne({email : req.session.UserEmail}, function(err, account){
+            if(err){
+                res.status(500).json(err)
+            }
+            else if(account == null){
+                res.status(404).json()
+            }
+            else if(req.session.AccountType == 'Admin'){
+                // personal info
+                res.json(account)
+                // employee info
+
 
 module.exports = function (app) {
   // dev
@@ -59,11 +53,13 @@ module.exports = function (app) {
     getInfo(req, res);
   });
 
+
   app.put("/account/edit", function (req, res) {
     var info = req.body;
     if (!info.id) {
       return res.status(500).send("ID is required");
-    } else {
+    } 
+    else {
       userModel.findOne({ phone: info.phone }, function (err, account) {
         if (err) res.status(500).json(err);
         else if (account != null) res.send(JSON.stringify("Phone exists"));
@@ -79,7 +75,8 @@ module.exports = function (app) {
             function (err, user) {
               if (err) {
                 return res.status(500).json(err);
-              } else {
+              } 
+              else {
                 getInfo(req, res);
               }
             }

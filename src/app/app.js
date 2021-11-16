@@ -13,6 +13,7 @@ const session_config = require("./session_config");
 const log_out = require("./log_out");
 const remove_employee = require("./alter_data/remove_employee");
 const product = require("./product/product");
+const blog = require("./blog/blog");
 const authen = require("./authentication");
 
 app.engine("mustache", mustacheExpress());
@@ -61,4 +62,5 @@ log_out(app); //route: /log_out
 edit_info(app); // route: /data
 remove_employee(app); //route: /remove_employee
 product(app);
+blog(app);
 authen(app); //authentication
