@@ -1,16 +1,16 @@
 'use strict'
 
-const logged = false
-
 const checkMedia = window.matchMedia('(max-width: 767.98px)')
 
 const loginButton = document.querySelector('.login')
 
-if (!logged) {
+const guestHandler = () => {
     loginButton.addEventListener('click', () => {
         window.location = '/login'
     })
-} else {
+}
+
+const customerHandler = (name) => {
     const dropdown = document.createElement('div')
     dropdown.classList.add('logindropdown')
     if (checkMedia.matches)
@@ -19,7 +19,7 @@ if (!logged) {
             dropdown.classList.toggle('loginclicked')
         })
     dropdown.innerHTML = `
-        <p>ANH's ACCOUNT </p>
+        <p>${name.toUpperCase()}'s ACCOUNT </p>
         <hr>
         <a href = '#'>My account</a>
         <a href = '#'>Orders</a>
@@ -29,3 +29,14 @@ if (!logged) {
     `
     loginButton.appendChild(dropdown)
 }
+
+const url = 'http://localhost:3000/account/profile'
+
+fetch(url, { method: 'GET' })
+    .then((res) => {
+        if (res.status == 404) guestHandler()
+        else return res.json()
+    })
+    .then((data) => {
+        customerHandler(data['first name'])
+    })

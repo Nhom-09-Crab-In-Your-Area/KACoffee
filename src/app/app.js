@@ -14,12 +14,14 @@ const log_out = require("./log_out");
 const remove_employee = require("./alter_data/remove_employee");
 const product = require("./product/product");
 const blog = require("./blog/blog");
+const authen = require('./authentication');
 
 app.engine("mustache", mustacheExpress());
 
 app.set("view engine", "mustache");
 app.set("views", path.join(__dirname, "../../views"));
-session_config(app); //session configuration
+session_config.init(app); //session configuration
+
 
 app.engine(
   "mustache",
@@ -35,8 +37,11 @@ app.get("/", (req, res) => {
   res.render(path.join(__dirname + "/../../views/index"), { name: "Anh" });
 });
 
+
+
 app.get("/login", (req, res) => {
   res.render(path.join(__dirname + "/../../views/login"), {});
+  
 });
 
 app.get("/product", (req, res) => {
@@ -56,5 +61,8 @@ log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 edit_info(app); // route: /data
 remove_employee(app); //route: /remove_employee
+
 product(app);
 blog(app);
+authen(app); //authentication
+
