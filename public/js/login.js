@@ -10,20 +10,34 @@ async function loginUser(e) {
     e.preventDefault()
     const email = document.querySelector('#email_login').value
     const password = document.querySelector('#password_login').value
-    await fetch('/log_in', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data != 'log in accepted') warning.classList.remove('d-none')
-            else {
-                window.location = '/'
-            }
+    if (email == '' || password == '') {
+        warning.classList.remove('d-none')
+        document.querySelector('#email_login').style.backgroundColor = '#ff8080'
+        document.querySelector('#password_login').style.backgroundColor =
+            '#ff8080'
+    } else {
+        await fetch('/log_in', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
         })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data != 'log in accepted') {
+                    warning.classList.remove('d-none')
+                    document.querySelector(
+                        '#email_login'
+                    ).style.backgroundColor = '#ff8080'
+                    document.querySelector(
+                        '#password_login'
+                    ).style.backgroundColor = '#ff8080'
+                } else {
+                    window.location = '/'
+                }
+            })
+    }
 }
 
 // Phan dang ky tai khoan
