@@ -21,7 +21,7 @@ const customerHandler = (name) => {
     dropdown.innerHTML = `
         <p>${name.toUpperCase()}'s ACCOUNT </p>
         <hr>
-        <a href = '#'>My account</a>
+        <a href = '/my_profile'>My account</a>
         <a href = '#'>Orders</a>
         <a href = '#'>Vouchers</a> 
         <hr>
@@ -32,11 +32,10 @@ const customerHandler = (name) => {
 
 const url = 'http://localhost:3000/account/profile'
 
-fetch(url, { method: 'GET' })
-    .then((res) => {
-        if (res.status == 404) guestHandler()
-        else return res.json()
-    })
-    .then((data) => {
-        customerHandler(data['first name'])
-    })
+fetch(url, { method: 'GET' }).then((res) => {
+    if (res.status == 404) guestHandler()
+    else
+        res.json().then((data) => {
+            customerHandler(data['first name'])
+        })
+})

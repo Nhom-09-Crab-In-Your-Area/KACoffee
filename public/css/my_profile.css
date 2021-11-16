@@ -1,0 +1,46 @@
+@media only screen and (max-width: 767.98px) {
+    .account-info {
+        margin-top: 50px;
+    }
+    .account-menu div {
+        text-align: center;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+}
+
+.title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.account-menu {
+    background-color: rgb(173, 173, 173);
+    padding: 10px;
+    margin: 10px;
+}
+
+.account-menu div {
+    padding: 2px;
+    margin: 2px;
+}
+
+.info-container {
+    margin-bottom: 20px;
+}
+
+.info-container .subtitle {
+    font-weight: bold;
+    font-size: 17px;
+    color: chocolate;
+}
+
+.info-container .row * {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.info-container .btn-cnt {
+    margin-top: 14px;
+    margin-bottom: 7px;
+}
