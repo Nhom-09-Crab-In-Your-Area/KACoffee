@@ -12,6 +12,7 @@ const edit_info = require("./alter_data/account_info");
 const session_config = require("./session_config");
 const log_out = require("./log_out");
 const remove_employee = require("./alter_data/remove_employee");
+const product = require("./product/product");
 
 app.engine("mustache", mustacheExpress());
 
@@ -54,3 +55,4 @@ log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 edit_info(app); // route: /data
 remove_employee(app); //route: /remove_employee
+product(app)
