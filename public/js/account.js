@@ -1,6 +1,6 @@
 'use strict'
 
-const logged = false
+const logged = localStorage.getItem('check_login') == 'true'
 
 const checkMedia = window.matchMedia('(max-width: 767.98px)')
 

@@ -340,20 +340,19 @@ a:active {
     background-color: rgb(255, 255, 255);
 }
 
-#home {   
+#home {
     width: 100%;
     float: left;
     height: 40px;
     margin: 35px 0 0 100px;
 }
 
-
 .fil {
-    display: inline-block; 
+    display: inline-block;
     list-style: none;
 }
 ul.fil-li {
-    display: flex;  
+    display: flex;
 }
 
 #filter {
@@ -371,7 +370,7 @@ ul.fil-li {
 .product-item {
     display: inline-block;
     max-width: 100%;
-    margin-bottom:50px;
+    margin-bottom: 50px;
     padding: 15px;
     margin-left: 20px;
     background-color: rgb(255, 255, 255);
@@ -383,29 +382,29 @@ ul.fil-li {
     margin-top: 10px;
 }
 ul.products {
-    display: flex; 
+    display: flex;
     flex-wrap: wrap;
     list-style: none;
 }
 
 ul.products-li {
-    flex-basis: 25%;  
-    display: flex;  
+    flex-basis: 25%;
+    display: flex;
 }
 ul.products li img {
-   border-radius: 7px;
+    border-radius: 7px;
 }
 .image {
     margin-bottom: 20px;
     width: 240px;
-    height:250px;
+    height: 250px;
     justify-content: center;
 }
 .img {
     margin: auto 0;
 }
 .Soluong {
-    font-size:large;
+    font-size: large;
 }
 .num {
     width: 100px;
@@ -415,7 +414,7 @@ ul.products li img {
 }
 ul.fil {
     width: 100%;
-    display : flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     list-style: none;
@@ -426,22 +425,24 @@ ul.fil-li {
 
 div.stars {
     display: inline-block;
-  }
-   
-  input.star { display: none; }
-   
-  label.star {
+}
+
+input.star {
+    display: none;
+}
+
+label.star {
     float: right;
     padding: 5px;
     font-size: 16px;
     color: #444;
-    transition: all .2s;
-  }
-   
-  label.star {
+    transition: all 0.2s;
+}
+
+label.star {
     content: '\f005';
-    color: #FD4;
-    transition: all .25s;
+    color: #fd4;
+    transition: all 0.25s;
 }
 .login {
     position: relative;
@@ -457,13 +458,15 @@ div.stars {
     padding: 10px;
 }
 
+/* LOGIN nha */
+
 .login a {
     display: block;
     text-decoration: none;
     color: inherit;
 }
 
-.login:hover {
+.login i {
     cursor: pointer;
 }
 
@@ -473,7 +476,6 @@ div.stars {
 
 .loginclicked {
     display: block !important;
-    cursor: pointer;
 }
 
 .login .logindropdown button {
