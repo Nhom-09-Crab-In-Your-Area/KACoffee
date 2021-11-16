@@ -61,7 +61,6 @@ log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 edit_info(app); // route: /data
 remove_employee(app); //route: /remove_employee
-
 product(app)
 authen(app); //authentication
 

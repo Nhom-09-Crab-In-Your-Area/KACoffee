@@ -2,7 +2,6 @@ const _2hours = 1000 * 60 * 60 * 2;
 let session = require('express-session');
 let MongoDBStore = require('connect-mongodb-session')(session);
 let DBconfig = require('../dbConfig/config');
-const cookieParser = require('cookie-parser');
 const shortid = require('shortid');
 
 var store = new MongoDBStore({
@@ -18,8 +17,6 @@ store.on('error', function(error) {
 module.exports.init = (app) => {
     app.use(session({
         genid: function(req) {
-            req.session.AccountType = 'Guest';
-            req.session.UserEmail = null;
             return shortid.generate();;
         },
         secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
