@@ -23,7 +23,7 @@
             {{>navbar}}
             
             <h1 align ='center'> SIGN IN OR REGISTER</h1>
-            <div class="row">
+            <div class=" row" id ="mid">
                 <div class="col-xs-12 col-md-2 pull-right col3"></div>
                 <div class="col-xs-12 col-md-4 pull-right col1">
                         <div class="card col-md-10 " style="background-color:#D3D3D3 ;">
@@ -71,31 +71,39 @@
                             <hr  width="100%" size="5px"  />
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23" >First Name</label>
+                                <label class="help-block" for="form1Example23">*</label>
                                 <input type="text" id="firstName" placeholder="First Name" class="form-control" autofocus>
+                                <div class ="p-3 d-none" id ='warn-firstname'> Please enter your first name</div>
                               </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23"> Last Name</label>
+                                <label class="help-block" for="form1Example23">*</label>
                                 <input type="text" id="lastName" placeholder="Last Name " class="form-control" autofocus>
+                                <div class ="p-3 d-none" id ='warn-lastname'> Please enter your last name </div>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Email </label>
                                 <label class="help-block" for="form1Example23">*</label>
                                 <input type="email" id="email" placeholder="Email" class="form-control" name= "email">
+                                 <div class ="p-3 d-none"   id ='warn-email'>Please enter valid email </div>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Password</label>
                                 <label class="help-block" for="form1Example23">*</label>
-                                <input type="password" id="password_forget" placeholder="Password" class="form-control">
+                                <input type="password" id="password_signup" placeholder="Password" class="form-control">
+                                <div class ="p-3 d-none"  id ='warn-password'>Password length must be at least 6 characters</div>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Confirm Password</label>
                                 <label class="help-block" for="form1Example23">*</label>
-                                <input type="password" id="password_forget_cf" placeholder="Password" class="form-control">
+                                <input type="password" id="password_signup_cf" placeholder="Password" class="form-control">
+                                <div class ="p-3 d-none" id ='warn-password_confirm'> Password confirm must be the same with password </div>
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Phone number </label>
                                 <label class="help-block" for="form1Example23">*</label>
                                 <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" class="form-control">
+                                 <div class ="p-3 d-none" id='warn-phonenumber'>Please enter valid phone number </div>
                                 <span class="help-block1">Your phone number won't be disclosed anywhere </span>
                             </div>
                             <div class="form-outline mb-4">
@@ -103,7 +111,7 @@
                                     <span class="help-block">*Required fields</span>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" id= "submit_register" class="btn btn-primary btn-block">Register</button>
                         </div> <!-- ./container -->
                     </div>
                
