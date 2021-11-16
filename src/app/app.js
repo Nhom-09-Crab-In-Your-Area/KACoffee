@@ -19,7 +19,7 @@ app.engine("mustache", mustacheExpress());
 app.set("view engine", "mustache");
 app.set("views", path.join(__dirname, "../../views"));
 session_config.init(app); //session configuration
-
+authen(app); //authentication
 
 app.engine(
   "mustache",
@@ -59,4 +59,3 @@ log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 edit_info(app); // route: /data
 remove_employee(app); //route: /remove_employee
-authen(app); //authentication
