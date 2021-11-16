@@ -13,13 +13,16 @@ function getAllInfo(res){
 }
 
 function getInfo(req, res){
-    if(req.session['account type'] == 'Customer'){
+    if(req.session['account type'] == null){
+        res.status(404).json()
+    }
+    else if(req.session['account type'] == 'Customer'){
         userModel.findOne({email : req.session.UserEmail}, function(err, account){
             if(err){
                 res.status(500).json(err)
             }
             else if(account == null){
-                res.redirect("/")
+                res.status(404).json()
             }
             else{
                 res.json(account)
@@ -32,7 +35,7 @@ function getInfo(req, res){
                 res.status(500).json(err)
             }
             else if(account == null){
-                res.redirect("/")
+                res.status(404).json()
             }
             else if(req.session.AccountType == 'Admin'){
                 // personal info
@@ -68,7 +71,7 @@ module.exports = function(app){
         else{
             userModel.findOne({'phone': info.phone}, function(err, account){
                 if(err) res.status(500).json(err)
-                else if(account != null) res.send("Phone exists")
+                else if(account != null) res.send(JSON.stringify("Phone exists"))
                 else{
                     userModel.updateOne(
                         {_id: info.id}
