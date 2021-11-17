@@ -108,11 +108,11 @@ async function registerUser(e) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                firstName,
-                lastName,
-                phone,
-                email,
-                password,
+                'first name': firstName,
+                'last name': lastName,
+                phone: phone,
+                email: email,
+                password: password,
             }),
         })
             .then((res) => res.json())

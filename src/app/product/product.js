@@ -1,7 +1,8 @@
 const productModel = require('../../models/product_model')
+
 function create(req,res){
     if(req.session['account type'] == 'Admin'){
-        const {name, price, type, image} = req.body
+        const {name, price, type, description, image} = req.body
         // productModel.findOne({'id': id}, function(err, product){
         //     if(err){
         //         res.status(500).json(err)
@@ -15,14 +16,15 @@ function create(req,res){
             name,
             price,
             type,
+            description,
             image
         })
-        res.send("created")
+        res.send(JSON.stringify("created"))
     //         }
     //     })
     }
     else{
-        res.send('Only admin can create products')
+        res.send(JSON.stringify('Only admin can create products'))
     }
 }
 function displayAll(req,res){
@@ -36,14 +38,30 @@ function displayAll(req,res){
     })
 }
 function display(req,res){
-    const {name} = req.body
-    if(name != null){
-        productModel.findOne({name: name}, (err, product) => {
+    const {id, name, type} = req.body
+    if(type != null){
+        productModel.find({type: type}, (err, product) => {
+            //console.log(product)
             if(err){
                 res.status(500).json(err)
             }
-            else if(product == null){
-                res.send("Not found")
+            else if(product.length == 0){
+                console.log("type not exist")
+                res.status(404).json("type not exist")
+            }
+            else{
+                res.json(product)
+            }
+        })
+    }
+    else if(name != null){
+        productModel.find({name: name}, (err, product) => {
+            if(err){
+                res.status(500).json(err)
+            }
+            else if(product.length == 0){
+                console.log("name not exist")
+                res.status(404).json();
             }
             else{
                 res.json(product)
@@ -52,6 +70,33 @@ function display(req,res){
     }
     else{
         displayAll(req,res)
+    }
+}
+function remove(req,res){
+    if(req.session['account type'] == 'Admin'){
+        const {id, name} = req.body
+        if(id == null){
+            res.status(404).json();
+        }
+        else{
+            productModel.findOne({_id: id}, (err, product) =>{
+                if(err){
+                    res.status(500).json(err)
+                }
+                else if(product == null){
+                    console.log("Not found")
+                    res.status(404).json();
+                }
+                else{
+                    productModel.deleteOne({_id: id}, () =>{
+                        res.send(JSON.stringify("deleted"))
+                    })
+                }
+            })
+        }
+    }
+    else{
+        res.send(JSON.stringify('Only admin can create products'))
     }
 }
 module.exports = (app) => {
@@ -63,5 +108,8 @@ module.exports = (app) => {
     })
     app.get('/product/view', (req,res) => {
         displayAll(req,res)
+    })
+    app.post('/product/delete', (req,res) => {
+        remove(req,res)
     })
 }

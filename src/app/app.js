@@ -12,8 +12,8 @@ const session_config = require("./session_config");
 const log_out = require("./log_out");
 const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
-const authen = require('./authentication');
-
+const blog = require("./blog/blog");
+const authen = require("./authentication");
 
 app.engine("mustache", mustacheExpress());
 
@@ -36,15 +36,16 @@ app.get("/", (req, res) => {
   res.render(path.join(__dirname + "/../../views/index"), { name: "Anh" });
 });
 
-
-
 app.get("/login", (req, res) => {
   res.render(path.join(__dirname + "/../../views/login"), {});
-  
 });
 
 app.get("/product", (req, res) => {
   res.render(path.join(__dirname + "/../../views/product"), {});
+});
+
+app.get("/my_profile", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/profile/my_profile"), {});
 });
 
 app.listen(port, () => {
@@ -59,6 +60,5 @@ register(app); //route: /addCustomer, /addEmployee
 log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 account_utils(app);
-product(app)
+product(app);
 authen(app); //authentication
-

@@ -9,15 +9,13 @@ let ProductSchema = new Schema(
         name: {type: String, require: true},
         price: {type: String, require: true},
         type: {type: String},
+        description: {type: String},
         image: {type: String},
         rateLevel: {type: Number, default: 0},
         rateNumber: {type: Number, default: 0}
     }, 
     {
         _id: false,
-    },
-    {
-        collection: 'Product'
     })
 
 ProductSchema.plugin(AutoIncrement)

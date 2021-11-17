@@ -458,13 +458,15 @@ label.star {
     padding: 10px;
 }
 
+/* LOGIN nha */
+
 .login a {
     display: block;
     text-decoration: none;
     color: inherit;
 }
 
-.login:hover {
+.login i {
     cursor: pointer;
 }
 
@@ -474,7 +476,6 @@ label.star {
 
 .loginclicked {
     display: block !important;
-    cursor: pointer;
 }
 
 .login .logindropdown button {
