@@ -44,10 +44,12 @@
                                     <div class="row">
                                         <div class="col-3 info-type">First Name: </div>
                                         <input class="col-9" type="text" id="firstName" placeholder="First Name" value="Anh">
+                                        <p class = 'mes-firstname' >* Please enter your First Name</p>
                                         <div class="col-3 info-type">Last Name: </div>
                                         <input class="col-9" type="text" id="lastName" placeholder="Last Name" value="Anh">
                                         <div class="col-3 info-type">Phone: </div>
                                         <input class="col-9" type="text" id="phone" placeholder="Phone Number" value="0399272702">
+                                        <p class = 'mes-phone'>* Please enter your phone number</p>
                                         <div class="col-3 info-type">Email: </div>
                                         <div class="col-9 email">phananhtqvn@gmail.com</div>
                                     </div>
@@ -68,8 +70,11 @@
                                     <div class="row">
                                         <div class="col-4">* New password: </div>
                                         <input class="col-8" type="password" id="password1" placeholder="Your new password">
+                                        <p class = 'mes-password1'>* Please enter your password</p>
                                         <div class="col-4">* Confirm password: </div>
                                         <input class="col-8" type="password" id="password2" placeholder="Confirm your password">
+                                        <p class = 'mes-password2'>* Please enter your confirm password</p>
+                                        <p class = 'mes-password'>* Password and confirm password do not match</p>
                                     </div>
                                 </div>
 
@@ -90,6 +95,7 @@
                                         <div class="col-8 address">So 421, Giai Phong, Phuong Liet, Thanh Xuan, Ha Noi</div>
                                         <div class="col-4 info-type">* New address: </div>
                                         <input class="col-8" type="text" id="new_address" placeholder="Your new address">
+                                        <p class = 'mes-address'>* Please enter your new address</p>
                                     </div>
                                 </div>
 
@@ -104,6 +110,8 @@
             </div>
         </div>
         <script src='js/profile-menu/profile.js'></script>
+        <script src='js/profile-menu/my_profile.js'></script>
+
 
         {{>footer}}
 

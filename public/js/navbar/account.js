@@ -28,11 +28,15 @@ const customerHandler = (name) => {
         <button>Log out</button>
     `
     loginButton.appendChild(dropdown)
+    loginButton.addEventListener('click', async () => {
+        const res = await fetch('/log_out', { method: 'GET' })
+        window.location = '/'
+    })
 }
 
-const fetchState = async (url = 'http://localhost:3000/account/profile') => {
+const fetchState = async (url = '/check_self_profile') => {
     const data = await fetch(url, { method: 'GET' }).then((res) => {
-        if (res.status == 404) {
+        if (res.status == 401) {
             guestHandler()
             return null
         } else return res.json()
