@@ -4,7 +4,7 @@ const session_store = sessions.session_store;
 
 module.exports = (app) =>{
     app.use((req, res,next) =>{
-        if (req.session.UserEmail == null) {
+        if (req.session.UserEmail == undefined) {
             next();
             return;
         }
@@ -14,7 +14,6 @@ module.exports = (app) =>{
                 res.sendStatus(400);
             }
             else{
-                req.session.touch(req.session.id);
                 next();
             }
         })

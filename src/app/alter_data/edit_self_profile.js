@@ -12,7 +12,7 @@ module.exports = (app) => {
       update = Object.assign({}, update, { password: undefined });
       console.log(update);
     }
-    if (req.session["account type"] == "Customer") Model = userModel;
+    if (req.session.AccountType == "Customer") Model = userModel;
     else {
       Model = employeeModel;
     }

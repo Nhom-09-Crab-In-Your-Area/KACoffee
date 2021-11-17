@@ -20,7 +20,7 @@ module.exports.init = (app) => {
             return shortid.generate();;
         },
         secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-        cookie: { maxAge: _2hours,
+        cookie: {
             //secure need to be set to true when implement
             secure: false,
             AccountType: 'Guest', // guest until  login
