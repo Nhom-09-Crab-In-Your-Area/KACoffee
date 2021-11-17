@@ -13,6 +13,7 @@ module.exports = (app)=> {
                         if (account.password == req.body.password){
                             req.session.UserEmail = account.email;
                             req.session['account type'] = account['account type'];
+                            if(req.body.remember_me) req.session.cookie.expires = false;
                             res.send(JSON.stringify('log in accepted'));
                         }
                         else{

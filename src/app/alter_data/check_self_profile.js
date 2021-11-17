@@ -1,5 +1,5 @@
 const userModel = require('../../models/users_model');
-const employeeModel = requrie('../../models/employees_model');
+const employeeModel = require('../../models/employees_model');
 
 module.exports = (app) =>{
     app.route('/check_self_profile')

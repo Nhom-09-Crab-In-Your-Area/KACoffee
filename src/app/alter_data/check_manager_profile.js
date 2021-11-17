@@ -1,7 +1,7 @@
 const employeeModel = require('../../models/employees_model');
 
 module.exports = (app) =>{
-    app.route('check_manager_profile')
+    app.route('/check_manager_profile')
     .get((req, res) =>{
         employeeModel.findOne({'email': req.session.UserEmail}, (err, account) =>{
             if (err) throw err;

@@ -2,7 +2,6 @@ const _2hours = 1000 * 60 * 60 * 2;
 let session = require('express-session');
 let MongoDBStore = require('connect-mongodb-session')(session);
 let DBconfig = require('../dbConfig/config');
-const cookieParser = require('cookie-parser');
 const shortid = require('shortid');
 
 var store = new MongoDBStore({
@@ -21,13 +20,14 @@ module.exports.init = (app) => {
             return shortid.generate();;
         },
         secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-        saveUninitialized: true,
         cookie: { maxAge: _2hours,
-                  //secure need to be set to true when implement
-                  secure: false,
-                  AccountType: 'Guest', // guest until  login
-                  UserEmail: null, //should contain email
-                },
+            //secure need to be set to true when implement
+            secure: false,
+            AccountType: 'Guest', // guest until  login
+            UserEmail: null, //should contain email
+        },
+        saveUninitialized: true,
+        
         resave: true,
         store: store,
         
