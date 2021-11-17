@@ -18,6 +18,13 @@ const customerHandler = (name) => {
             dropdown.classList.toggle('loginclicked')
             dropdown.classList.toggle('loginclicked')
         })
+
+    const hello = async (e) => {
+        e.preventDefault()
+        const res = await fetch('/log_out', { method: 'GET' })
+        window.location = '/'
+    }
+
     dropdown.innerHTML = `
         <p>${name.toUpperCase()}'s ACCOUNT </p>
         <hr>
@@ -25,10 +32,11 @@ const customerHandler = (name) => {
         <a href = '#'>Orders</a>
         <a href = '#'>Vouchers</a> 
         <hr>
-        <button>Log out</button>
+        <button class = "logout-btn" >Log out</button>
     `
     loginButton.appendChild(dropdown)
-    loginButton.addEventListener('click', async () => {
+    const logoutBtn = document.querySelector('.logout-btn')
+    logoutBtn.addEventListener('click', async () => {
         const res = await fetch('/log_out', { method: 'GET' })
         window.location = '/'
     })

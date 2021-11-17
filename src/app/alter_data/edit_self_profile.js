@@ -4,7 +4,6 @@ const authenticationModel = require("../../models/authentication_model");
 
 module.exports = (app) => {
   app.route("/edit_self_profile").post(async (req, res) => {
-    console.log(req.body);
     let update = req.body;
     let new_password = null;
     if (update.password) {
@@ -12,7 +11,7 @@ module.exports = (app) => {
       update = Object.assign({}, update, { password: undefined });
       console.log(update);
     }
-    if (req.session["account type"] == "Customer") Model = userModel;
+    if (req.session.AccountType == "Customer") Model = userModel;
     else {
       Model = employeeModel;
     }
