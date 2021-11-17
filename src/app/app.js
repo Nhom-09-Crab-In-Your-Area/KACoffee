@@ -45,7 +45,7 @@ app.get("/product", (req, res) => {
 });
 
 app.get("/my_profile", (req, res) => {
-  res.render(path.join(__dirname + "/../../views/my_profile"), {});
+  res.render(path.join(__dirname + "/../../views/profile/my_profile"), {});
 });
 
 app.listen(port, () => {

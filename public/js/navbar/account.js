@@ -30,12 +30,17 @@ const customerHandler = (name) => {
     loginButton.appendChild(dropdown)
 }
 
-const url = 'http://localhost:3000/account/profile'
+const fetchState = async (url = 'http://localhost:3000/account/profile') => {
+    const data = await fetch(url, { method: 'GET' }).then((res) => {
+        if (res.status == 404) {
+            guestHandler()
+            return null
+        } else return res.json()
+    })
 
-fetch(url, { method: 'GET' }).then((res) => {
-    if (res.status == 404) guestHandler()
-    else
-        res.json().then((data) => {
-            customerHandler(data['first name'])
-        })
-})
+    if (data) {
+        customerHandler(data['first name'])
+    }
+
+    return data
+}
