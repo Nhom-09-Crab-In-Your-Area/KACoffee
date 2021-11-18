@@ -2,7 +2,7 @@
 
 // INFORMATION
 const container = document.querySelector('.account-info')
-const title = document.querySelector('.title')
+const title = document.querySelector('.account-title')
 const firstName = document.querySelector('#firstName')
 const lastName = document.querySelector('#lastName')
 const phone = document.querySelector('#phone')
@@ -36,6 +36,7 @@ mesAddress.classList.add('mes-none')
 fetchState().then((User) => {
     if (User) {
         // INFORMATION
+        console.log(title)
         title.textContent = `${User['first name'].toUpperCase()}'S ACCOUNT`
         firstName.value = User['first name']
         lastName.value = User['last name']

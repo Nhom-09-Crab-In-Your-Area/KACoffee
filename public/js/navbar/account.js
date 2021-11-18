@@ -37,6 +37,7 @@ const customerHandler = (name) => {
     loginButton.appendChild(dropdown)
     const logoutBtn = document.querySelector('.logout-btn')
     logoutBtn.addEventListener('click', async () => {
+        localStorage.removeItem('login')
         const res = await fetch('/log_out', { method: 'GET' })
         window.location = '/'
     })
@@ -51,6 +52,7 @@ const fetchState = async (url = '/check_self_profile') => {
     })
 
     if (data) {
+        //localStorage.setItem('login', 'true')
         customerHandler(data['first name'])
     }
 

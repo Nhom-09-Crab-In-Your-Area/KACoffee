@@ -34,6 +34,7 @@ async function loginUser(e) {
                         '#password_login'
                     ).style.backgroundColor = '#ff8080'
                 } else {
+                    localStorage.setItem('login', 'true')
                     window.location = '/'
                 }
             })
