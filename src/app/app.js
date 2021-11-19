@@ -48,6 +48,10 @@ app.get("/my_profile", (req, res) => {
   res.render(path.join(__dirname + "/../../views/profile/my_profile"), {});
 });
 
+app.get("/blog", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/blog"), {});
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
