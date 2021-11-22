@@ -137,3 +137,7 @@ div.ratingStars {
 .logo-filter:hover {
     cursor: pointer !important;
 }
+
+.logo-filter label:hover {
+    cursor: pointer !important;
+}
