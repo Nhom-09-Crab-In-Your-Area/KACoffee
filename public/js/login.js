@@ -51,7 +51,7 @@ function checkbefore(
     password_signup_cf,
     phoneNumber
 ) {
-    if (password_signup.value != password_signup_cf.value) {
+    if (password_signup != password_signup_cf) {
         document
             .querySelector('#warn-password_confirm')
             .classList.remove('d-none')
@@ -59,22 +59,22 @@ function checkbefore(
     }
     if (firstName.length == 0) {
         document.querySelector('#firstName').style.backgroundColor = '#ff8080'
-        document.querySelector('#warn-firstname').classList.toggle('d-none')
+        document.querySelector('#warn-firstname').classList.remove('d-none')
         return false
     }
     if (lastName.length == 0) {
         document.querySelector('#lastName').style.backgroundColor = '#ff8080'
-        document.querySelector('#warn-lastname').classList.toggle('d-none')
+        document.querySelector('#warn-lastname').classList.remove('d-none')
     }
     if (!email.includes('@gmail.com')) {
         document.querySelector('#email').style.backgroundColor = '#ff8080'
-        document.querySelector('#warn-email').classList.toggle('d-none')
+        document.querySelector('#warn-email').classList.remove('d-none')
         return false
     }
     if (password_signup_cf.length < 6) {
         document.querySelector('#password_signup').style.backgroundColor =
             '#ff6666'
-        document.querySelector('#warn-password').classList.toggle('d-none')
+        document.querySelector('#warn-password').classList.remove('d-none')
         return false
     }
     if (password_signup_cf.length == 0) {
@@ -82,14 +82,15 @@ function checkbefore(
             '#ff8080'
         document
             .querySelector('#warn-password_confirm')
-            .classList.toggle('d-none')
+            .classList.remove('d-none')
         return false
     }
     if (phoneNumber.length < 10) {
         document.querySelector('#phoneNumber').style.backgroundColor = '#ff8080'
-        document.querySelector('#warn-phonenumber').classList.toggle('d-none')
+        document.querySelector('#warn-phonenumber').classList.remove('d-none')
         return false
     }
+
     return true
 }
 
