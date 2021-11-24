@@ -7,6 +7,7 @@ module.exports = (email, service_type)=>{
         code: code,
         email: email,
     })
+    
     //need to change url
-    return `localhost:3000/code_verify?code=${code}&email=${email}&service_type=${service_type}`;
+    return new URL(`https://code_verify?code=${code}&email=${email}&service_type=${service_type}`);
 }

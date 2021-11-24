@@ -9,8 +9,10 @@ module.exports = (app)=>{
     app.route('/send_email')
     .post((req, res) =>{
         let emailType = req.body.emailType;
-
-        let email = req.session.UserEmail;
+        if(req.session.UserEmail) let email = req.session.UserEmail;
+        else{
+            let email = req.body.email;
+        }
         if (req.session.AccountType == 'Customer'){
             Model = users_model;
         }
@@ -29,7 +31,7 @@ module.exports = (app)=>{
                     //create content
                     let content = email_forms(emailType, account['first name'], url);
                     try{
-                        sendEmail(email, content.subject, content.text);
+                        sendEmail(email, content.subject, content.text, res);
                         res.status(200).send(JSON.stringify("email sent"))
                     }
                     catch(err){

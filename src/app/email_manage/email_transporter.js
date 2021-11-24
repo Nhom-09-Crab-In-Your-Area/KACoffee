@@ -3,14 +3,17 @@ const nodemailer = require("nodemailer");
 const user = cfg.user;
 const password = cfg.password;
 
-const sendEmail = async (email, subject, text) => {
+const sendEmail = async (email, subject, text, res) => {
     try {
         var transporter = nodemailer.createTransport({
-            service: 'Gmail',
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 587,
             auth: {
               user: user,
               pass: password,
             },
+            // name: 'KA Coffee',
           });
           
         let mailOptions = {
@@ -24,7 +27,7 @@ const sendEmail = async (email, subject, text) => {
                 throw error;
             }
             else{
-                console.log('email sent');
+                res.status(404).send(error);
             }
         });
     }
