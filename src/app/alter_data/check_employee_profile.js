@@ -1,4 +1,5 @@
-const employeeModel = require('../../models/employees_model');
+const employeeModel = require("../../models/employees_model");
+
 
 module.exports = (app) =>{
     app.route('/check_employee_profile')
@@ -20,3 +21,4 @@ module.exports = (app) =>{
         })
     })
 }
+

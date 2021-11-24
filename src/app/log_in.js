@@ -1,5 +1,4 @@
-
-const authenticationModel = require('../models/authentication_model')
+const authenticationModel = require("../models/authentication_model");
 
 module.exports = (app)=> {  
     app.route('/log_in')
@@ -25,5 +24,5 @@ module.exports = (app)=> {
                 res.status(500).send(err);
             }
         }
-    )
+  });
 };

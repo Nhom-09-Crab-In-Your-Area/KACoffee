@@ -36,6 +36,10 @@ body {
     .dropdown-menu.show {
         left: 10px;
     }
+
+    .navbar .nav-left .cart {
+        position: relative;
+    }
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -51,7 +55,7 @@ body {
         background-color: rgba(255, 255, 255, 0.9);
         width: 100vw;
         height: 100vh;
-        z-index: 10000;
+        z-index: 1000;
     }
 
     .navbar-collapse {
@@ -61,6 +65,16 @@ body {
     .dropdown-menu {
         background: none !important;
         border: none;
+    }
+
+    .cart {
+        overflow: scroll !important;
+    }
+    .cart .cartdropdown {
+        width: 100vw !important;
+        left: 0px !important;
+        padding-top: 7vh;
+        z-index: 1;
     }
 }
 
@@ -82,37 +96,34 @@ body {
     position: absolute;
     left: 3vw;
     top: 0px;
+    z-index: 1000;
 }
 .navbar-brand img {
     background-color: black;
     width: 60px;
     height: 74px;
     border-bottom-right-radius: 15px;
+    z-index: 1000;
 }
 
 .nav-link {
     color: black;
 }
 
-.navbar .nav-left .cart div {
-    position: relative;
-    display: inline-block;
-    font-size: large;
-}
-
-.navbar .nav-left .cart {
+.navbar .nav-left .cart i {
     position: relative;
 }
 
-.navbar .nav-left .cart .product-count {
+.navbar .nav-left .cart i .product-count {
+    font-family: 'Neutra Text';
     position: absolute;
     bottom: 0;
-    right: 10px;
+    right: 10 px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 15px;
-    height: 15px;
+    height: 15 px;
     font-size: small;
     color: white;
     background-color: black;
@@ -444,6 +455,8 @@ label.star {
     color: #fd4;
     transition: all 0.25s;
 }
+
+/* LOGIN */
 .login {
     position: relative;
 }
@@ -457,8 +470,6 @@ label.star {
     left: -100px;
     padding: 10px;
 }
-
-/* LOGIN nha */
 
 .login a {
     display: block;
@@ -480,4 +491,53 @@ label.star {
 
 .login .logindropdown button {
     background-color: white;
+}
+
+/* CART */
+
+.cart a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cart i {
+    cursor: pointer;
+}
+
+.cart:hover .cartdropdown {
+    display: block;
+}
+
+.loginclicked {
+    display: block !important;
+}
+
+.cart .cartdropdown button {
+    background-color: white;
+}
+
+.cart .cartdropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: none;
+    width: 500px;
+    right: 0px;
+    max-height: 80vh;
+    overflow: auto;
+}
+
+.cart .cartdropdown .title {
+    padding: 3px;
+    padding-left: 20px;
+    background-color: black;
+    font-weight: bold;
+    color: white;
+}
+
+.cart .productList {
+    padding: 20px;
+    color: chocolate;
+    max-height: fit-content;
 }

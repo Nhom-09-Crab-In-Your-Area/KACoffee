@@ -1,6 +1,5 @@
-const sessions = require('./session_config');
+const sessions = require("./session_config");
 const session_store = sessions.session_store;
-
 
 module.exports = (app) =>{
     app.use((req, res,next) =>{
@@ -19,4 +18,5 @@ module.exports = (app) =>{
         })
     })
 }
+
 

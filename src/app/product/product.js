@@ -1,7 +1,7 @@
 const productModel = require("../../models/product_model");
 
 function create(req, res) {
-  if (req.session["account type"] == "Admin") {
+  if (req.session.AccountType == "Admin") {
     const { name, price, type, description, image } = req.body;
     // productModel.findOne({'id': id}, function(err, product){
     //     if(err){
@@ -65,7 +65,7 @@ function display(req, res) {
   }
 }
 function remove(req, res) {
-  if (req.session["account type"] == "Admin") {
+  if (req.session.AccountType == "Admin") {
     const { id, name } = req.body;
     if (id == null) {
       res.status(404).json();

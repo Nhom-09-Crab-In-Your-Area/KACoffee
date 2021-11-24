@@ -4,7 +4,6 @@ const authenticationModel = require("../../models/authentication_model");
 
 module.exports = (app) => {
   app.route("/edit_self_profile").post(async (req, res) => {
-    console.log(req.body);
     let update = req.body;
     let new_password = null;
     if (update.password) {
