@@ -14,6 +14,8 @@ const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
 const blog = require("./blog/blog");
 const authen = require("./authentication");
+const emailSender = require("./email_manage/email_sender");
+const email_sender = require("./email_manage/email_sender");
 
 app.engine("mustache", mustacheExpress());
 
@@ -66,3 +68,4 @@ log_out(app); //route: /log_out
 account_utils(app);
 product(app);
 authen(app); //authentication
+email_sender(app);
