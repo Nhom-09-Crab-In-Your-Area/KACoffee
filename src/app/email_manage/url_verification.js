@@ -10,14 +10,19 @@ module.exports = (app)=>{
         let code = req.query.code;
         let email = req.query.email;
         let service_type = req.query.service_type;
-        code_verification_model.findOne({'email': email}, (err, code)=>{
+        code_verification_model.findOne({'email': email}, (err, authen)=>{
             if (err) throw err;
             else{
-                if (code == null){
+                if (authen == null){
                     res.status(404).send(JSON.stringify('can not verify'));
                 }
                 else{
-                    res.status(200).render(html_path_dict[service_type], {});
+                    if(authen.code == code){
+                        res.status(200).render(html_path_dict[service_type], {});
+                    }
+                    else{
+                        res.status(404).send(JSON.stringify('can not verify'));
+                    }
                 }
             }
         })
