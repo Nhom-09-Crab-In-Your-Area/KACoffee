@@ -15,7 +15,6 @@ store.on("error", function (error) {
 });
 
 module.exports.init = (app) => {
-
   app.use(
     session({
       genid: function (req) {
@@ -29,22 +28,11 @@ module.exports.init = (app) => {
         UserEmail: null, //should contain email
       },
       saveUninitialized: true,
-    app.use(session({
-        genid: function(req) {
-            return shortid.generate();;
-        },
-        secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-        cookie: {
-            //secure need to be set to true when implement
-            secure: false,
-            AccountType: 'Guest', // guest until  login
-            UserEmail: null, //should contain email
-        },
-        saveUninitialized: true,
-        
-        resave: true,
-        store: store,
+
+      resave: true,
+      store: store,
     })
   );
 };
+
 module.exports.session_store = store;
