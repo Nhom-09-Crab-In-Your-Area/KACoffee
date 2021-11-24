@@ -2,20 +2,17 @@ const cfg = require('./email_cfg')
 const nodemailer = require("nodemailer");
 const user = cfg.user;
 const password = cfg.password;
-const smtpPool = require('nodemailer-smtp-pool');
 
 const sendEmail = async (email, subject, text) => {
     try {
-        let transporter = nodemailer.createTransport(smtpPool({
-            service: 'gmail',
-            host: 'smtp.gmail.com',
+        var transporter = nodemailer.createTransport({
+            service: 'Gmail',
             auth: {
-                user: user,
-                password: password,
+              user: user,
+              pass: password,
             },
-            maxConnections: 5,
-            maxMessages: 100,
-        }))
+          });
+          
         let mailOptions = {
             from: user,
             to: email, 
@@ -26,8 +23,10 @@ const sendEmail = async (email, subject, text) => {
             if(error){
                 throw error;
             }
+            else{
+                console.log('email sent');
+            }
         });
-        console.log('email sent')
     }
     catch(err){
         throw err;
