@@ -34,4 +34,5 @@ module.exports.init = (app) => {
     })
   );
 };
+
 module.exports.session_store = store;

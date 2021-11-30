@@ -16,7 +16,7 @@
     background-color: rgb(255, 255, 255);
 }
 
-#home {   
+#home {
     width: 100%;
     float: left;
     height: 40px;
@@ -24,11 +24,11 @@
 }
 
 .fil {
-    display: inline-block; 
+    display: inline-block;
     list-style: none;
 }
 ul.fil-li {
-    display: flex;  
+    display: flex;
 }
 
 #filter {
@@ -47,7 +47,7 @@ ul.fil-li {
 .product-item {
     display: inline-block;
     max-width: 100%;
-    margin-bottom:50px;
+    margin-bottom: 50px;
     padding: 15px;
     margin-left: 20px;
     background-color: rgb(255, 255, 255);
@@ -59,22 +59,22 @@ ul.fil-li {
     margin-top: 10px;
 }
 ul.products {
-    display: flex; 
+    display: flex;
     flex-wrap: wrap;
     list-style: none;
 }
 
 ul.products-li {
-    flex-basis: 25%;  
-    display: flex;  
+    flex-basis: 25%;
+    display: flex;
 }
 ul.products li img {
-   border-radius: 7px;
+    border-radius: 7px;
 }
 .image {
     margin-bottom: 20px;
     width: 240px;
-    height:250px;
+    height: 250px;
     justify-content: center;
 }
 .product-name {
@@ -82,10 +82,10 @@ ul.products li img {
     height: 65px;
 }
 .product-cost {
-    font-size:larger;
+    font-size: larger;
 }
 .Soluong {
-    font-size:larger;
+    font-size: larger;
 }
 .number-product {
     width: 100px;
@@ -99,19 +99,18 @@ ul.products li img {
 }
 .rateNumber {
     margin-left: 50px;
-
 }
 
 ul.fil {
     width: 100%;
-    display : flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     list-style: none;
     text-align: center;
 }
 .fil {
-    display: inline-block; 
+    display: inline-block;
     list-style: none;
 }
 .checkbox {
@@ -124,15 +123,21 @@ ul.fil {
     font-size: larger;
 }
 
-
 div.ratingStars {
     display: inline-block;
-  }
-   
-   
+}
+
 .star {
     float: right;
     padding-right: 10px;
     font-size: 23px;
     color: yellow;
-  }
+}
+
+.logo-filter:hover {
+    cursor: pointer !important;
+}
+
+.logo-filter label:hover {
+    cursor: pointer !important;
+}

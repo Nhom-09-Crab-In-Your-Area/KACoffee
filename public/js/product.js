@@ -96,7 +96,7 @@ function Add_info(product_info) {
 
 async function get_info_product(category) {
     var myJSON
-    const data = await fetch('http://localhost:3000/product/view', {
+    const data = await fetch('/product/view', {
         method: 'GET',
     })
         .then((data) => data.json())
