@@ -3,14 +3,14 @@
 const blogModel = require('../../models/blog_model')
 
 function create(req,res){
-    if(req.session['account type'] == 'Admin' || req.session['account type'] == 'Customer'){
+    if(req.session['account type'] == 'Admin'){
         const {title, content, image} = req.body
-        // productModel.findOne({'id': id}, function(err, product){
+        // blogModel.findOne({'id': id}, function(err, blog){
         //     if(err){
         //         res.status(500).json(err)
         //     }
-        //     else if(product != null){
-        //         res.send("Product id existed")
+        //     else if(blog != null){
+        //         res.send("blog id existed")
         //     }
             // else{
         blogModel.create({
@@ -24,10 +24,9 @@ function create(req,res){
     //     })
     }
     else{
-        res.send(JSON.stringify('Only admin and employees can create products'))
+        res.send(JSON.stringify('Only admin and employees can create blogs'))
     }
 }
-
 function displayAll(req,res){
     blogModel.find((err,blog) => {
         if(err){
@@ -38,11 +37,10 @@ function displayAll(req,res){
         }
     })
 }
-
 function display(req,res){
-    const {name} = req.body
-    if(name != null){
-        blogModel.findOne({name: name}, (err, blog) => {
+    const {title} = req.body
+    if(title != null){
+        blogModel.findOne({title: title}, (err, blog) => {
             if(err){
                 res.status(500).json(err)
             }
@@ -58,6 +56,29 @@ function display(req,res){
         displayAll(req,res)
     }
 }
+function remove(req,res){
+    if (req.session.AccountType == "Admin") {
+        const {id} = req.body;
+        if (id == null) {
+          res.status(404).json();
+        } else {
+          blogModel.findOne({ _id: id }, (err, blog) => {
+            if (err) {
+              res.status(500).json(err);
+            } else if (blog == null) {
+              console.log("Not found");
+              res.status(404).json();
+            } else {
+              blogModel.deleteOne({ _id: id }, () => {
+                res.send(JSON.stringify("deleted"));
+              });
+            }
+          });
+        }
+      } else {
+        res.send(JSON.stringify("Only admin can create blog"));
+      }
+}
 module.exports = (app) => {
     app.post('/blog/create', (req,res) => {
         create(req,res)
@@ -67,5 +88,8 @@ module.exports = (app) => {
     })
     app.get('/blog/view', (req,res) => {
         displayAll(req,res)
+    })
+    app.post('/blog/delete', (req,res) =>{
+        remove(req,res)
     })
 }
