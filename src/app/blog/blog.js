@@ -3,7 +3,7 @@
 const blogModel = require('../../models/blog_model')
 
 function create(req,res){
-    if(req.session['account type'] == 'Admin'){
+    if(req.session.AccountType == 'Admin'){
         const {title, content, image} = req.body
         // blogModel.findOne({'id': id}, function(err, blog){
         //     if(err){
