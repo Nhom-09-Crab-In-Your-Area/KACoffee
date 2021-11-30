@@ -67,5 +67,6 @@ log_in(app); //route: /log_in
 log_out(app); //route: /log_out
 account_utils(app);
 product(app);
+blog(app);
 authen(app); //authentication
-email_sender(app);
+//email_sender(app);
