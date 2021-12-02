@@ -35,23 +35,24 @@
                             <hr  width="100%" size="5px"  />
                             <div class="p-3 d-none" id = "warning">&middot Invalid email or password</div>
                             <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                
-                                <input type="email" id="email_login" placeholder="Email" class="form-control" name= "email">
+                            <div class="input-box">
+                                <i class = "fa fa-envelope-o"></i>
+                                <input type="email" id="email_login" placeholder="Email"  name= "email" autofocus>
                             </div>
             
                             <!-- Password input -->
-                            <div class="form-outline mb-4">
-                                
-                                <input type="password" id="password_login" placeholder="Password" class="form-control">
+                            <div class="input-box" >
+                                <i class = "fa fa-key"></i>
+                                <input type="password" id="password_login" placeholder="Password" autofocus>
+                                <span class ='eye' onclick="showpass()">
+                                    <i id="hide1" class ="fa fa-eye"></i>
+                                    <i id="hide2" class ="fa fa-eye-slash"></i>
+                                </span>
                             
                             </div>
-                            {{! <a href="#!">Forgot password?</a> }}
-
-                            <div class="login-btn">
+                             <a href="#!">Forgot password?</a>
                             <!-- Submit button -->
-                            <button type="submit" id= "submit_login" class="btn btn-danger btn-block">Sign in</button>
-                            </div>
+                            <button type="button" id= "submit_login" class="login-btn">Sign in</button>
                                 </div>
                             </div>
                             
