@@ -4,6 +4,19 @@ const users_model = require('../../models/users_model');
 const employees_model = require('../../models/employees_model');
 const code_generate = require('./code_generator');
 
+send_email = function(email, emailType, res){
+    //create url
+    let url = code_generate(email, emailType);
+    //create content
+    let content = email_forms(emailType, account['first name'], url);
+    try{
+        sendEmail(email, content.subject, content.text, res);
+        res.status(200).send(JSON.stringify("email sent"))
+    }
+    catch(err){
+        res.status(503).send(err);
+    }
+}
 
 module.exports = (app)=>{
     app.route('/send_email')
@@ -11,33 +24,27 @@ module.exports = (app)=>{
         let emailType = req.body.emailType;
         if(req.session.UserEmail) let email = req.session.UserEmail;
         else{
-            let email = req.body.email;
+            email = req.body.email;
         }
-        if (req.session.AccountType == 'Customer'){
-            Model = users_model;
-        }
-        else{
-            Model = employees_model;
-        }
-        Model.findOne({'email': email}, (err, account) =>{
+
+        users_model.findOne({'email': email}, (err, account) =>{
             if(err) throw err;
             else{
                 if (account == null){
-                    res.status(404).send(JSON.stringify('email not exist'));
+                    employees_model.findOne({'email': email}, (err, account)=>{
+                        if(err) throw err;
+                        if(account == null) res.status(404).send(JSON.stringify('email not exist'));
+                        else{
+                            send_email(email, emailType, res);
+                        }
+                    })
+                    
                 }
                 else{
-                    //create url
-                    let url = code_generate(email, emailType);
-                    //create content
-                    let content = email_forms(emailType, account['first name'], url);
-                    try{
-                        sendEmail(email, content.subject, content.text, res);
-                        res.status(200).send(JSON.stringify("email sent"))
-                    }
-                    catch(err){
-                        res.status(503).send(err);
-                    }
+                    send_email(email, emailType, res);
                 }
+                
+                
             }
         })
         
