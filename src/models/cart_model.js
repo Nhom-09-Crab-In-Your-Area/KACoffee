@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 var cartSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: "users_model"
+        ref: "Users"
     },
     productList: [{
-        type: Schema.Types.ObjectId,
-        ref: "product_model"
+        type: Schema.Types.String,
+        ref: "Product"
     }]
 })
 

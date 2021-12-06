@@ -12,6 +12,8 @@ const session_config = require("./session_config");
 const log_out = require("./log_out");
 const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
+const cart = require("./product/cart");
+const purchase = require("./product/purchase");
 const blog = require("./blog/blog");
 const authen = require("./authentication");
 const email_utils = require("./email_manage/email_utils");
@@ -45,6 +47,10 @@ app.get("/product", (req, res) => {
   res.render(path.join(__dirname + "/../../views/product"), {});
 });
 
+app.get("/viewproduct", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/viewproduct"), {});
+});
+
 app.get("/my_profile", (req, res) => {
   res.render(path.join(__dirname + "/../../views/profile/my_profile"), {});
 });
@@ -71,5 +77,7 @@ log_out(app); //route: /log_out
 account_utils(app);
 product(app);
 blog(app);
+cart(app);
+purchase(app);
 authen(app); //authentication
 email_utils(app); //email utils

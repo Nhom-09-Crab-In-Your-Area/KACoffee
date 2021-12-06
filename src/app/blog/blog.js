@@ -79,6 +79,7 @@ function remove(req,res){
         res.send(JSON.stringify("Only admin can create blog"));
       }
 }
+
 module.exports = (app) => {
     app.post('/blog/create', (req,res) => {
         create(req,res)
