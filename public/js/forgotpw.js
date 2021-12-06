@@ -2,12 +2,15 @@ const square = document.getElementById('square-1')
 const submitbtn = document.querySelector('#email-submit')
 const codebtn = document.querySelector('#code-submit')
 const submit = document.querySelector('#submit-success')
+const email = document.querySelector('#email')
 submitbtn.addEventListener('click', (e) => {
     e.preventDefault()
-    if()
-    else{
-    square.style.transform = 'rotate3d(0, -1, 0, 90deg)'
-    document.title = 'Sign up page'
+
+    if (email.value != '') {
+        square.style.transform = 'rotate3d(0, -1, 0, 90deg)'
+        document.title = 'Sign up page'
+    } else {
+        warning.classList.remove('d-none')
     }
 })
 codebtn.addEventListener('click', (e) => {
