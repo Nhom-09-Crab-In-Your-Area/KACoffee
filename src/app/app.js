@@ -48,6 +48,10 @@ app.get("/product", (req, res) => {
   res.render(path.join(__dirname + "/../../views/product"), {});
 });
 
+app.get("/viewproduct", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/viewproduct"), {});
+});
+
 app.get("/my_profile", (req, res) => {
   res.render(path.join(__dirname + "/../../views/profile/my_profile"), {});
 });
