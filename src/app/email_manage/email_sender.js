@@ -4,7 +4,7 @@ const users_model = require('../../models/users_model');
 const employees_model = require('../../models/employees_model');
 const code_generate = require('./code_generator');
 
-send_email = function(email, emailType, res){
+send_email = function(email, emailType, account, res){
     //create url
     let url = code_generate(email, emailType);
     //create content
@@ -22,7 +22,8 @@ module.exports = (app)=>{
     app.route('/send_email')
     .post((req, res) =>{
         let emailType = req.body.emailType;
-        if(req.session.UserEmail) let email = req.session.UserEmail;
+        let email;
+        if(req.session.UserEmail) email = req.session.UserEmail;
         else{
             email = req.body.email;
         }
@@ -31,20 +32,18 @@ module.exports = (app)=>{
             if(err) throw err;
             else{
                 if (account == null){
-                    employees_model.findOne({'email': email}, (err, account)=>{
+                    employees_model.findOne({'email': email}, (err, account1)=>{
                         if(err) throw err;
-                        if(account == null) res.status(404).send(JSON.stringify('email not exist'));
+                        if(account1 == null) res.status(404).send(JSON.stringify('email not exist'));
                         else{
-                            send_email(email, emailType, res);
+                            send_email(email, emailType, account1, res);
                         }
                     })
                     
                 }
                 else{
-                    send_email(email, emailType, res);
+                    send_email(email, emailType, account ,  res);
                 }
-                
-                
             }
         })
         
