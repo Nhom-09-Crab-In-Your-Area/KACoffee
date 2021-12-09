@@ -11,7 +11,7 @@ var cartSchema = new Schema({
         ice_level: {type: Number, enum: [0,30,50,70,100], default: 100},
         amount: {type: Number, default: 1}
     }],
-    storeID: {type: Schema.Types.String}
+    storeID: {type: Schema.Types.String},
 })
 
 module.exports = mongoose.model('Shopping Cart', cartSchema)
