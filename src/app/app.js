@@ -64,6 +64,10 @@ app.get("/forgotpassword", (req, res) => {
   res.render(path.join(__dirname + "/../../views/forgotpassword"), {});
 });
 
+app.get("/orderoffline", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/counter/order_offline"), {});
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
