@@ -1,6 +1,6 @@
 p {
     color: black;
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
 .p-3 {
     color: #d8363a;
@@ -19,7 +19,13 @@ h1 {
     background-size: cover;
     background-position: bottom;
 }
-
+.panel-body {
+    margin: 31px auto;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    border-radius: 2px;
+}
 #hide1 {
     display: none;
 }
