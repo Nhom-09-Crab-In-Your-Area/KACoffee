@@ -15,7 +15,7 @@ async function viewCart(req, res){
             res.send(JSON.stringify("Shopping cart is empty!"))
         else{
             const cart = await cart_model.findById(id_cart).populate({path: "products.info"})
-            res.json(cart.products)
+            res.json(cart)
         }
     }catch(err){
         res.send(JSON.stringify("error"))
