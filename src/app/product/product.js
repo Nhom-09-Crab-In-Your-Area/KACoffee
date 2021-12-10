@@ -87,6 +87,28 @@ function remove(req, res) {
     res.send(JSON.stringify("Only admin can create products"));
   }
 }
+function rate(req, res){
+  const {id, rate} = req.body
+  if(req.session.AccountType == null){
+    return res.send(JSON.stringify("Log in in order to rate products"))
+  }
+
+  productModel.findById(id, (err, product) =>{
+    if(err){
+      res.send.status(500).json(err);
+    }
+    else if (id == null) {
+      res.status(404).json();
+    }
+    else{
+      product.rateNumber++
+      product.rateLevel[rate-1]++
+      product.save()
+      res.json(product)
+    }
+    
+  })
+}
 module.exports = (app) => {
   app.post("/product/create", (req, res) => {
     create(req, res);
@@ -96,6 +118,9 @@ module.exports = (app) => {
   });
   app.get("/product/view", (req, res) => {
     displayAll(req, res);
+  });
+  app.put("/product/rate", (req, res) => {
+    rate(req, res);
   });
   app.post("/product/delete", (req, res) => {
     remove(req, res);
