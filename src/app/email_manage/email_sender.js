@@ -1,7 +1,6 @@
 const sendEmail = require('./email_transporter');
 const email_forms = require('./email_forms');
-const users_model = require('../../models/users_model');
-const employees_model = require('../../models/employees_model');
+const model = require('../../models/authentication_model');
 const code_generate = require('./code_generator');
 
 send_email = function(email, emailType, account, res){
@@ -28,18 +27,11 @@ module.exports = (app)=>{
             email = req.body.email;
         }
 
-        users_model.findOne({'email': email}, (err, account) =>{
+        model.findOne({'email': email}, (err, account) =>{
             if(err) throw err;
             else{
                 if (account == null){
-                    employees_model.findOne({'email': email}, (err, account1)=>{
-                        if(err) throw err;
-                        if(account1 == null) res.status(404).send(JSON.stringify('email not exist'));
-                        else{
-                            send_email(email, emailType, account1, res);
-                        }
-                    })
-                    
+                    res.status(404).send(JSON.stringify('email not exist'));
                 }
                 else{
                     send_email(email, emailType, account ,  res);
