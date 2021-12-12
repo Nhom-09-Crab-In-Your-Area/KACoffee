@@ -58,6 +58,30 @@ const cartAddItem = async (
     }
 }
 
+const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
+    let data = { id_cart, id_item, amount }
+    if (amount == 0) {
+        await fetch('/cart/delete_product', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ id_cart, id_item }),
+        })
+    }
+    await fetch('/cart/change_amount', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+    })
+
+    await cartRender(id_user)
+}
+
 const cartRender = async (id_user) => {
     const data = { id_user }
     let items = await fetch('/cart/view', {
@@ -70,7 +94,9 @@ const cartRender = async (id_user) => {
     }).then((data) => data.json())
 
     const productList = document.querySelector('.productList')
-    console.log(productList)
+    productList.innerHTML = ''
+
+    const id_cart = items._id
 
     items = items.products
 
@@ -80,16 +106,16 @@ const cartRender = async (id_user) => {
     items.forEach((item) => {
         const itemContainer = document.createElement('div')
         qty += item.amount
-        console.log(item)
+        //console.log(item)
         let price =
             Number(item.info.price) +
             (item.size == 'M' ? 5000 : 0) +
             (item.size == 'L' ? 10000 : 0)
-        console.log(item.info.price)
+        //console.log(item.info.price)
         total += price * item.amount
         itemContainer.innerHTML = `
             <div class = "cart-item row">
-                <div class = "col-8 col-md-7">
+                <div class = "col-6 col-md-6">
                     <div> ${item.info.name.toUpperCase()} </div>
                     <div> 
                         <span class="badge rounded-pill bg-secondary ">${
@@ -103,10 +129,23 @@ const cartRender = async (id_user) => {
                         }</span>
                     </div>
                 </div>
-                <div class = "col-1" style = "color:black">x${item.amount}</div>
-                <div class = "col-3 col-md-4 secondary" style = "color:grey; font-weight:bold">${
+                <div class = "col-3 col-md-2" style = "color:black">
+                    <i class="fas fa-minus change-amount" onClick="adjustAmountHandler('${id_cart}','${
+            item._id
+        }', '${item.amount - 1}','${id_user}')"></i>
+                    <span> ${item.amount} </span>
+                    <i class="fas fa-plus change-amount" onClick="adjustAmountHandler('${id_cart}','${
+            item._id
+        }', '${item.amount + 1}','${id_user}')"></i>
+                </div>
+                <div class = "col-2 col-md-3 secondary" style = "color:grey; font-weight:bold">${
                     price * item.amount
                 } VND</div>
+                <div class = "col-1" style = "color:black">
+                <i class="fas fa-trash-alt" onClick="adjustAmountHandler('${id_cart}','${
+            item._id
+        }', '${0}','${id_user}')"></i>
+                </div>
             </div>
         `
         productList.appendChild(itemContainer)
