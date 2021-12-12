@@ -38,6 +38,7 @@ const customerHandler = (name) => {
     const logoutBtn = document.querySelector('.logout-btn')
     logoutBtn.addEventListener('click', async () => {
         localStorage.removeItem('login')
+        localStorage.removeItem('id')
         const res = await fetch('/log_out', { method: 'GET' })
         window.location = '/'
     })
@@ -47,12 +48,14 @@ const fetchState = async (url = '/check_self_profile') => {
     const data = await fetch(url, { method: 'GET' }).then((res) => {
         if (res.status == 401) {
             guestHandler()
+            localStorage.removeItem('login')
             return null
         } else return res.json()
     })
 
     if (data) {
         //localStorage.setItem('login', 'true')
+        localStorage.setItem('id', data['_id'])
         customerHandler(data['first name'])
     }
 
