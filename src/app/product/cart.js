@@ -15,17 +15,17 @@ async function viewCart(req, res){
             res.send(JSON.stringify("Shopping cart is empty!"))
         else{
             const cart = await cart_model.findById(id_cart).populate({path: "products.info"})
-            res.json(cart.products)
+            res.json(cart)
         }
     }catch(err){
-        res.send(JSON.stringify("error"))
+        throw err
     }
 }
 
 async function addProduct(req, res){
     try{
         // dùng id_user bởi vì có thể chưa có id_cart
-        var {id_user, id_product, size, sugar_level, ice_level, amount, storeID} = req.body
+        var {id_user, id_product, size, sugar_level, ice_level, amount, storeID, price} = req.body
 
         if(id_user == null || id_product == null)
             return res.send(JSON.stringify("id user/ id product is null"))
@@ -46,6 +46,7 @@ async function addProduct(req, res){
         const cart = await cart_model.findById(id_cart)
         const products = cart.products
         const len = products.length
+        cart.priceTotal += Number(amount)*price
         for(var i = 0; i < len; i++){
             item = products[i]
             //console.log("i",i)
@@ -56,13 +57,13 @@ async function addProduct(req, res){
                 return res.json(cart)
             }
         }
-
         await products.push({
                     info: id_product,
                     size: size,
                     sugar_level: sugar_level,
                     ice_level: ice_level,
-                    amount: amount
+                    amount: amount,
+                    price: price
                 })//,{ new: true, useFindAndModify: false })
         await cart.save()
         return res.json(cart)
@@ -80,30 +81,33 @@ async function changeAmount(req, res){
         const cart = await cart_model.findById(id_cart)
         const item = cart.products.id(id_item)
         //console.log(item.amount)
+        cart.priceTotal += (Number(amount) - item.amount)*item.price
         item.amount = amount
         await cart.save()
 
         return res.json(cart)
     }catch(err){
-        res.send(JSON.stringify("error"))
+        throw err
     }
 }
 
 async function changeSize(req, res){
     try{
-        const {id_cart, id_item, size} = req.body
+        const {id_cart, id_item, size, price} = req.body
         if(id_cart == null || id_item == null)
             return res.send(JSON.stringify("id_cart/id_item is null"))
         
         const cart = await cart_model.findById(id_cart)
         const item = cart.products.id(id_item)
         //console.log(item.amount)
+        cart.priceTotal += Number(item.amount)*(price - item.price)
+        item.price = price
         item.size = size
         await cart.save()
 
         return res.json(cart)
     }catch(err){
-        res.send(JSON.stringify("error"))
+        throw err
     }
 }
 
@@ -118,12 +122,14 @@ async function deleteProduct(req, res){
         const cart = await cart_model.findById(id_cart)
         if(cart.products == null)
             return res.send(JSON.stringify("Shopping cart is empty!"))
-
+        
+        const item = cart.products.id(id_item) 
+        cart.priceTotal -= item.amount*item.price
         await cart.products.pull({_id: id_item})
         await cart.save()
         res.json(cart)
     }catch(err){
-        res.send(JSON.stringify("error"))
+        throw err
     }
 }
 
@@ -144,7 +150,7 @@ async function deleteCart(req,res){
         }
         res.json(user)
     }catch(err){
-        res.send(JSON.stringify("error"))
+        throw err
     }
 }
 module.exports = (app) =>{

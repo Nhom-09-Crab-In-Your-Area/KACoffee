@@ -13,6 +13,7 @@ const log_out = require("./log_out");
 const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
 const cart = require("./product/cart");
+const order = require("./product/order");
 const purchase = require("./product/order");
 const blog = require("./blog/blog");
 const authen = require("./authentication");
@@ -71,6 +72,7 @@ account_utils(app);
 product(app);
 blog(app);
 cart(app);
+order(app);
 purchase(app);
 authen(app); //authentication
 //email_sender(app);
