@@ -16,8 +16,8 @@ const cart = require("./product/cart");
 const purchase = require("./product/order");
 const blog = require("./blog/blog");
 const authen = require("./authentication");
-const emailSender = require("./email_manage/email_sender");
-const email_sender = require("./email_manage/email_sender");
+const email_utils = require("./email_manage/email_utils");
+
 
 app.engine("mustache", mustacheExpress());
 
@@ -85,4 +85,5 @@ blog(app);
 cart(app);
 purchase(app);
 authen(app); //authentication
-//email_sender(app);
+email_utils(app); //email utils
+
