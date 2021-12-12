@@ -13,10 +13,11 @@ const log_out = require("./log_out");
 const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
 const cart = require("./product/cart");
-const purchase = require("./product/purchase");
+const purchase = require("./product/order");
 const blog = require("./blog/blog");
 const authen = require("./authentication");
 const email_utils = require("./email_manage/email_utils");
+
 
 app.engine("mustache", mustacheExpress());
 
@@ -63,6 +64,10 @@ app.get("/forgotpassword", (req, res) => {
   res.render(path.join(__dirname + "/../../views/forgotpassword"), {});
 });
 
+app.get("/orderoffline", (req, res) => {
+  res.render(path.join(__dirname + "/../../views/counter/order_offline"), {});
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
@@ -81,3 +86,4 @@ cart(app);
 purchase(app);
 authen(app); //authentication
 email_utils(app); //email utils
+
