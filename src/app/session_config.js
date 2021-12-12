@@ -1,4 +1,4 @@
-const _2hours = 1000 * 60 * 60 * 2;
+const _24hours = 1000 * 60 * 60 * 24;
 let session = require("express-session");
 let MongoDBStore = require("connect-mongodb-session")(session);
 let DBconfig = require("../dbConfig/config");
@@ -17,6 +17,7 @@ store.on("error", function (error) {
 module.exports.init = (app) => {
   app.use(
     session({
+      name: "login",
       genid: function (req) {
         return shortid.generate();
       },
@@ -26,6 +27,7 @@ module.exports.init = (app) => {
         secure: false,
         AccountType: "Guest", // guest until  login
         UserEmail: null, //should contain email
+        maxAge: 30 * _24hours,
       },
       saveUninitialized: true,
 

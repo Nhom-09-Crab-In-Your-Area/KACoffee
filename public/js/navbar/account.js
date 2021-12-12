@@ -48,6 +48,7 @@ const fetchState = async (url = '/check_self_profile') => {
     const data = await fetch(url, { method: 'GET' }).then((res) => {
         if (res.status == 401) {
             guestHandler()
+            localStorage.removeItem('login')
             return null
         } else return res.json()
     })
