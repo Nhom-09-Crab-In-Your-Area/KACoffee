@@ -73,6 +73,7 @@ function Add_info(product_info) {
     var product_cost = document.getElementsByClassName('product-cost')
     var rateNumber = document.getElementsByClassName('rateNumber')
     var ratingStars = document.getElementsByClassName('ratingStars')
+    var linkProduct = document.getElementsByClassName('link_product')
 
     for (var i = 0; i < product_info.length; i++) {
         var type = product_info[i].type
@@ -82,6 +83,13 @@ function Add_info(product_info) {
         product_name[i].innerHTML = product_info[i].name
         product_cost[i].innerHTML = product_info[i].price
         rateNumber[i].innerHTML = product_info[i].rateNumber
+
+        var link = "http://localhost:3000/viewproduct?id="
+        var id = product_info[i]._id
+        var Id = String(id)
+        link = link + Id
+        linkProduct[i].href = link
+        
 
         var rateLevel = product_info[i].rateLevel
         rateLevel = 5

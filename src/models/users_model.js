@@ -7,7 +7,8 @@ let userSchema = new Schema({
     'last name': {type: String},
     'phone': {type: String},
     'address': {type: String, default: ''},
-    
+    cart: {type: Schema.Types.ObjectId, ref: "Shopping Cart"},
+    orders: [{type: Schema.Types.ObjectId, ref: "Order"}]
 }, {collection: 'Users'});
 
 module.exports = mongoose.model('Users', userSchema);
