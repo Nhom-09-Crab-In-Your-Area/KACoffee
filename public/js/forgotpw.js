@@ -17,6 +17,7 @@ async function checkmail(e) {
             },
             body: JSON.stringify({
                 email: email.value,
+                email_type: 'passwword_change',
             }),
         })
             .then((res) => res.json())
