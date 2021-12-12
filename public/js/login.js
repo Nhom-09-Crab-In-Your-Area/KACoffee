@@ -4,6 +4,22 @@
 const loginbutton = document.querySelector('#submit_login')
 const warning = document.querySelector('#warning')
 const registerbutton = document.querySelector('#submit_register')
+
+// Hien thi mat khau
+function showpass() {
+    const x = document.getElementById('password_login')
+    const y = document.getElementById('hide1')
+    const z = document.getElementById('hide2')
+    if (x.type === 'password') {
+        x.type = 'text'
+        y.style.display = 'block'
+        z.style.display = 'none'
+    } else {
+        x.type = 'password'
+        y.style.display = 'none'
+        z.style.display = 'block'
+    }
+}
 // Phan login
 loginbutton.addEventListener('click', loginUser)
 async function loginUser(e) {
