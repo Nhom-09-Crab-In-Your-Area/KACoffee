@@ -11,7 +11,7 @@ async function viewOrder(req,res){
                 res.send(JSON.stringify("Employee not exist!"))
             const storeID = employee.storeID
             //console.log("Abc",storeID)
-            const orders = await order_model.find({storeID: storeID})
+            const orders = await order_model.find({storeID: storeID}).populate({path: "products.info"})
             res.json(orders)
         }
         else res.send(JSON.stringify("Only employee can access!"))
@@ -31,7 +31,7 @@ async function viewFilterOrder(req,res){
                 res.send(JSON.stringify("Employee not exist!"))
             const storeID = employee.storeID
             //console.log("Abc",storeID)
-            const orders = await order_model.find({storeID: storeID, status: status_order})
+            const orders = await order_model.find({storeID: storeID, status: status_order}).populate({path: "products.info"})
             res.json(orders)
         }
         else res.send(JSON.stringify("Only employee can access!"))
