@@ -1,5 +1,7 @@
 'use strict'
 
+const cartChangeAmount = async () => {}
+
 const cart = document.querySelector('.cart')
 
 const dropdown = document.createElement('div')
@@ -22,8 +24,160 @@ cart.appendChild(dropdown)
 
 const productList = document.querySelector('.productList')
 
+const cartAddItem = async (
+    id_user,
+    id_product,
+    size,
+    sugar_level,
+    ice_level,
+    amount,
+    storeID = 1
+) => {
+    try {
+        console.log(
+            id_user,
+            id_product,
+            size,
+            sugar_level,
+            ice_level,
+            amount,
+            storeID
+        )
+        const data = {
+            id_user,
+            id_product,
+            size,
+            sugar_level,
+            ice_level,
+            amount,
+            storeID,
+        }
+        console.log(data)
+        await fetch('/cart/add_product', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(data),
+        })
+
+        await cartRender(id_user)
+
+        return true
+    } catch {
+        return false
+    }
+}
+
+const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
+    let data = { id_cart, id_item, amount }
+    if (amount == 0) {
+        await fetch('/cart/delete_product', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ id_cart, id_item }),
+        })
+    }
+    await fetch('/cart/change_amount', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+    })
+
+    await cartRender(id_user)
+}
+
+const cartRender = async (id_user) => {
+    const data = { id_user }
+    let items = await fetch('/cart/view', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(data),
+    }).then((data) => data.json())
+
+    const productList = document.querySelector('.productList')
+    productList.innerHTML = ''
+
+    const id_cart = items._id
+
+    items = items.products
+
+    let total = 0
+    let qty = 0
+
+    items.forEach((item) => {
+        const itemContainer = document.createElement('div')
+        qty += item.amount
+        //console.log(item)
+        let price =
+            Number(item.info.price) +
+            (item.size == 'M' ? 5000 : 0) +
+            (item.size == 'L' ? 10000 : 0)
+        //console.log(item.info.price)
+        total += price * item.amount
+        itemContainer.innerHTML = `
+            <div class = "cart-item row">
+                <div class = "col-6 col-md-6">
+                    <div> ${item.info.name.toUpperCase()} </div>
+                    <div> 
+                        <span class="badge rounded-pill bg-secondary ">${
+                            'Size: ' + item.size
+                        }</span>
+                        <span class="badge rounded-pill bg-secondary ">${
+                            'Sugar: ' + item.sugar_level + '%'
+                        }</span>
+                        <span class="badge rounded-pill bg-secondary ">${
+                            'Ice: ' + item.ice_level + '%'
+                        }</span>
+                    </div>
+                </div>
+                <div class = "col-3 col-md-2" style = "color:black">
+                    <i class="fas fa-minus change-amount" onClick="adjustAmountHandler('${id_cart}','${
+            item._id
+        }', '${item.amount - 1}','${id_user}')"></i>
+                    <span> ${item.amount} </span>
+                    <i class="fas fa-plus change-amount" onClick="adjustAmountHandler('${id_cart}','${
+            item._id
+        }', '${item.amount + 1}','${id_user}')"></i>
+                </div>
+                <div class = "col-2 col-md-3 secondary" style = "color:grey; font-weight:bold">${
+                    price * item.amount
+                } VND</div>
+                <div class = "col-1" style = "color:black">
+                <i class="fas fa-trash-alt" onClick="adjustAmountHandler('${id_cart}','${
+            item._id
+        }', '${0}','${id_user}')"></i>
+                </div>
+            </div>
+        `
+        productList.appendChild(itemContainer)
+    })
+
+    const mess = document.createElement('div')
+    if (items.length > 0)
+        mess.innerHTML = `<div style = "color:black; font-weight:bold; text-align: right" >TOTAL: ${total} VND</div>
+        <div style = "text-align: center"><button>CHECK OUT</button> </div>`
+    else mess.innerHTML = `YOUR CART IS EMPTY`
+
+    productList.appendChild(mess)
+
+    document.querySelector('.product-count').textContent = qty
+
+    console.log(items)
+}
+
 if (localStorage.getItem('login')) {
-    console.log(localStorage.getItem('login'))
+    cartRender(localStorage.getItem('id'))
 } else {
     const mess = document.createElement('div')
     mess.textContent = `* PLEASE LOGIN TO VIEW YOUR CART AND ORDER!`

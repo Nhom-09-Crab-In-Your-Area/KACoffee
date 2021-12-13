@@ -1,3 +1,4 @@
+
 const express = require("express");
 const morgan = require("morgan");
 var mustacheExpress = require("mustache-express");
@@ -27,42 +28,59 @@ app.set("views", path.join(__dirname, "../../views"));
 session_config.init(app); //session configuration
 authen(app); //authentication
 
+
 app.engine(
-  "mustache",
-  mustacheExpress(path.join(__dirname, "../../views/partials"), ".mustache")
-);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan("dev")); // show all response
-app.use(express.static(path.join(__dirname, "../../public")));
+    'mustache',
+    mustacheExpress(path.join(__dirname, '../../views/partials'), '.mustache')
+)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan('dev')) // show all response
+app.use(express.static(path.join(__dirname, '../../public')))
 
 //render
-app.get("/", (req, res) => {
-  res.render(path.join(__dirname + "/../../views/index"), { name: "Anh" });
-});
+app.get('/', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/index'), { name: 'Anh' })
+})
 
-app.get("/login", (req, res) => {
-  res.render(path.join(__dirname + "/../../views/login"), {});
-});
+app.get('/login', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/login'), {})
+})
 
-app.get("/product", (req, res) => {
-  res.render(path.join(__dirname + "/../../views/product"), {});
-});
+app.get('/product', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/product'), {})
+})
 
-app.get("/my_profile", (req, res) => {
-  res.render(path.join(__dirname + "/../../views/profile/my_profile"), {});
-});
+app.get('/viewproduct', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/viewproduct'), {})
+})
 
-app.get("/blog", (req, res) => {
-  res.render(path.join(__dirname + "/../../views/blog"), {});
-});
+app.get('/my_profile', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/profile/my_profile'), {})
+})
+
+app.get('/blog', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/blog'), {})
+})
+
+app.get('/forgotpassword', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/forgotpassword'), {})
+})
+
+app.get('/changepassword', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/changepassword'), {})
+})
+
+app.get('/orderoffline', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/counter/order_offline'), {})
+})
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+    console.log(`Example app listening at http://localhost:${port}`)
+})
 
 //connect db
-connectDB();
+connectDB()
 
 //utils
 register(app); //route: /addCustomer, /addEmployee
@@ -76,3 +94,4 @@ order(app);
 purchase(app);
 authen(app); //authentication
 //email_sender(app);
+
