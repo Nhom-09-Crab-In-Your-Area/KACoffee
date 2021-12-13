@@ -144,7 +144,7 @@ body {
     margin: 0 auto;
     width: auto;
 }
-.item-order {
+.order-name {
     margin-right: 16px;
     min-width: 280px;
     max-width: 280px;
@@ -152,17 +152,17 @@ body {
     -ms-flex: 1;
     flex: 1; */
 }
-.item-product {
+.order-status {
     margin-right: 16px;
     min-width: 370px;
     max-width: 370px;
 }
-.status {
+.order-price {
     margin-right: 16px;
     min-width: 150px;
     max-width: 150px;
 }
-.item-cost {
+.order-address {
     /* margin-right: 16px; */
     min-width: 160px;
     max-width: 160px;
