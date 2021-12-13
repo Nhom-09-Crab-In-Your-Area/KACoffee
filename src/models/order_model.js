@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-var cartSchema = new Schema({
+const orderSchema = new Schema({
     user: {type: Schema.Types.ObjectId, ref: "Users"
     },
     products: [{
@@ -9,11 +9,17 @@ var cartSchema = new Schema({
         size: {type: String, enum: ["S","M","L"], default: "S"},
         sugar_level: {type: Number, enum: [0,30,50,70,100], default: 100},
         ice_level: {type: Number, enum: [0,30,50,70,100], default: 100},
-        amount: {type: Number, default: 1, min: 1},
-        price: {type: Number, default: 0}
+        amount: {type: Number, default: 1, min: 1}
     }],
-    priceTotal: {type: Number, default: 0},
     storeID: {type: Schema.Types.String, default: "1"},
+    employee: {type: Schema.Types.ObjectId, ref: "Employees"},
+    createAt: {type: Date, default: Date.now},
+    status: {
+        type: String, 
+        enum: ["Verifying","Canceled","Processing","Shipping","Completed"],
+        default: "Verifying"
+    },
+    price: {type: Number},
 })
 
-module.exports = mongoose.model('Shopping Cart', cartSchema)
+module.exports = mongoose.model("Order", orderSchema)
