@@ -166,20 +166,33 @@ async function deleteProduct(req, res){
 
 async function deleteCart(req,res){
     try{
-        const {id_user} = req.body
-        if(id_user == null){
-            return res.send(JSON.stringify("Id is null"))
-        }
+        const {id_cart} = req.body
+        const id_user = req.session.idAccount
+        
 
-        const user = await user_model.findById(id_user)
-        var id_cart = user.cart
-        if(id_cart != undefined){
-            user.cart = undefined
-            await user.save()
-            
-            const cart = await cart_model.findByIdAndRemove(id_cart)
+        if(req.session.AccountType == "Customer"){
+//             if(id_user == null){
+//                 return res.send(JSON.stringify("Id is null"))
+//             }
+            const user = await user_model.findById(id_user)
+            var id_cart = user.cart
+            if(id_cart != undefined){
+                user.cart = undefined
+                await user.save()
+
+                const cart = await cart_model.findByIdAndRemove(id_cart)
+            }
+            res.json(user)
         }
-        res.json(user)
+        
+        else if(req.session.AccountType == "Employee"){
+            if(id_cart == null){
+                return res.send(JSON.stringify("Id is null"))
+            }
+            await cart_model.findByIdAndRemove(id_cart)
+        }
+        
+        
     }catch(err){
         throw err
     }
