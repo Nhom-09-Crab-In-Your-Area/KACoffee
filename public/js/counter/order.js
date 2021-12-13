@@ -47,7 +47,7 @@ async function myTimer(e) {
     })
         .then((data) => data.json())
         .then((data) => {
-            console.log(data)
+            console.log(data[0].products[0].info)
             rs = data
         })
     getData(rs)
