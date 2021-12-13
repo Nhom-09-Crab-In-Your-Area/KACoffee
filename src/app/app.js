@@ -1,29 +1,33 @@
-const express = require('express')
-const morgan = require('morgan')
-var mustacheExpress = require('mustache-express')
 
-const path = require('path')
-const app = express()
-const port = process.env.PORT || 3000
-const connectDB = require('../dbConfig/connectDB')
-const register = require('./register')
-const log_in = require('./log_in')
-const session_config = require('./session_config')
-const log_out = require('./log_out')
-const account_utils = require('./alter_data/account_utils')
-const product = require('./product/product')
-const cart = require('./product/cart')
-const purchase = require('./product/order')
-const blog = require('./blog/blog')
-const authen = require('./authentication')
-const email_utils = require('./email_manage/email_utils')
+const express = require("express");
+const morgan = require("morgan");
+var mustacheExpress = require("mustache-express");
 
-app.engine('mustache', mustacheExpress())
+const path = require("path");
+const app = express();
+const port = process.env.PORT || 3000;
+const connectDB = require("../dbConfig/connectDB");
+const register = require("./register");
+const log_in = require("./log_in");
+const session_config = require("./session_config");
+const log_out = require("./log_out");
+const account_utils = require("./alter_data/account_utils");
+const product = require("./product/product");
+const cart = require("./product/cart");
+const order = require("./product/order");
+const employee = require("./employee/employee")
+const blog = require("./blog/blog");
+const authen = require("./authentication");
+const emailSender = require("./email_manage/email_sender");
+const email_sender = require("./email_manage/email_sender");
 
-app.set('view engine', 'mustache')
-app.set('views', path.join(__dirname, '../../views'))
-session_config.init(app) //session configuration
-authen(app) //authentication
+app.engine("mustache", mustacheExpress());
+
+app.set("view engine", "mustache");
+app.set("views", path.join(__dirname, "../../views"));
+session_config.init(app); //session configuration
+authen(app); //authentication
+
 
 app.engine(
     'mustache',
@@ -79,13 +83,15 @@ app.listen(port, () => {
 connectDB()
 
 //utils
-register(app) //route: /addCustomer, /addEmployee
-log_in(app) //route: /log_in
-log_out(app) //route: /log_out
-account_utils(app)
-product(app)
-blog(app)
-cart(app)
-purchase(app)
-authen(app) //authentication
-email_utils(app) //email utils
+register(app); //route: /addCustomer, /addEmployee
+log_in(app); //route: /log_in
+log_out(app); //route: /log_out
+account_utils(app);
+product(app);
+blog(app);
+cart(app);
+order(app);
+employee(app);
+authen(app); //authentication
+//email_sender(app);
+

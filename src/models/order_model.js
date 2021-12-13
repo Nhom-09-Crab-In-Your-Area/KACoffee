@@ -2,12 +2,23 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const orderSchema = new Schema({
-    user: {type: Schema.Types.ObjectId, ref: "Users"},
-    products: [{type: Schema.Types.String, ref: "Product"}],
+    user: {type: Schema.Types.ObjectId, ref: "Users"
+    },
+    products: [{
+        info: {type: Schema.Types.String, ref: "Product"},
+        size: {type: String, enum: ["S","M","L"], default: "S"},
+        sugar_level: {type: Number, enum: [0,30,50,70,100], default: 100},
+        ice_level: {type: Number, enum: [0,30,50,70,100], default: 100},
+        amount: {type: Number, default: 1, min: 1}
+    }],
+    storeID: {type: Schema.Types.String, default: "1"},
     employee: {type: Schema.Types.ObjectId, ref: "Employees"},
-    storeID: {type: String},
     createAt: {type: Date, default: Date.now},
-    status: {type: String},
+    status: {
+        type: String, 
+        enum: ["Verifying","Canceled","Processing","Shipping","Completed"],
+        default: "Verifying"
+    },
     price: {type: Number},
 })
 

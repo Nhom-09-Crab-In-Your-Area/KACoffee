@@ -8,7 +8,7 @@ let employeeSchema = new Schema({
     'phone': {type: String},
     'address': {type: String, default: ''},
     'account type': {type: String, default: ''},
-    'storeID': {type: String, default: ''}
+    'storeID': {type: String, default: '1'}
 }, {collection: 'Employees'});
 
 module.exports = mongoose.model('Employees', employeeSchema);
