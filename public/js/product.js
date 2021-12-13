@@ -78,7 +78,11 @@ function Add_info(product_info) {
 
     for (var i = 0; i < product_info.length; i++) {
         const tmp = document.createElement('div')
-        tmp.innerHTML = `
+        if (
+            window.localStorage.getItem('login') &&
+            window.localStorage.getItem('login') == 'true'
+        )
+            tmp.innerHTML = `
         <button class = "AddCart" type = "button" data-toggle="modal"
         data-target="#Modal${i}">
                                     <i class="fas fa-cart-plus"></i>
@@ -193,6 +197,36 @@ function Add_info(product_info) {
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+        `
+        else
+            tmp.innerHTML = `<button class = "AddCart" type = "button" data-toggle="modal"
+        data-target="#Modal${i}">
+                                    <i class="fas fa-cart-plus"></i>
+                                    Thêm vào giỏ hàng
+                                </button>
+    <div
+        class="modal fade"
+        id="Modal${i}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="ModalLabel${i}"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel${i}">Add to cart</h5>
+                </div>
+                <div class="modal-body">
+                    <div>PLEASE LOGIN</div>
+                </div>
+                <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
             </div>
         </div>
     </div>
