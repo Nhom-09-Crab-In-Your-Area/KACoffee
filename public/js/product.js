@@ -226,12 +226,6 @@ function Add_info(product_info) {
     }
 }
 
-function addcart () {
-    var AddCart = document.getElementsByClassName('AddCart')
-    for (var i = 0; i < AddCart.length; i++) {
-        AddCart[i].onclick = Tested()
-    }
-}
 
 async function get_info_product(category) {
     var myJSON
@@ -245,6 +239,3 @@ async function get_info_product(category) {
     Add_info(myJSON)
 }
 
-function Tested () {
-    alert("Chào mừng bạn đến với Thanh Lam")
-}
