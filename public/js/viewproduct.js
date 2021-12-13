@@ -18,7 +18,7 @@ function add_info(product_info) {
             product_type.innerHTML = product_info[i].type
             product_name.innerHTML = product_info[i].name
             product_cost.innerHTML = product_info[i].price
-            product_rate_number.innerHTML = product_info[i].rateNumber
+            product_rate_number.innerHTML = product_info[i].rateNumber// sửa lại đoạn nay sau khi cập nhập
             product_image.src = product_info[i].image
             product_description.innerHTML = product_info[i].description
             for (var j = 1; j <= 5; j++) {
