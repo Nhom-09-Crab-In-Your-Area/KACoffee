@@ -75,6 +75,7 @@ function Add_info(product_info) {
     var rateNumber = document.getElementsByClassName('rateNumber')
     var ratingStars = document.getElementsByClassName('ratingStars')
     var linkProduct = document.getElementsByClassName('link_product')
+    
 
     for (var i = 0; i < product_info.length; i++) {
         const tmp = document.createElement('div')
@@ -221,8 +222,10 @@ function Add_info(product_info) {
                 .cloneNode(true)
             ratingStars[i].appendChild(SampleStar)
         }
+
     }
 }
+
 
 async function get_info_product(category) {
     var myJSON
@@ -235,3 +238,4 @@ async function get_info_product(category) {
         })
     Add_info(myJSON)
 }
+

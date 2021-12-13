@@ -55,7 +55,7 @@ async function viewOrder(req,res){
 
         // case 2
         // const user = await user_model.findById(id_user).populate("orders")
-        // res.json(user.orders)
+        // res.json(user)
     }
     catch(err){
         throw err
