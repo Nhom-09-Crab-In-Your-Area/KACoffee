@@ -31,18 +31,13 @@ const cartAddItem = async (
     sugar_level,
     ice_level,
     amount,
+    price,
     storeID = 1
 ) => {
     try {
-        console.log(
-            id_user,
-            id_product,
-            size,
-            sugar_level,
-            ice_level,
-            amount,
-            storeID
-        )
+        const total =
+            Number(amount) *
+            (price + (size == 'M' ? 5000 : 0) + (size == 'L' ? 10000 : 0))
         const data = {
             id_user,
             id_product,
@@ -51,13 +46,12 @@ const cartAddItem = async (
             ice_level,
             amount,
             storeID,
+            price: total,
         }
-        console.log(data)
         await fetch('/cart/add_product', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data),
         })
@@ -70,9 +64,29 @@ const cartAddItem = async (
     }
 }
 
+async function addButtonClickHandle(id_product, id_form, price) {
+    //console.log(id_form)
+    const form = document.querySelector(id_form)
+    const sugar = form.elements['sugar'].value
+    const ice = form.elements['ice'].value
+    const amount = form.elements['quantity'].value
+    const size = form.elements['size'].value
+    //console.log(id_product, id_form, sugar, ice, amount, price)
+    await cartAddItem(
+        window.localStorage.getItem('id'),
+        id_product,
+        size,
+        sugar,
+        ice,
+        amount,
+        price
+    )
+}
+
 const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
     let data = { id_cart, id_item, amount }
     if (amount == 0) {
+        console.log(id_cart, id_item)
         await fetch('/cart/delete_product', {
             method: 'PUT',
             headers: {
@@ -81,6 +95,8 @@ const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
             },
             body: JSON.stringify({ id_cart, id_item }),
         })
+        await cartRender(id_user)
+        return false
     }
     await fetch('/cart/change_amount', {
         method: 'PUT',
