@@ -61,25 +61,6 @@ function Filter_gift() {
     }
 }
 
-async function addButtonClickHandle(id_product, id_form, price) {
-    //console.log(id_form)
-    const form = document.querySelector(id_form)
-    const sugar = form.elements['sugar'].value
-    const ice = form.elements['ice'].value
-    const amount = form.elements['quantity'].value
-    const size = form.elements['size'].value
-    //console.log(id_product, id_form, sugar, ice, amount, price)
-    await cartAddItem(
-        window.localStorage.getItem('id'),
-        id_product,
-        size,
-        sugar,
-        ice,
-        amount,
-        price
-    )
-}
-
 function Add_info(product_info) {
     var a = document.getElementById('Sample')
     for (var i = 0; i < product_info.length; i++) {

@@ -64,6 +64,25 @@ const cartAddItem = async (
     }
 }
 
+async function addButtonClickHandle(id_product, id_form, price) {
+    //console.log(id_form)
+    const form = document.querySelector(id_form)
+    const sugar = form.elements['sugar'].value
+    const ice = form.elements['ice'].value
+    const amount = form.elements['quantity'].value
+    const size = form.elements['size'].value
+    //console.log(id_product, id_form, sugar, ice, amount, price)
+    await cartAddItem(
+        window.localStorage.getItem('id'),
+        id_product,
+        size,
+        sugar,
+        ice,
+        amount,
+        price
+    )
+}
+
 const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
     let data = { id_cart, id_item, amount }
     if (amount == 0) {

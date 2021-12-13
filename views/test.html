@@ -1,35 +1,22 @@
-<button
-    type="button"
-    class="btn btn-primary"
-    data-toggle="modal"
-    data-target="#${i}Modal"
->
-    Launch demo modal
-</button>
-<button
-    class="AddCart"
-    type="button"
-    data-toggle="modal"
-    data-target="#Modal${i}"
->
+<button type="button" data-toggle="modal" data-target="#Modal">
     <i class="fas fa-cart-plus"></i>
     Thêm vào giỏ hàng
 </button>
 <div
     class="modal fade"
-    id="${i}Modal"
+    id="Modal"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="${i}ModalLabel"
+    aria-labelledby="ModalLabel"
     aria-hidden="true"
 >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="${i}ModalLabel">Add to cart</h5>
+                <h5 class="modal-title" id="ModalLabel">Add to cart</h5>
             </div>
             <div class="modal-body">
-                <form class="test">
+                <form class="formINPUT">
                     <div style="margin-bottom: 5px">
                         <label for="quantity" class="col-sm-2">Quantity</label>
                         <input
@@ -115,12 +102,14 @@
                         >
                             Close
                         </button>
-                        <input
-                            type="button"
+                        <button
                             class="btn btn-primary"
+                            onClick="addButtonClickHandle('idsanpham','.formINPUT',giasanpham)"
                             value="Add"
                             data-dismiss="modal"
-                        />
+                        >
+                            Add
+                        </button>
                     </div>
                 </form>
             </div>
