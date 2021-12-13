@@ -16,8 +16,8 @@ const orderSchema = new Schema({
     createAt: {type: Date, default: Date.now},
     status: {
         type: String, 
-        enum: ["Pending Payment","Canceled","Payment Received","Processing","Shipping","Complete"],
-        default: "Payment Received"
+        enum: ["Verifying","Canceled","Processing","Shipping","Completed"],
+        default: "Verifying"
     },
     price: {type: Number},
 })

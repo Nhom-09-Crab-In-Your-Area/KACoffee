@@ -1,9 +1,11 @@
 const cart_model = require("../../models/cart_model")
 const user_model = require("../../models/users_model")
+const employee_model = require("../../models/employees_model")
+const users_model = require("../../models/users_model")
 
 async function viewCart(req, res){
     try{
-        const {id_user} = req.body
+        const id_user = req.session.idAccount
         // click view cart: client-server has just id_user, hasn't id_cart
         const user = await user_model.findById(id_user)
         if(user == null)
@@ -22,28 +24,57 @@ async function viewCart(req, res){
     }
 }
 
+// employee creates new cart
+async function createCart(req, res){
+    try{
+        const {phone} = req.body
+        const {idAccount, AccountType} = req.session
+        if(AccountType == "Employee"){
+            const user = await users_model.findOne({phone: phone})
+            let id_cart
+
+            if(user == null) id_cart = null
+            else id_cart = user.id
+            
+            const cart = await cart_model.create({
+                user: id_cart
+            })
+            res.json(cart)
+        }
+        else res.send(JSON.stringify("Only employee can access!"))
+    }
+    catch(err){
+        throw err
+    }
+}
+
 async function addProduct(req, res){
     try{
         // dùng id_user bởi vì có thể chưa có id_cart
-        var {id_user, id_product, size, sugar_level, ice_level, amount, storeID, price} = req.body
+        const id_user = req.session.idAccount
+        var {id_cart, id_product, size, sugar_level, ice_level, amount, storeID, price} = req.body
+        let cart
 
-        if(id_user == null || id_product == null)
-            return res.send(JSON.stringify("id user/ id product is null"))
+        if(id_product == null)
+            return res.send(JSON.stringify("id product is null"))
 
-        const user = await user_model.findById(id_user)
-        let id_cart
-        if(user.cart == undefined){
-            let cart = await cart_model.create({
-                user: id_user,
-            })
-            await user.updateOne({cart: cart})
-            id_cart = cart.id
+        if(req.session.AccountType == "Customer"){
+            const user = await user_model.findById(id_user)
+            if(user.cart == undefined){
+                cart = await cart_model.create({
+                    user: id_user,
+                })
+                await user.updateOne({cart: cart})
+            }
+            else{
+                cart = await cart_model.findById(user.cart)
+            }
         }
-        else{
-            id_cart = user.cart
+        else if(req.session.AccountType == "Employee"){
+            cart = await cart_model.findById(id_cart)
         }
 
-        const cart = await cart_model.findById(id_cart)
+        // modify cart
         const products = cart.products
         const len = products.length
         cart.priceTotal += Number(amount)*price
@@ -156,6 +187,9 @@ async function deleteCart(req,res){
 module.exports = (app) =>{
     app.post("/cart/view", (req, res) => {
         viewCart(req,res)
+    })
+    app.post("/cart/create", (req, res) => {
+        createCart(req,res)
     })
     app.put("/cart/add_product", (req, res) => {
         addProduct(req,res)

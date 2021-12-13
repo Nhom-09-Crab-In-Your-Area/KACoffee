@@ -15,7 +15,7 @@ const account_utils = require("./alter_data/account_utils");
 const product = require("./product/product");
 const cart = require("./product/cart");
 const order = require("./product/order");
-const purchase = require("./product/order");
+const employee = require("./employee/employee")
 const blog = require("./blog/blog");
 const authen = require("./authentication");
 const emailSender = require("./email_manage/email_sender");
@@ -91,7 +91,7 @@ product(app);
 blog(app);
 cart(app);
 order(app);
-purchase(app);
+employee(app);
 authen(app); //authentication
 //email_sender(app);
 

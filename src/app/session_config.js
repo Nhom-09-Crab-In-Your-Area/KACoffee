@@ -26,6 +26,7 @@ module.exports.init = (app) => {
                 secure: false,
                 AccountType: 'Guest', // guest until  login
                 UserEmail: null, //should contain email
+                idAccount: null,
                 maxAge: 30 * _24hours,
             },
             saveUninitialized: true,
