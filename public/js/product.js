@@ -61,21 +61,22 @@ function Filter_gift() {
     }
 }
 
-async function addButtonClickHandle(id_product, id_form) {
+async function addButtonClickHandle(id_product, id_form, price) {
     //console.log(id_form)
     const form = document.querySelector(id_form)
     const sugar = form.elements['sugar'].value
     const ice = form.elements['ice'].value
     const amount = form.elements['quantity'].value
     const size = form.elements['size'].value
-    console.log(id_product, id_form, sugar, ice, amount)
+    //console.log(id_product, id_form, sugar, ice, amount, price)
     await cartAddItem(
         window.localStorage.getItem('id'),
         id_product,
         size,
         sugar,
         ice,
-        amount
+        amount,
+        price
     )
 }
 
@@ -204,7 +205,7 @@ function Add_info(product_info) {
                             </button>
                             <button
                                 class="btn btn-primary"
-                                onClick = "addButtonClickHandle('${product_info[i]._id}','.form${i}')"
+                                onClick = "addButtonClickHandle('${product_info[i]._id}','.form${i}',${product_info[i].price})"
                                 value="Add"
                                 data-dismiss="modal"
                             >Add</button>

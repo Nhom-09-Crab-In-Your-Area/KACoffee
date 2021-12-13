@@ -31,18 +31,13 @@ const cartAddItem = async (
     sugar_level,
     ice_level,
     amount,
+    price,
     storeID = 1
 ) => {
     try {
-        console.log(
-            id_user,
-            id_product,
-            size,
-            sugar_level,
-            ice_level,
-            amount,
-            storeID
-        )
+        const total =
+            Number(amount) *
+            (price + (size == 'M' ? 5000 : 0) + (size == 'L' ? 10000 : 0))
         const data = {
             id_user,
             id_product,
@@ -51,13 +46,12 @@ const cartAddItem = async (
             ice_level,
             amount,
             storeID,
+            price: total,
         }
-        console.log(data)
         await fetch('/cart/add_product', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data),
         })
