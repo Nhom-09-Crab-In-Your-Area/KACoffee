@@ -166,11 +166,8 @@ async function deleteProduct(req, res){
 
 async function deleteCart(req,res){
     try{
-        const {id_cart} = req.body
-        const id_user = req.session.idAccount
-        
-
         if(req.session.AccountType == "Customer"){
+            const id_user = req.session.idAccount
 //             if(id_user == null){
 //                 return res.send(JSON.stringify("Id is null"))
 //             }
@@ -186,6 +183,7 @@ async function deleteCart(req,res){
         }
         
         else if(req.session.AccountType == "Employee"){
+            const {id_cart} = req.body
             if(id_cart == null){
                 return res.send(JSON.stringify("Id is null"))
             }
