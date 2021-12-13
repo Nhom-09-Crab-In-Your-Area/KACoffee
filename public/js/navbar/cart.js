@@ -165,7 +165,6 @@ const cartRender = async (id_user) => {
 }
 
 if (localStorage.getItem('login')) {
-    console.log(localStorage.getItem('login'))
     cartRender(localStorage.getItem('id'))
 } else {
     const mess = document.createElement('div')

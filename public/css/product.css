@@ -17,8 +17,8 @@
 }
 
 #home {
-    width: 100%;
-    float: left;
+    /* width: 100%; */
+
     height: 40px;
     margin: 35px 0 0 100px;
 }
@@ -27,7 +27,6 @@
     min-width: 100px;
     min-height: 115px;
     /* border: 1px solid black; */
-    
 }
 
 .product-grids-all {
@@ -144,8 +143,6 @@ div.ratingStars {
 .logo-filter label:hover {
     cursor: pointer !important;
 }
-
-
 
 .fil-label-name {
     max-width: 90px;
