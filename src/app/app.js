@@ -95,4 +95,4 @@ cart(app)
 order(app)
 employee(app)
 authen(app) //authentication
-//email_sender(app);
+email_sender(app)
