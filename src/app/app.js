@@ -96,8 +96,3 @@ cart(app)
 order(app)
 employee(app)
 authen(app) //authentication
-<<<<<<< HEAD
-email_sender(app)
-=======
-email_utils(app) //email utils
->>>>>>> 92f3eed4ec1d30e0468392014221f8212cbe7c82
