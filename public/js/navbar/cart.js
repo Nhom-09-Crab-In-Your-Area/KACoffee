@@ -121,6 +121,8 @@ const cartRender = async (id_user) => {
         body: JSON.stringify(data),
     }).then((data) => data.json())
 
+    console.log(data)
+
     const productList = document.querySelector('.productList')
     productList.innerHTML = ''
 
