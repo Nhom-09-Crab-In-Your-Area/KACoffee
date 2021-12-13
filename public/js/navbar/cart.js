@@ -67,6 +67,7 @@ const cartAddItem = async (
 const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
     let data = { id_cart, id_item, amount }
     if (amount == 0) {
+        console.log(id_cart, id_item)
         await fetch('/cart/delete_product', {
             method: 'PUT',
             headers: {
@@ -75,6 +76,8 @@ const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
             },
             body: JSON.stringify({ id_cart, id_item }),
         })
+        await cartRender(id_user)
+        return false
     }
     await fetch('/cart/change_amount', {
         method: 'PUT',
