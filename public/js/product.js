@@ -61,10 +61,40 @@ function Filter_gift() {
     }
 }
 
+async function addButtonClickHandle(id_product, id_form) {
+    //console.log(id_form)
+    const form = document.querySelector(id_form)
+    const sugar = form.elements['sugar'].value
+    const ice = form.elements['ice'].value
+    const amount = form.elements['quantity'].value
+    const size = form.elements['size'].value
+    console.log(id_product, id_form, sugar, ice, amount)
+    await cartAddItem(
+        window.localStorage.getItem('id'),
+        id_product,
+        size,
+        sugar,
+        ice,
+        amount
+    )
+}
+
 function Add_info(product_info) {
     var a = document.getElementById('Sample')
     for (var i = 0; i < product_info.length; i++) {
         var clone = document.querySelector('#Sample').cloneNode(true)
+        a.insertAdjacentElement('afterend', clone)
+    }
+    a.remove()
+    var product_item = document.getElementsByClassName('product-item-li')
+    var product_img = document.getElementsByClassName('product-img')
+    var product_name = document.getElementsByClassName('product-name')
+    var product_cost = document.getElementsByClassName('product-cost')
+    var rateNumber = document.getElementsByClassName('rateNumber')
+    var ratingStars = document.getElementsByClassName('ratingStars')
+    var linkProduct = document.getElementsByClassName('link_product')
+
+    for (var i = 0; i < product_info.length; i++) {
         const tmp = document.createElement('div')
         tmp.innerHTML = `
         <button class = "AddCart" type = "button" data-toggle="modal"
@@ -86,7 +116,7 @@ function Add_info(product_info) {
                     <h5 class="modal-title" id="ModalLabel${i}">Add to cart</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="test">
+                    <form class="form${i}">
                         <div style="margin-bottom: 5px">
                             <label for="quantity" class="col-sm-2">Quantity</label>
                             <input
@@ -172,12 +202,12 @@ function Add_info(product_info) {
                             >
                                 Close
                             </button>
-                            <input
-                                type="button"
+                            <button
                                 class="btn btn-primary"
+                                onClick = "addButtonClickHandle('${product_info[i]._id}','.form${i}')"
                                 value="Add"
                                 data-dismiss="modal"
-                            />
+                            >Add</button>
                         </div>
                     </form>
                 </div>
@@ -186,19 +216,7 @@ function Add_info(product_info) {
     </div>
     
         `
-        clone.childNodes[1].childNodes[3].appendChild(tmp)
-        a.insertAdjacentElement('afterend', clone)
-    }
-    a.remove()
-    var product_item = document.getElementsByClassName('product-item-li')
-    var product_img = document.getElementsByClassName('product-img')
-    var product_name = document.getElementsByClassName('product-name')
-    var product_cost = document.getElementsByClassName('product-cost')
-    var rateNumber = document.getElementsByClassName('rateNumber')
-    var ratingStars = document.getElementsByClassName('ratingStars')
-    var linkProduct = document.getElementsByClassName('link_product')
-
-    for (var i = 0; i < product_info.length; i++) {
+        product_item[i].childNodes[1].childNodes[3].appendChild(tmp)
         var type = product_info[i].type
         product_item[i].classList.add(type)
         var src = product_info[i].image
