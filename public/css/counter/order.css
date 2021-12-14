@@ -144,28 +144,28 @@ body {
     margin: 0 auto;
     width: auto;
 }
-.item-order {
+.order-name {
     margin-right: 16px;
-    min-width: 280px;
-    max-width: 280px;
+    min-width: 150px;
+    max-width: 150px;
     /* -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1; */
 }
-.item-product {
-    margin-right: 16px;
-    min-width: 370px;
-    max-width: 370px;
-}
-.status {
+.order-status {
     margin-right: 16px;
     min-width: 150px;
     max-width: 150px;
 }
-.item-cost {
-    /* margin-right: 16px; */
-    min-width: 160px;
-    max-width: 160px;
+.order-address {
+    margin-right: 16px;
+    min-width: 350px;
+    max-width: 350px;
+}
+.order-phone {
+    margin-right: 16px;
+    min-width: 150px;
+    max-width: 150px;
 }
 
 .order-list-data {
@@ -177,4 +177,9 @@ body {
     color: #757575;
     font-size: 14px;
     /* border: 1px solid #e8e8e8; */
+}
+.item-name {
+    margin-right: 16px;
+    min-width: 150px;
+    max-width: 150px;
 }
