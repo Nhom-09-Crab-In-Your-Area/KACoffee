@@ -1,5 +1,6 @@
 const order_model = require("../../models/order_model")
 const employee_model = require("../../models/employees_model")
+const user_model = require("../../models/users_model")
 
 // xem tất cả đơn hàng trong cửa hàng
 async function viewOrder(req,res){
@@ -11,7 +12,7 @@ async function viewOrder(req,res){
                 res.send(JSON.stringify("Employee not exist!"))
             const storeID = employee.storeID
             //console.log("Abc",storeID)
-            const orders = await order_model.find({storeID: storeID}).populate({path: "products.info"})
+            const orders = await order_model.find({storeID: storeID}).populate({path: "products.info"}).populate("user")
             res.json(orders)
         }
         else res.send(JSON.stringify("Only employee can access!"))
@@ -31,7 +32,7 @@ async function viewFilterOrder(req,res){
                 res.send(JSON.stringify("Employee not exist!"))
             const storeID = employee.storeID
             //console.log("Abc",storeID)
-            const orders = await order_model.find({storeID: storeID, status: status_order}).populate({path: "products.info"})
+            const orders = await order_model.find({storeID: storeID, status: status_order}).populate({path: "products.info"}).populate("user")
             res.json(orders)
         }
         else res.send(JSON.stringify("Only employee can access!"))
