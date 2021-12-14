@@ -38,13 +38,14 @@ function Filter_3() {
     }
 }
 var myVar = setTimeout(myTimer, 1000)
-
+var myVar = setTimeout(myTimer1, 1000)
 async function myTimer(e) {
     const data = await fetch('/store/view_order', {
         method: 'GET',
     }).then((data) => data.json())
 
     console.log(data)
+    var i = 0
     const orderlists = document.querySelector('.order-list-section')
     orderlists.innerHTML = ''
     const bars = document.createElement('div')
@@ -63,8 +64,8 @@ async function myTimer(e) {
         itemContainer.innerHTML = `
         <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item to-pay"> <!-- sua lai khi them database -->
-          <h2 class="accordion-header" id="flush-headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          <h2 class="accordion-header" id="flush-heading${i}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
                     <span class="order-name">Phan Đức Anh</span>
                     <span class="order-status">Chưa hoàn thành</span>
@@ -74,17 +75,17 @@ async function myTimer(e) {
                 </div>
             </button>
           </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapse${i}" class="accordion-collapse collapse" aria-labelledby="flush-heading${i}" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body">
-                <div class="item-infor">
+                <div class="item-infor-${i}">
                     <div class="row">
-                        <div class="col-sm">CÀ PHÊ SỮA ĐÁ</div>
-                        <div class="col-sm">M</div>
-                        <div class="col-sm">100%</div>
-                        <div class="col-sm">100%</div>
-                        <div class="col-sm">2</div>
-                        <div class="col-sm">68.000đ</div>
-                    </div>    
+                        <div class="col-sm">Sản phẩm</div>
+                        <div class="col-sm">Size</div>
+                        <div class="col-sm">Đá</div>
+                        <div class="col-sm">Đường</div>
+                        <div class="col-sm">Số lượng</div>
+                        <div class="col-sm">Thành tiền</div>
+                    </div>  
                 </div>
                <div class="col-md-12 bg-light text-right">
                     <button type="button" class="btn btn-warning">Submit</button>
@@ -93,7 +94,38 @@ async function myTimer(e) {
           </div>
         </div>
       </div>
-        
         `
+        orderlists.appendChild(itemContainer)
+        i++
+    })
+}
+async function myTimer1(e) {
+    const data = await fetch('/store/view_order', {
+        method: 'GET',
+    }).then((data) => data.json())
+
+    console.log(data)
+    var i = 0
+    data.forEach((order) => {
+        const itemInfo = document.createElement('div')
+        const temp = document.querySelector(`.item-infor-${i}`)
+        for (let j = 0; j < order.products.length; j++) {
+            const item = document.createElement('div')
+            item.innerHTML = `
+                <div class="row">
+                    <div class="col-sm">${order.products[j].info.name}</div>
+                    <div class="col-sm">${order.products[j].size}</div>
+                    <div class="col-sm">${order.products[j].ice_level}</div>
+                    <div class="col-sm">${order.products[j].sugar_level}</div>
+                    <div class="col-sm">${order.products[j].amount}</div>
+                    <div class="col-sm">${
+                        order.products[j].info.price * order.products[j].amount
+                    }VNĐ</div>
+                </div>    
+            `
+            itemInfo.appendChild(item)
+        }
+        temp.appendChild(itemInfo)
+        i++
     })
 }
