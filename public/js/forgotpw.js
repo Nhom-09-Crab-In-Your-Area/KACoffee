@@ -32,3 +32,4 @@ sendmailbtn.addEventListener('click', async (e) => {
         warning.classList.remove('d-none')
     }
 })
+
