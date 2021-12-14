@@ -62,6 +62,10 @@ app.get('/blog', (req, res) => {
     res.render(path.join(__dirname + '/../../views/blog'), {})
 })
 
+app.get('/viewblog', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/viewpostblog'), {})
+})
+
 app.get('/forgotpassword', (req, res) => {
     res.render(path.join(__dirname + '/../../views/forgotpassword'), {})
 })
