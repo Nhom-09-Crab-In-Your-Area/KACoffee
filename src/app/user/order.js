@@ -10,18 +10,20 @@ async function createOrder(req,res){
             res.send(JSON.stringify("Shopping cart is empty!"))
         }
 
-        let status
-        if(req.session.AccountType == "Customer") status = "Processing"
-        else status = "Verifying"
+        let status, typeOrder = 1
+        if(req.session.AccountType == "Customer") status = "Verifying"
+        else status = "Processing"
 
         const cart = await cart_model.findById(id_cart)
         const id_user = cart.user
+        if(id_user == null) typeOrder = 0 // 0 means offline, 1 means online
         let order = await order_model.create({
             user: id_user,
             products: cart.products,
             storeID: cart.storeID,
             price: cart.priceTotal,
-            status: status
+            status: status,
+            type: typeOrder
         })
         await user_model.findByIdAndUpdate(
             id_user,
