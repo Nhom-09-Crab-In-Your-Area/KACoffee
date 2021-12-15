@@ -1,8 +1,12 @@
-function Add_active(string){
-    var delete_active = document.getElementsByClassName("active");
-    delete_active[0].classList.remove("active");
+//Get element from html
+var i = 0
+
+// Filter
+function Add_active(string) {
+    var delete_active = document.getElementsByClassName('active')
+    delete_active[0].classList.remove('active')
     var active = document.getElementById(string)
-    active.classList.add("active")
+    active.classList.add('active')
 }
 
 function All() {
@@ -10,7 +14,7 @@ function All() {
     for (var i = 0; i < all.length; i++) {
         all[i].style.display = 'block'
     }
-    Add_active("all_filter");
+    Add_active('all_filter')
 }
 
 function Filter_1() {
@@ -22,7 +26,7 @@ function Filter_1() {
     for (var i = 0; i < to_pay.length; i++) {
         to_pay[i].style.display = 'block'
     }
-    Add_active("verifying_filter")
+    Add_active('verifying_filter')
 }
 
 function Filter_2() {
@@ -34,7 +38,7 @@ function Filter_2() {
     for (var i = 0; i < to_receive.length; i++) {
         to_receive[i].style.display = 'block'
     }
-    Add_active("processing_filter")
+    Add_active('processing_filter')
 }
 
 function Filter_3() {
@@ -46,7 +50,7 @@ function Filter_3() {
     for (var i = 0; i < completed.length; i++) {
         completed[i].style.display = 'block'
     }
-    Add_active("shipping_filter")
+    Add_active('shipping_filter')
 }
 function Filter_4() {
     var all = document.getElementsByClassName('accordion-item')
@@ -57,17 +61,33 @@ function Filter_4() {
     for (var i = 0; i < completed.length; i++) {
         completed[i].style.display = 'block'
     }
-    Add_active("completed_filter")
+    Add_active('completed_filter')
 }
-// var myVar = setInterval(getorder, 15000)
-// var myVar = setInterval(getorderdata, 15000)
-// var myVar = setInterval(getpendingorder, 10000)
-// var myVar = setInterval(getpendingorderdata, 10000)
-var i = 0
-var myVar = setTimeout(getorder, 1000)
-var myVar = setTimeout(getorderdata, 1000)
-var myVar = setTimeout(getpendingorder, 1500)
-var myVar = setTimeout(getpendingorderdata, 1500)
+
+//Gui request lien tuc de cap nhat
+setTimeout(getorder, 1000)
+setTimeout(getorderdata, 1000)
+setTimeout(getpendingorder, 1500)
+setTimeout(getpendingorderdata, 1500)
+
+// setInterval(getorder, 60000)
+// setInterval(getorderdata, 60000)
+// setInterval(getpendingorder, 60001)
+// setInterval(getpendingorderdata, 60001)
+//Cac ham request
+
+async function changestatus(id, status) {
+    await fetch('/store/status_order', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, status }),
+    })
+        .then((res) => res.json())
+        .then((data) => {})
+}
+
 async function getorder(e) {
     const data = await fetch('/store/view_order', {
         method: 'GET',
@@ -116,7 +136,7 @@ async function getorder(e) {
                     </div>  
                 </div>
                 <p class="button">
-                <input type="button" class="d-block btn btn-warning mr-0 ml-auto" value="Done">
+                <button onclick ="changestatus('${order._id}',"${order.status}")" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
           </div>
@@ -202,7 +222,7 @@ async function getpendingorder(e) {
                     </div>  
                 </div>
                 <p class="button">
-                <input type="button" class="d-block btn btn-warning mr-0 ml-auto" value="Done">
+                <button onclick ="changestatus('${order._id}',"${order.status}")" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
           </div>
