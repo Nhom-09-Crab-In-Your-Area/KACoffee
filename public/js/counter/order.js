@@ -87,9 +87,9 @@ async function myTimer(e) {
                         <div class="col-sm">Thành tiền</div>
                     </div>  
                 </div>
-               <div class="col-md-12 bg-light text-right">
-                    <button type="button" class="btn btn-warning">Submit</button>
-                </div>
+                <p class="button">
+                <input type="button" class="d-block mr-0 ml-auto" value="Done">
+                </p>
             </div>
           </div>
         </div>

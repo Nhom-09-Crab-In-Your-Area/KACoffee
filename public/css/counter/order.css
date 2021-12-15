@@ -183,3 +183,10 @@ body {
     min-width: 150px;
     max-width: 150px;
 }
+
+.mr-0 {
+    margin-right: 0;
+}
+.ml-auto {
+    margin-left: auto;
+}
