@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/custom.css" />
+        <link rel="icon" href="images/favicon.jpg">
+        <script src="https://kit.fontawesome.com/a10c199002.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/counter/order.css">        
+        <script src="js/counter/order.js"></script>
+        <title>KACoffee | Deliver World Flavor</title>
+    </head>
+    <body>
+        <div class="promotion">
+            <p>
+                &#183 <i class="fas fa-truck"></i> Free shipping on 3
+                cups or more within 20kms &#183
+            </p>
+        </div>
+
+        {{>navbar}}
+
+<<<<<<< HEAD
+       <script>fetchState()</script>
+=======
+        <script>fetchState()</script>
+>>>>>>> e99ff8c81669c2b7b342b4838db26c6d91e5b81c
+        <div class="order">
+            <!-- sidebar -->
+            <!-- order container -->
+            <div class="order-container has-siderbar">
+                <div class="page-content-wrapper">
+                    <div class="portal-sale-root">
+                        <div class="tab-nav" style="top: 56px; z-index: 1000;">
+                            <div class="row">
+                                <div class="col-3 nav-tabs active" onclick="All()">Tất cả</div>
+                                <div class="col-3 nav-tabs active" onclick="Filter_1()">Chờ xác nhận</div>
+                                <div class="col-3 nav-tabs active" onclick="Filter_2()">Đang giao</div>
+                                <div class="col-3 nav-tabs active" onclick="Filter_3()">Đã giao</div>
+                            </div>
+                        </div>
+
+                        <div class="page fulfillment-order">                            
+                            <div class="order-list">
+                                <div class="padding-wrap">
+                                    <div class="order-search">
+                                        <div class="order-search-container">
+                                            <div class="search-input">
+                                                <!-- <div class="input-label">
+                                                    <span class="id-user-label">Mã người dùng</span>
+                                                </div> -->
+                                                <div class="input-text">
+                                                    <input type="text" placeholder="Nhập mã người dùng" maxlength="50" size="150" class="form-control">
+                                                    <div class="input-suffix">
+                                                        <i class="bi bi-search text-dark mx-1"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="order-search-button">
+                                                <button class="btn btn-warning" onclick="">Tìm kiếm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order-panel-header">
+                                        <div class="title">3 Đơn hàng</div>
+                                    </div>
+                                </div>                                
+                                <div class="order-list-panel">                                    
+                                    <div class="order-list-section">                                        
+                                        <div class="fixed-container">
+                                            <div class="order-list-header text-center">
+                                                <span class="order-name">Người mua</span>
+                                                <span class="order-status">Trạng thái</span>
+                                                <span class="order-phone">Số điện thoại</span>
+                                                <span class="order-address">Địa chỉ</span>
+                                                <span class="order-price">Giá tiền</span>
+                                            </div>
+                                        </div>
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="accordion-item to-pay"> <!-- sua lai khi them database -->
+                                              <h2 class="accordion-header" id="flush-headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                    <div class="order-list-data text-center">
+                                                        <span class="order-name">Phan Đức Anh</span>
+                                                        <span class="order-status">Chưa hoàn thành</span>
+                                                        <span class="order-phone">0399272702</span>
+                                                        <span class="order-address">Tuyen Quang </span>
+                                                        <span class="order-price">100.000đ</span>
+                                                    </div>
+                                                </button>
+                                              </h2>
+                                              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <div class="item-infor">
+                                                        <div class="row">
+                                                            <div class="col-sm">CÀ PHÊ SỮA ĐÁ</div>
+                                                            <div class="col-sm">M</div>
+                                                            <div class="col-sm">100%</div>
+                                                            <div class="col-sm">100%</div>
+                                                            <div class="col-sm">2</div>
+                                                            <div class="col-sm">68.000đ</div>
+                                                        </div>    
+                                                    </div>
+                                                   <div class="col-md-12 bg-light text-right">
+                                                        <button type="button" class="btn btn-warning">Submit</button>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{>footer}}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrap .com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"
+      ></script>
+    </body>
+</html>

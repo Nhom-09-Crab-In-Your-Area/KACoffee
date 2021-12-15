@@ -12,7 +12,7 @@
         <link rel="icon" href="images/favicon.jpg">
         
 
-        <title>KACoffee | Diliver World Flavor</title>
+        <title>KACoffee | Deliver World Flavor</title>
     </head>
     <body>
         <div class="promotion">
@@ -32,15 +32,15 @@
                     <div class="col-lg-12">
                         <ol class="breadcrumb">
                             <li>
-                                <a href="/index">Home</a>
+                                <a href="/">Home</a>
                             </li>
                             <li>
                                 <a href="/product">Products</a>
                             </li>
                             <li class="active" id="product-type" aria-current="page"></li><!--product-type-->  
-                            <li class="labels">
+                            <!-- <li class="labels">
                                 <span class="labels" style="background-color: brown;"> Giảm 50%</span>
-                            </li>
+                            </li> -->
                         </ol>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
 
         <div id="product">
             <section class="product-main page-header-section">
-                <div class="container">
+                <div class="container css-container">
                     <div class="row">
                         <div id="image_container" class="product image-product col-md-6">
                             <!-- <div class="image" style="height: 507px;">
@@ -69,7 +69,7 @@
                                             <h1 id="product-name"></h1><!--product-name-->
                                         </div>
                                         <div class="col-xs-12 price pb-3">
-                                            <span aria-label=" price: 16.95$" id="product-cost"></span><!--product-cost-->
+                                            <span id="product-cost"></span><!--product-cost-->
                                         </div>
                                     </div>
                                     <div class="row review">
@@ -77,11 +77,6 @@
                                             <div class="rating-component">
                                                 <div id="product_just_stars" class="reg">
                                                     <span id="rate-star"></span>
-                                                    <!-- <span class="on"></span>
-                                                    <span class="on"></span>
-                                                    <span class="on"></span>
-                                                    <span class="on"></span>
-                                                    <span class="off"></span> -->
                                                     <span class="ind_cnt low">
                                                         <a class="sa_jump_to_reviews" href="#">
                                                             <span id="rate-number"></span><!--rate-number-->
@@ -92,64 +87,137 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="row presentation-container"></div> -->
                                     <div class="row qty-container mb-3">
-                                        <div class="add-option">
-                                            <div class="form-group col-xs-3 col-sm-3">
-                                                <select name="cantidad_incluir" id="cantidad_incluir" class="form-control" aria-label="Quantity">
-                                                    <option value="1" selected>1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-xs-9 col-sm-9">
-                                                <button id="add-to-cart" class="btn btn-primary btn-mg btn-block cart-add-event" type="submit" value="1">
-                                                    <i class="material-icons" aria-hidden="true" tabindex="-1">shopping_cart</i>
-                                                    Add to Cart
+                                            <div id="addtocart" class="form-group col-xs-9 col-sm-9">
+                                                <button type="button" class="btn btn-primary btn-mg btn-block cart-add-event" data-toggle="modal" data-target="#Modal">
+                                                    <i class="material-icons">shopping_cart</i>
+                                                    Thêm vào giỏ hàng
                                                 </button>
+                                                <div
+                                                    class="modal fade"
+                                                    id="Modal"
+                                                    tabindex="-1"
+                                                    role="dialog"
+                                                    aria-labelledby="ModalLabel"
+                                                    aria-hidden="true"
+                                                >
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="ModalLabel">Add to cart</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form class="formINPUT">
+                                                                    <div style="margin-bottom: 5px">
+                                                                        <label for="quantity" class="col-sm-2">Quantity</label>
+                                                                        <input
+                                                                            type="number"
+                                                                            id="quantity"
+                                                                            name="quantity"
+                                                                            value="1"
+                                                                            min="1"
+                                                                            max="20"
+                                                                        />
+                                                                    </div>
+                                                                    <fieldset class="row mb-3">
+                                                                        <legend class="col-form-label col-sm-2 pt-0">
+                                                                            Size
+                                                                        </legend>
+                                                                        <div class="col-sm-10">
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input
+                                                                                    class="form-check-input"
+                                                                                    type="radio"
+                                                                                    name="size"
+                                                                                    id="sizeS"
+                                                                                    value="S"
+                                                                                    checked
+                                                                                />
+                                                                                <label class="form-check-label" for="sizeS">
+                                                                                    S
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input
+                                                                                    class="form-check-input"
+                                                                                    type="radio"
+                                                                                    name="size"
+                                                                                    id="sizeM"
+                                                                                    value="M"
+                                                                                />
+                                                                                <label class="form-check-label" for="sizeM">
+                                                                                    M (+ 5000 VND)
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input
+                                                                                    class="form-check-input"
+                                                                                    type="radio"
+                                                                                    name="size"
+                                                                                    id="sizeL"
+                                                                                    value="L"
+                                                                                />
+                                                                                <label class="form-check-label" for="sizeL">
+                                                                                    L (+ 10000 VND)
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                    <div class="row" style="margin-bottom: 7px">
+                                                                        <div class="col-md-6">
+                                                                            <label for="sugar" class="form-label">Sugar</label>
+                                                                            <select id="sugar" class="form-select" name="sugar">
+                                                                                <option value="100" selected>100%</option>
+                                                                                <option value="70">70%</option>
+                                                                                <option value="50">50%</option>
+                                                                                <option value="30">30%</option>
+                                                                                <option value="0">0%</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="ice" class="form-label">Ice</label>
+                                                                            <select id="ice" class="form-select" name="ice">
+                                                                                <option value="100" selected>100%</option>
+                                                                                <option value="70">70%</option>
+                                                                                <option value="50">50%</option>
+                                                                                <option value="30">30%</option>
+                                                                                <option value="0">0%</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-dismiss="modal"
+                                                                        >
+                                                                            Close
+                                                                        </button>
+                                                                        <button
+                                                                            class="btn btn-primary"
+                                                                            
+                                                                            value="Add"
+                                                                            data-dismiss="modal"
+                                                                        >
+                                                                            Add
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mini-description read-more-advanced">
-                                        <h3 aria-label="Product Description">DESCRIPTION</h3>
-                                        <!-- <div class="mini-text">
-                                            <p> 
-                                                When creating this year’s Holiday Blend, we wanted to capture all our favorite memories of the most festive time of
-                                                the year in one exquisite cup.</p>
-                                            <p> 
-                                                We selected the highest quality beans from some of Costa Rica’s most exceptional co
-                                                <span class="ellipsis">...</span>
-                                            </p>
-                                        </div> -->
+                                        <h3>DESCRIPTION</h3>
                                         <div class="full-text hide">
                                             <p id="description">
-                                                <!-- When creating this year’s Holiday Blend, we wanted to capture all our favorite memories of the most festive time of
-                                                the year in one exquisite cup. -->
+                                                <!-- ... -->
                                             </p>
-                                            <!-- <p>
-                                                We selected the highest quality beans from some of Costa Rica’s most exceptional coffee regions: Poás, Palmichal de
-                                                Acosta, the Central and Western Valley. The result, a delectable brew with notes of chocolate, orange blossom,
-                                                peach, and vanilla.
-                                            </p>
-                                            <p>
-                                                Our limited edition Holiday Blend is a perfect selection this time of year and a must-have for coffee lovers
-                                                everywhere. 
-                                            </p> -->
                                         </div>
-                                        <!-- <p>
-                                            <a class="read-more small more" href="#" aria-label="Read more about Coffee" title="Read more about Coffee">
-                                                Show more
-                                            </a>
-                                        </p> -->
                                     </div>
                                 </div>
                             </form>
@@ -191,7 +259,7 @@
                                     </div>
                                     <div style="clear:both;"><input class="pr_link" type="button" onclick="ReviewProduct(sa_productid, sa_product_desc, sa_product_image_src);"
                                          value="Write a review about this product">
-                                    </div>
+                                    </div><!-- Người dùng vote sao -->
                                 </div>
                                 <div id="product_page" style="opacity: 1;">
                                     <div id="sa_review_section" style="min-height: 353.8px;">
@@ -248,7 +316,7 @@
         <script src="js/main.js"></script>}} -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrap .com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </body>
 </html>
 

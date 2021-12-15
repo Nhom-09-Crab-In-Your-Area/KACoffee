@@ -61,24 +61,6 @@ function Filter_gift() {
     }
 }
 
-async function addButtonClickHandle(id_product, id_form) {
-    //console.log(id_form)
-    const form = document.querySelector(id_form)
-    const sugar = form.elements['sugar'].value
-    const ice = form.elements['ice'].value
-    const amount = form.elements['quantity'].value
-    const size = form.elements['size'].value
-    console.log(id_product, id_form, sugar, ice, amount)
-    await cartAddItem(
-        window.localStorage.getItem('id'),
-        id_product,
-        size,
-        sugar,
-        ice,
-        amount
-    )
-}
-
 function Add_info(product_info) {
     var a = document.getElementById('Sample')
     for (var i = 0; i < product_info.length; i++) {
@@ -96,7 +78,11 @@ function Add_info(product_info) {
 
     for (var i = 0; i < product_info.length; i++) {
         const tmp = document.createElement('div')
-        tmp.innerHTML = `
+        if (
+            window.localStorage.getItem('login') &&
+            window.localStorage.getItem('login') == 'true'
+        )
+            tmp.innerHTML = `
         <button class = "AddCart" type = "button" data-toggle="modal"
         data-target="#Modal${i}">
                                     <i class="fas fa-cart-plus"></i>
@@ -204,13 +190,43 @@ function Add_info(product_info) {
                             </button>
                             <button
                                 class="btn btn-primary"
-                                onClick = "addButtonClickHandle('${product_info[i]._id}','.form${i}')"
+                                onClick = "addButtonClickHandle('${product_info[i]._id}','.form${i}',${product_info[i].price})"
                                 value="Add"
                                 data-dismiss="modal"
                             >Add</button>
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+        `
+        else
+            tmp.innerHTML = `<button class = "AddCart" type = "button" data-toggle="modal"
+        data-target="#Modal${i}">
+                                    <i class="fas fa-cart-plus"></i>
+                                    Thêm vào giỏ hàng
+                                </button>
+    <div
+        class="modal fade"
+        id="Modal${i}"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="ModalLabel${i}"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel${i}">Add to cart</h5>
+                </div>
+                <div class="modal-body">
+                    <div>PLEASE LOGIN</div>
+                </div>
+                <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
             </div>
         </div>
     </div>
