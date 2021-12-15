@@ -10,8 +10,12 @@ async function createOrder(req,res){
             res.send(JSON.stringify("Shopping cart is empty!"))
         }
 
-        let status, typeOrder = 1
-        if(req.session.AccountType == "Customer") status = "Verifying"
+        let status, typeOrder = 1, idAccount = req.session.idAccount
+
+        if(req.session.AccountType == "Customer") {
+            status = "Verifying"
+            idAccount = undefined // là khách hàng thì chưa gán employee
+        }
         else status = "Processing"
 
         const cart = await cart_model.findById(id_cart)
@@ -23,7 +27,8 @@ async function createOrder(req,res){
             storeID: cart.storeID,
             price: cart.priceTotal,
             status: status,
-            type: typeOrder
+            type: typeOrder,
+            employee: idAccount
         })
         await user_model.findByIdAndUpdate(
             id_user,
