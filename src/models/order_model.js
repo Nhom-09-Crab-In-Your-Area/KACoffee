@@ -20,6 +20,7 @@ const orderSchema = new Schema({
         default: "Verifying"
     },
     price: {type: Number},
+    type: {type: Number, enum: [0,1]}
 })
 
 module.exports = mongoose.model("Order", orderSchema)

@@ -1,17 +1,24 @@
 const order_model = require("../../models/order_model")
 const employee_model = require("../../models/employees_model")
+const user_model = require("../../models/users_model")
 
 // xem tất cả đơn hàng trong cửa hàng
+// nhân viên chỉ xem đơn của mình
+// admin xem tất cả đơn
 async function viewOrder(req,res){
     try{
-        if(req.session.AccountType == "Employee"){
+        if(req.session.AccountType == "Employee" || req.session.AccountType == "Admin"){
             const idAccount = req.session.idAccount
             const employee = await employee_model.findById(idAccount)
             if(employee == null)
                 res.send(JSON.stringify("Employee not exist!"))
+
             const storeID = employee.storeID
-            //console.log("Abc",storeID)
-            const orders = await order_model.find({storeID: storeID}).populate({path: "products.info"})
+            let orders
+            if(req.session.AccountType == "Admin")
+                orders = await order_model.find({storeID: storeID}).populate({path: "products.info"}).populate("user")
+            else
+                orders = await order_model.find({storeID: storeID, employee: idAccount}).populate({path: "products.info"}).populate("user")
             res.json(orders)
         }
         else res.send(JSON.stringify("Only employee can access!"))
@@ -20,19 +27,45 @@ async function viewOrder(req,res){
         throw err
     }
 }
+
+// xem đơn đang ở trạng thái verifying
+async function viewPendingOrder(req,res){
+    try{
+        if(req.session.AccountType == "Employee" || req.session.AccountType == "Admin"){
+            const idAccount = req.session.idAccount
+            const employee = await employee_model.findById(idAccount)
+            if(employee == null)
+                res.send(JSON.stringify("Employee not exist!"))
+
+            const storeID = employee.storeID
+            const orders = await order_model.find({storeID: storeID, status: "Verifying"}).populate({path: "products.info"}).populate("user")
+            res.json(orders)
+        }
+        else res.send(JSON.stringify("Only employee can access!"))
+    }
+    catch(err){
+        throw err
+    }
+}
+
 // xem tất cả đơn hàng chờ xác nhận trong cửa hàng
 async function viewFilterOrder(req,res){
     try{
-        if(req.session.AccountType == "Employee"){
+        if(req.session.AccountType == "Employee" || req.session.AccountType == "Admin"){
             const { status_order } = req.body
             const idAccount = req.session.idAccount
             const employee = await employee_model.findById(idAccount)
             if(employee == null)
                 res.send(JSON.stringify("Employee not exist!"))
             const storeID = employee.storeID
-            //console.log("Abc",storeID)
-            const orders = await order_model.find({storeID: storeID, status: status_order}).populate({path: "products.info"})
-            res.json(orders)
+
+            let orders
+            if(req.session.AccountType == "Admin")
+                orders = await order_model.find({storeID: storeID, status: status_order}).populate({path: "products.info"}).populate("user")
+            else
+                orders = await order_model.find({storeID: storeID, status: status_order, employee: idAccount}).populate({path: "products.info"}).populate("user")
+            
+                res.json(orders)
         }
         else res.send(JSON.stringify("Only employee can access!"))
     }
@@ -79,6 +112,9 @@ async function changeStatus(req,res){
 module.exports = (app) =>{
     app.get("/store/view_order", (req,res) =>{
         viewOrder(req,res)
+    })
+    app.get("/store/view_pending_order", (req,res) =>{
+        viewPendingOrder(req,res)
     })
     app.post("/store/view_order", (req,res) =>{
         viewFilterOrder(req,res)

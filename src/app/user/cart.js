@@ -21,7 +21,7 @@ async function viewCart(req, res) {
             res.json(cart)
         }
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 
@@ -43,7 +43,7 @@ async function createCart(req, res) {
             res.json(cart)
         } else res.send(JSON.stringify('Only employee can access!'))
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 
@@ -110,7 +110,7 @@ async function addProduct(req, res) {
         await cart.save()
         return res.json(cart)
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 
@@ -129,7 +129,7 @@ async function changeAmount(req, res) {
 
         return res.json(cart)
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 
@@ -149,7 +149,7 @@ async function changeSize(req, res) {
 
         return res.json(cart)
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 
@@ -173,7 +173,7 @@ async function deleteProduct(req, res) {
         await cart.save()
         res.json(cart)
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 
@@ -201,7 +201,7 @@ async function deleteCart(req, res) {
             await cart_model.findByIdAndRemove(id_cart)
         }
     } catch (err) {
-        throw err
+        res.send(err)
     }
 }
 module.exports = (app) => {
