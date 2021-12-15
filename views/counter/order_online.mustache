@@ -29,11 +29,21 @@
                     <div class="portal-sale-root">
                         <div class="tab-nav" style="top: 56px; z-index: 1000;">
                             <div class="row">
-                                <div class="col-2 nav-tabs active" onclick="All()">All</div>
-                                <div class="col-3 nav-tabs active" onclick="Filter_1()">Verifying</div>
-                                <div class="col-3 nav-tabs active" onclick="Filter_2()">Processing </div>
-                                <div class="col-2 nav-tabs active" onclick="Filter_3()">Shipping</div>
-                                <div class="col-2 nav-tabs active" onclick="Filter_4()">Completed</div>
+                                <div class="col-2 nav-tabs active" id="all_filter" onclick="All()">
+                                    <span class="mx-auto">All</span>
+                                </div>
+                                <div class="col-3 nav-tabs" id="verifying_filter" onclick="Filter_1()">
+                                    <span class="mx-auto">Verifying</span>
+                                </div>
+                                <div class="col-3 nav-tabs" id="processing_filter" onclick="Filter_2()">
+                                    <span class="mx-auto">Processing</span>
+                                </div>
+                                <div class="col-2 nav-tabs" id="shipping_filter" onclick="Filter_3()">
+                                    <span class="mx-auto">Shipping</span>
+                                </div>
+                                <div class="col-2 nav-tabs" id="completed_filter" onclick="Filter_4()">
+                                    <span class="mx-auto">Completed</span>
+                                </div>
                             </div>
                         </div>
 

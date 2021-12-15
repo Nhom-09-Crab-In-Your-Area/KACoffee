@@ -62,6 +62,7 @@ body {
 .active {
     font-weight: 600;
     color: #ee4d2d;
+    border-bottom: 3px solid #ee4d2d;
 }
 .order-list-section {
     margin-left: 24px;
@@ -189,4 +190,11 @@ body {
 }
 .ml-auto {
     margin-left: auto;
+}
+
+.accordion-cus {
+    z-index: 3;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0 !important;
 }

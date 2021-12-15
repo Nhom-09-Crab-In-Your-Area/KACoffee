@@ -1,8 +1,16 @@
+function Add_active(string){
+    var delete_active = document.getElementsByClassName("active");
+    delete_active[0].classList.remove("active");
+    var active = document.getElementById(string)
+    active.classList.add("active")
+}
+
 function All() {
     var all = document.getElementsByClassName('accordion-item')
     for (var i = 0; i < all.length; i++) {
         all[i].style.display = 'block'
     }
+    Add_active("all_filter");
 }
 
 function Filter_1() {
@@ -14,6 +22,7 @@ function Filter_1() {
     for (var i = 0; i < to_pay.length; i++) {
         to_pay[i].style.display = 'block'
     }
+    Add_active("verifying_filter")
 }
 
 function Filter_2() {
@@ -25,6 +34,7 @@ function Filter_2() {
     for (var i = 0; i < to_receive.length; i++) {
         to_receive[i].style.display = 'block'
     }
+    Add_active("processing_filter")
 }
 
 function Filter_3() {
@@ -36,6 +46,7 @@ function Filter_3() {
     for (var i = 0; i < completed.length; i++) {
         completed[i].style.display = 'block'
     }
+    Add_active("shipping_filter")
 }
 function Filter_4() {
     var all = document.getElementsByClassName('accordion-item')
@@ -46,6 +57,7 @@ function Filter_4() {
     for (var i = 0; i < completed.length; i++) {
         completed[i].style.display = 'block'
     }
+    Add_active("completed_filter")
 }
 // var myVar = setInterval(getorder, 15000)
 // var myVar = setInterval(getorderdata, 15000)
@@ -81,7 +93,7 @@ async function getorder(e) {
         <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item ${order.status}"> <!-- sua lai khi them database -->
           <h2 class="accordion-header" id="flush-heading${i}">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
+            <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
                     <span class="order-name">Phan Đức Anh</span>
                     <span class="order-status">${order.status}</span>
@@ -104,7 +116,7 @@ async function getorder(e) {
                     </div>  
                 </div>
                 <p class="button">
-                <input type="button" class="d-block mr-0 ml-auto" value="Done">
+                <input type="button" class="d-block btn btn-warning mr-0 ml-auto" value="Done">
                 </p>
             </div>
           </div>
@@ -167,7 +179,7 @@ async function getpendingorder(e) {
         <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item ${order.status}"> <!-- sua lai khi them database -->
           <h2 class="accordion-header" id="flush-heading${i}">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
+            <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
                 <span class="order-name">Phan Đức Anh</span>
                 <span class="order-status">${order.status}</span>
@@ -190,7 +202,7 @@ async function getpendingorder(e) {
                     </div>  
                 </div>
                 <p class="button">
-                <input type="button" class="d-block mr-0 ml-auto" value="Done">
+                <input type="button" class="d-block btn btn-warning mr-0 ml-auto" value="Done">
                 </p>
             </div>
           </div>
