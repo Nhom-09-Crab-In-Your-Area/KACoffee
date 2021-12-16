@@ -64,16 +64,6 @@ function Filter_4() {
     Add_active('completed_filter')
 }
 
-//Gui request lien tuc de cap nhat
-setTimeout(getorder, 1000)
-setTimeout(getorderdata, 1000)
-setTimeout(getpendingorder, 1500)
-setTimeout(getpendingorderdata, 1500)
-
-// setInterval(getorder, 60000)
-// setInterval(getorderdata, 60000)
-// setInterval(getpendingorder, 60001)
-// setInterval(getpendingorderdata, 60001)
 //Cac ham request
 
 async function changestatus(id, status) {
@@ -91,7 +81,9 @@ async function changestatus(id, status) {
         }),
     })
         .then((res) => res.json())
-        .then((data) => {})
+        .then((data) => {
+            location.reload()
+        })
 }
 
 async function getorder(e) {
@@ -269,3 +261,13 @@ async function getpendingorderdata(e) {
         i++
     })
 }
+
+//Gui request lien tuc de cap nhat
+async function a() {
+    setTimeout(getorder, 1000)
+    setTimeout(getorderdata, 1000)
+    setTimeout(getpendingorder, 1500)
+    setTimeout(getpendingorderdata, 1500)
+}
+setTimeout(a, 1000)
+setInterval(a, 1000 * 60 * 5)
