@@ -1,6 +1,6 @@
 //Get element from html
 var i = 0
-
+var u = 0
 // Filter
 function Add_active(string) {
     var delete_active = document.getElementsByClassName('active')
@@ -98,7 +98,7 @@ async function getorder(e) {
     const data = await fetch('/store/view_order', {
         method: 'GET',
     }).then((data) => data.json())
-
+    i = 0
     console.log(data)
     const orderlists = document.querySelector('.order-list-section')
     orderlists.innerHTML = ''
@@ -142,7 +142,7 @@ async function getorder(e) {
                     </div>  
                 </div>
                 <p class="button">
-                <button onclick ="changestatus('${order._id}',"${order.status}")" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
+                <button onclick ="changestatus('${order._id}','${order.status}')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
           </div>
@@ -159,7 +159,7 @@ async function getorderdata(e) {
     }).then((data) => data.json())
 
     console.log(data)
-    var i = 0
+    i = 0
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
         const temp = document.querySelector(`.item-infor-${i}`)
@@ -197,7 +197,7 @@ async function getpendingorder(e) {
     }).then((data) => data.json())
 
     console.log(data)
-
+    u = i
     const orderlists = document.querySelector('.order-list-section')
     data.forEach((order) => {
         const itemContainer = document.createElement('div')
@@ -228,7 +228,7 @@ async function getpendingorder(e) {
                     </div>  
                 </div>
                 <p class="button">
-                <button onclick ="changestatus('${order._id}',"${order.status}")" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
+                <button onclick ="changestatus('${order._id}','${order.status}')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
           </div>
@@ -245,7 +245,7 @@ async function getpendingorderdata(e) {
     }).then((data) => data.json())
 
     console.log(data)
-    var i = 0
+    i = u
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
         const temp = document.querySelector(`.item-infor-${i}`)
