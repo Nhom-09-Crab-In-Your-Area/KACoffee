@@ -77,12 +77,18 @@ setTimeout(getpendingorderdata, 1500)
 //Cac ham request
 
 async function changestatus(id, status) {
+    if (status == 'Verifying') a = 'Processing'
+    else if (status == 'Processing') a = 'Shipping'
+    else a = 'Completed'
     await fetch('/store/status_order', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, status }),
+        body: JSON.stringify({
+            id_order: id,
+            status_order: a,
+        }),
     })
         .then((res) => res.json())
         .then((data) => {})
