@@ -133,7 +133,7 @@ async function getorder(e) {
                         <div class="col-sm">Thành tiền</div>
                     </div>  
                 </div>
-                <p class="button">
+                <p class="button" id ='${order.status}'>
                 <button onclick ="changestatus('${order._id}','${order.status}')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
@@ -219,7 +219,7 @@ async function getpendingorder(e) {
                         <div class="col-sm">Thành tiền</div>
                     </div>  
                 </div>
-                <p class="button">
+                <p class="button" id ='${order.status}'>
                 <button onclick ="changestatus('${order._id}','${order.status}')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
