@@ -64,38 +64,29 @@ function Filter_4() {
     Add_active('completed_filter')
 }
 
-
-function search_name(){
-    var name_search = document.getElementById("search-name").value
-    var name = document.getElementsByClassName("name")
-    for(var i = 0; i < name.length; i++){
-            name[i].parentElement.parentElement.parentElement.style.display = 'block'
+function search_name() {
+    var name_search = document.getElementById('search-name').value
+    var name = document.getElementsByClassName('name')
+    for (var i = 0; i < name.length; i++) {
+        name[i].parentElement.parentElement.parentElement.style.display =
+            'block'
     }
     console.log(name[1].innerHTML)
-    for(var i = 0; i < name.length; i++){
-        if(name[i].innerHTML != name_search){
-            name[i].parentElement.parentElement.parentElement.style.display = 'none'
+    for (var i = 0; i < name.length; i++) {
+        if (name[i].innerHTML != name_search) {
+            name[i].parentElement.parentElement.parentElement.style.display =
+                'none'
         }
     }
 }
 
-function reset(){
-    var name = document.getElementsByClassName("name")
-    for(var i = 0; i < name.length; i++){
-            name[i].parentElement.parentElement.parentElement.style.display = 'block'
+function reset() {
+    var name = document.getElementsByClassName('name')
+    for (var i = 0; i < name.length; i++) {
+        name[i].parentElement.parentElement.parentElement.style.display =
+            'block'
     }
 }
-
-//Gui request lien tuc de cap nhat
-setTimeout(getorder, 1000)
-setTimeout(getorderdata, 1000)
-setTimeout(getpendingorder, 1500)
-setTimeout(getpendingorderdata, 1500)
-
-// setInterval(getorder, 60000)
-// setInterval(getorderdata, 60000)
-// setInterval(getpendingorder, 60001)
-// setInterval(getpendingorderdata, 60001)
 
 //Cac ham request
 
