@@ -284,6 +284,7 @@ async function getpendingorderdata(e) {
         temp.appendChild(itemInfo)
         i++
     })
+    document.querySelector('#numsofOrders').innerHTML = `${i} Đơn hàng`
 }
 
 //Gui request lien tuc de cap nhat
