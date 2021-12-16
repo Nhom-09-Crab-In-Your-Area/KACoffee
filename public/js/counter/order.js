@@ -64,38 +64,29 @@ function Filter_4() {
     Add_active('completed_filter')
 }
 
-
-function search_name(){
-    var name_search = document.getElementById("search-name").value
-    var name = document.getElementsByClassName("name")
-    for(var i = 0; i < name.length; i++){
-            name[i].parentElement.parentElement.parentElement.style.display = 'block'
+function search_name() {
+    var name_search = document.getElementById('search-name').value
+    var name = document.getElementsByClassName('name')
+    for (var i = 0; i < name.length; i++) {
+        name[i].parentElement.parentElement.parentElement.style.display =
+            'block'
     }
     console.log(name[1].innerHTML)
-    for(var i = 0; i < name.length; i++){
-        if(name[i].innerHTML != name_search){
-            name[i].parentElement.parentElement.parentElement.style.display = 'none'
+    for (var i = 0; i < name.length; i++) {
+        if (name[i].innerHTML != name_search) {
+            name[i].parentElement.parentElement.parentElement.style.display =
+                'none'
         }
     }
 }
 
-function reset(){
-    var name = document.getElementsByClassName("name")
-    for(var i = 0; i < name.length; i++){
-            name[i].parentElement.parentElement.parentElement.style.display = 'block'
+function reset() {
+    var name = document.getElementsByClassName('name')
+    for (var i = 0; i < name.length; i++) {
+        name[i].parentElement.parentElement.parentElement.style.display =
+            'block'
     }
 }
-
-//Gui request lien tuc de cap nhat
-setTimeout(getorder, 1000)
-setTimeout(getorderdata, 1000)
-setTimeout(getpendingorder, 1500)
-setTimeout(getpendingorderdata, 1500)
-
-// setInterval(getorder, 60000)
-// setInterval(getorderdata, 60000)
-// setInterval(getpendingorder, 60001)
-// setInterval(getpendingorderdata, 60001)
 
 //Cac ham request
 
@@ -139,18 +130,36 @@ async function getorder(e) {
             </div>`
     orderlists.appendChild(bars)
     data.forEach((order) => {
+        user = {
+            firstname: 'Unknown',
+            lastname: 'customer',
+            phone: '00',
+            address: 'None',
+        }
+        if (order.user != null) {
+            user = {
+                firstname: order.user['first name'],
+                lastname: order.user['last name'],
+                phone: order.user.phone,
+                address: order.user.address,
+            }
+        }
         const itemContainer = document.createElement('div')
         itemContainer.innerHTML = `
         <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item ${order.status}"> <!-- sua lai khi them database -->
+        <div class="accordion-item ${
+            order.status
+        }"> <!-- sua lai khi them database -->
           <h2 class="accordion-header" id="flush-heading${i}">
             <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
-                    <span class="order-name name">Phan Đức Anh</span>
-                    <span class="order-status">${order.status}</span>
-                    <span class="order-phone">0364900193</span>
-                    <span class="order-address">Tuyen Quang </span>
-                    <span class="order-price">${order.price} VNĐ</span>
+                <span class="order-name">${
+                    user.firstname + user.lastname
+                }</span>
+                <span class="order-status">${order.status}</span>
+                <span class="order-phone">${user.phone}</span>
+                <span class="order-address">${user.address} </span>
+                <span class="order-price">${order.price} VNĐ</span>
                 </div>
             </button>
           </h2>
@@ -166,8 +175,10 @@ async function getorder(e) {
                         <div class="col-sm fw-bold">Thành tiền</div>
                     </div>  
                 </div>
-                <p class="button">
-                <button onclick ="changestatus('${order._id}','${order.status}')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
+                <p class="button" id ='${order.status}'>
+                <button onclick ="changestatus('${order._id}','${
+            order.status
+        }')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
           </div>
@@ -210,11 +221,6 @@ async function getorderdata(e) {
 }
 
 {
-    /* <span class="order-name">$${order.user._id}</span>
-<span class="order-status">${order.status}</span>
-<span class="order-phone">${order.user.phone}</span>
-<span class="order-address">${order.user.address} </span>
-<span class="order-price">${order.price} VNĐ</span> */
 }
 async function getpendingorder(e) {
     const data = await fetch('/store/view_pending_order', {
@@ -226,16 +232,35 @@ async function getpendingorder(e) {
     const orderlists = document.querySelector('.order-list-section')
     data.forEach((order) => {
         const itemContainer = document.createElement('div')
+        user = {
+            firstname: 'Unknown',
+            lastname: 'customer',
+            phone: '00',
+            address: 'None',
+        }
+        if (order.user != null) {
+            user = {
+                firstname: order.user['first name'],
+                lastname: order.user['last name'],
+                phone: order.user.phone,
+                address: order.user.address,
+            }
+        }
+
         itemContainer.innerHTML = `
         <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item ${order.status}"> <!-- sua lai khi them database -->
+        <div class="accordion-item ${
+            order.status
+        }"> <!-- sua lai khi them database -->
           <h2 class="accordion-header" id="flush-heading${i}">
             <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
-                <span class="order-name name">Phan Đức Anh</span>
+                <span class="order-name">${
+                    user.firstname + user.lastname
+                }</span>
                 <span class="order-status">${order.status}</span>
-                <span class="order-phone">0364900193</span>
-                <span class="order-address">Tuyen Quang </span>
+                <span class="order-phone">${user.phone}</span>
+                <span class="order-address">${user.address} </span>
                 <span class="order-price">${order.price} VNĐ</span>
                 </div>
             </button>
@@ -252,8 +277,10 @@ async function getpendingorder(e) {
                         <div class="col-sm fw-bold">Thành tiền</div>
                     </div>  
                 </div>
-                <p class="button">
-                <button onclick ="changestatus('${order._id}','${order.status}')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
+                <p class="button" id ='${order.status}'>
+                <button onclick ="changestatus('${order._id}','${
+            order.status
+        }')" class="d-block btn btn-warning mr-0 ml-auto" >Done</button>
                 </p>
             </div>
           </div>
@@ -293,6 +320,7 @@ async function getpendingorderdata(e) {
         temp.appendChild(itemInfo)
         i++
     })
+    document.querySelector('#numsofOrders').innerHTML = `${i} Đơn hàng`
 }
 
 //Gui request lien tuc de cap nhat
