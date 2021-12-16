@@ -130,11 +130,11 @@ async function getorder(e) {
     const bars = document.createElement('div')
     bars.innerHTML = `   <div class="fixed-container">
                 <div class="order-list-header text-center">
-                    <span class="order-name">Người mua</span>
-                    <span class="order-status">Trạng thái</span>
-                    <span class="order-phone">Số điện thoại</span>
-                    <span class="order-address">Địa chỉ</span>
-                    <span class="order-price">Giá tiền</span>
+                    <span class="order-name fw-bold">Người mua</span>
+                    <span class="order-status fw-bold">Trạng thái</span>
+                    <span class="order-phone fw-bold">Số điện thoại</span>
+                    <span class="order-address fw-bold">Địa chỉ</span>
+                    <span class="order-price fw-bold">Giá tiền</span>
                 </div>
             </div>`
     orderlists.appendChild(bars)
