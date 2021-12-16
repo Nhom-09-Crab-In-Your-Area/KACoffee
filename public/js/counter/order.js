@@ -153,8 +153,8 @@ async function getorder(e) {
           <h2 class="accordion-header" id="flush-heading${i}">
             <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
-                <span class="order-name">${
-                    user.firstname + user.lastname
+                <span class="order-name name">${
+                    user.firstname + ' ' + user.lastname
                 }</span>
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
@@ -255,8 +255,8 @@ async function getpendingorder(e) {
           <h2 class="accordion-header" id="flush-heading${i}">
             <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
-                <span class="order-name">${
-                    user.firstname + user.lastname
+                <span class="order-name name">${
+                    user.firstname + ' ' + user.lastname
                 }</span>
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
