@@ -20,7 +20,8 @@ const orderSchema = new Schema({
         default: "Verifying"
     },
     price: {type: Number},
-    type: {type: Number, enum: [0,1]}
+    NbItem: {type: Number, default: 0}, // tổng số sản phẩm 
+    type: {type: Number, enum: [0,1]} // 0: off - 1: onl type order
 })
 
 module.exports = mongoose.model("Order", orderSchema)

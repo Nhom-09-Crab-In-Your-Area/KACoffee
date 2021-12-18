@@ -84,6 +84,9 @@ async function addProduct(req, res) {
         const products = cart.products
         const len = products.length
         cart.priceTotal += Number(amount) * price
+        cart.NbItem += Number(amount)
+        
+        // exist the same item (name product, level ice, ...)
         for (var i = 0; i < len; i++) {
             item = products[i]
             //console.log("i",i)
@@ -99,6 +102,7 @@ async function addProduct(req, res) {
                 return res.json(cart)
             }
         }
+        // create new item
         await products.push({
             info: id_product,
             size: size,
@@ -124,6 +128,7 @@ async function changeAmount(req, res) {
         const item = cart.products.id(id_item)
         //console.log(item.amount)
         cart.priceTotal += (Number(amount) - item.amount) * item.price
+        cart.NbItem += (Number(amount) - item.amount)
         item.amount = amount
         await cart.save()
 
@@ -169,6 +174,7 @@ async function deleteProduct(req, res) {
 
         const item = await cart.products.id(id_item)
         cart.priceTotal -= item.amount * item.price
+        cart.NbItem -= item.amount
         await cart.products.pull({ _id: id_item })
         await cart.save()
         res.json(cart)
@@ -204,6 +210,7 @@ async function deleteCart(req, res) {
         res.send(err)
     }
 }
+
 module.exports = (app) => {
     app.post('/cart/view', (req, res) => {
         viewCart(req, res)
