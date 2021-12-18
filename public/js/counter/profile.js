@@ -36,6 +36,7 @@ mesAddress.classList.add('mes-none27')
 const reload = async () => {
     //console.log('Hello')
     container.style.display = 'block'
+    document.querySelector('.orderHA').style.display = 'none'
     const User = await fetch('/check_self_profile', {
         method: 'GET',
     }).then((res) => res.json())
@@ -152,6 +153,7 @@ fetchState().then((User) => {
             e.preventDefault()
             //console.log('Hello')
             container.style.display = 'block'
+            document.querySelector('.orderHA').style.display = 'none'
             const User = await fetch('/check_self_profile', {
                 method: 'GET',
             }).then((res) => res.json())
