@@ -100,3 +100,4 @@ cart(app)
 order(app)
 employee(app)
 authen(app) //authentication
+email_utils(app)

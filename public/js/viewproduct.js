@@ -23,6 +23,15 @@ async function addButtonClickHandle(id_product, id_form) {
     )
 }
 
+function highlight() {
+    var img = document.getElementById("product-image")
+    img.classList.add('highlight')
+}
+function unhighlight() {
+    var img = document.getElementById("product-image")
+    img.classList.remove('highlight')
+}
+
 function add_info(product_info) {
     var product_type = document.getElementById('product-type')
     var product_name = document.getElementById('product-name')
