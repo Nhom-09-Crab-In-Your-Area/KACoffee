@@ -29,7 +29,7 @@ const customerHandler = (name) => {
     dropdown.innerHTML = `
         <p>${name.toUpperCase()}'s ACCOUNT </p>
         <hr>
-        <a href = '/my_profile'>My account</a>
+        <a class="profile-display">My account</a>
         <hr>
         <button class = "logout-btn" >Log out</button>
     `
@@ -43,6 +43,8 @@ const customerHandler = (name) => {
     })
 }
 
+const name = document.querySelector('.account-title272')
+
 const fetchState = async (url = '/check_self_profile') => {
     const data = await fetch(url, {method: 'GET'}).then((res) => {
         if (res.status == 401) {
@@ -54,6 +56,9 @@ const fetchState = async (url = '/check_self_profile') => {
 
     if (data) {
         //localStorage.setItem('login', 'true')
+        name.textContent = `${data['first name'].toUpperCase()} ${data[
+            'last name'
+        ].toUpperCase()}`
         localStorage.setItem('id', data['_id'])
         customerHandler(data['first name'])
     }

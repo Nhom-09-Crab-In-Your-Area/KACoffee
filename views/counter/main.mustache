@@ -66,16 +66,16 @@
                         font-size: 20px;
                     "
                 >
-                    <div>PHAN DUC ANH</div>
+                    <div class = "account-title272">PHAN DUC ANH</div>
                 </div>
             </div>
         </div>
         <script src="/js/counter/account.js"></script>
-        <script>
+        {{! <script>
             fetchState()
-        </script>
+        </script> }}
         <div class="row m-0 p-0">
-            <div class="col-2" style="background-color: beige; height: 89.5vh">
+            <div class="col-2" style="background-color: beige; min-height: 89.5vh; position: relative">
                 <div class="dashboard">DASHBOARD</div>
                 <div class="sidebar">
                     <div class="sidebar-item order-off">Create order</div>
@@ -95,13 +95,82 @@
                 </div>
             </div>
 
-            <div class="col-10">
-                <div class="profile">
-                
+            <div class="col-10 account-info27">
+                <div class="row profile">
+                    <div class="col-12 info-container27">
+                            <div class="subtitle27" style="margin-top:20px">MY INFORMATION</div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col-3 info-type27">First Name: </div>
+                                        <input class="col-9" type="text" id="firstName" placeholder="First Name" value="Anh">
+                                        <p class = 'mes-firstname27' >* Please enter your First Name</p>
+                                        <div class="col-3 info-type27">Last Name: </div>
+                                        <input class="col-9" type="text" id="lastName" placeholder="Last Name" value="Anh">
+                                        <div class="col-3 info-type27">Phone: </div>
+                                        <input class="col-9" type="text" id="phone" placeholder="Phone Number" value="0399272702">
+                                        <p class = 'mes-phone27'>* Please enter your phone number</p>
+                                        <div class="col-3 info-type27">Email: </div>
+                                        <div class="col-9 email27">phananhtqvn@gmail.com</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-3 btn-cnt27">
+                                    <button class="save-info-btn27">SAVE</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-12 info-container27">
+                            <div class="subtitle27">PASSWORD</div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col-4">* New password: </div>
+                                        <input class="col-8" type="password" id="password1" placeholder="Your new password">
+                                        <p class = 'mes-password127'>* Please enter your password</p>
+                                        <div class="col-4">* Confirm password: </div>
+                                        <input class="col-8" type="password" id="password2" placeholder="Confirm your password">
+                                        <p class = 'mes-password227'>* Please enter your confirm password</p>
+                                        <p class = 'mes-password27'>* Password and confirm password do not match</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-3 btn-cnt27">
+                                    <button class="save-password-btn27">SAVE</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-12 info-container27">
+                            <div class="subtitle27">YOUR SHIPPING ADDRESS</div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col-4 info-type27">* Your current address: </div>
+                                        <div class="col-8 address27">So 421, Giai Phong, Phuong Liet, Thanh Xuan, Ha Noi</div>
+                                        <div class="col-4 info-type27">* New address: </div>
+                                        <input class="col-8" type="text" id="new_address" placeholder="Your new address">
+                                        <p class = 'mes-address27'>* Please enter your new address</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-3 btn-cnt27">
+                                    <button class="save-address-btn27">SAVE</button>
+                                </div>
+                                
+                            </div>
+                        </div>
                 </div>
                 <div></div>
             </div>
         </div>
+        <script src="/js/counter/profile.js"></script>
 
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
