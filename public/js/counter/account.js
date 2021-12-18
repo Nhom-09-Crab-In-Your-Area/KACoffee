@@ -30,8 +30,6 @@ const customerHandler = (name) => {
         <p>${name.toUpperCase()}'s ACCOUNT </p>
         <hr>
         <a href = '/my_profile'>My account</a>
-        <a href = '#'>Orders</a>
-        <a href = '#'>Vouchers</a> 
         <hr>
         <button class = "logout-btn" >Log out</button>
     `

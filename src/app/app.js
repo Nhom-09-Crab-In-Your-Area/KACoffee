@@ -33,13 +33,13 @@ app.engine(
     mustacheExpress(path.join(__dirname, '../../views/partials'), '.mustache')
 )
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({extended: true}))
 app.use(morgan('dev')) // show all response
 app.use(express.static(path.join(__dirname, '../../public')))
 
 //render
 app.get('/', (req, res) => {
-    res.render(path.join(__dirname + '/../../views/index'), { name: 'Anh' })
+    res.render(path.join(__dirname + '/../../views/index'), {name: 'Anh'})
 })
 
 app.get('/login', (req, res) => {
@@ -82,6 +82,14 @@ app.get('/orderonline', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_online'), {})
 })
 
+app.get('/loginstaff', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/counter/login'), {})
+})
+
+app.get('/employee', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/counter/main'), {})
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
@@ -100,3 +108,4 @@ cart(app)
 order(app)
 employee(app)
 authen(app) //authentication
+email_utils(app)
