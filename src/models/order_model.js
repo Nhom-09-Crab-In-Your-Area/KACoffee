@@ -20,6 +20,7 @@ const orderSchema = new Schema({
     },
     price: {type: Number},
     point_used: {type: Number, default: 0},
+    voucher_value: {type: Number, default: 0},
     address: {type: String, default: "At store"},
     NbItem: {type: Number, default: 0}, // tổng số sản phẩm 
     type: {type: Number, enum: [0,1]} // 0: off - 1: onl type order
