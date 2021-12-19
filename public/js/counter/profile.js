@@ -34,9 +34,13 @@ mesPassword.classList.add('mes-none27')
 mesAddress.classList.add('mes-none27')
 
 const reload = async () => {
-    //console.log('Hello')
+    console.log('Hello')
     container.style.display = 'block'
-    document.querySelector('.orderHA').style.display = 'none'
+    if (document.querySelector('.orderHA'))
+        document.querySelector('.orderHA').style.display = 'none'
+    console.log(document.querySelector('.order-online'))
+    if (document.querySelector('.order-online'))
+        document.querySelector('.order-online').style.display = 'none'
     const User = await fetch('/check_self_profile', {
         method: 'GET',
     }).then((res) => res.json())
@@ -153,7 +157,11 @@ fetchState().then((User) => {
             e.preventDefault()
             //console.log('Hello')
             container.style.display = 'block'
-            document.querySelector('.orderHA').style.display = 'none'
+            if (document.querySelector('.orderHA'))
+                document.querySelector('.orderHA').style.display = 'none'
+            console.log(document.querySelector('.order-online'))
+            if (document.querySelector('.order-online'))
+                document.querySelector('.order-online').style.display = 'none'
             const User = await fetch('/check_self_profile', {
                 method: 'GET',
             }).then((res) => res.json())
