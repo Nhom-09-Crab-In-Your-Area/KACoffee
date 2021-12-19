@@ -50,6 +50,10 @@ app.get('/product', (req, res) => {
     res.render(path.join(__dirname + '/../../views/product'), {})
 })
 
+app.get('/checkout', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/checkout'), {})
+})
+
 app.get('/viewproduct', (req, res) => {
     res.render(path.join(__dirname + '/../../views/viewproduct'), {})
 })
