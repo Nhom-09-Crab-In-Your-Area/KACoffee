@@ -7,14 +7,13 @@ const rankList = [0, 300000, 800000, 1500000]
 
 async function createOrder(req,res){
     try{
-        const {id_cart} = req.body
+        const {id_cart, address, point_used, voucher} = req.body
         if(id_cart == null){
-            res.send(JSON.stringify("Shopping cart is empty!"))
+            return res.send(JSON.stringify("Shopping cart is empty!"))
         }
         const cart = await cart_model.findById(id_cart)
         const id_user = cart.user
-        let status, typeOrder,idAccount = req.session.idAccount
-
+        let status, typeOrder, idAccount = req.session.idAccount
         // set up attribute's order
         if(req.session.AccountType == "Customer") {
             status = "Verifying"
@@ -25,15 +24,19 @@ async function createOrder(req,res){
             status = "Completed"
             typeOrder = 0
         }
+
+        // create order
         let order = await order_model.create({
             user: id_user,
             products: cart.products,
             storeID: cart.storeID,
             price: cart.priceTotal,
+            point_used: Number(point_used),
             status: status,
             type: typeOrder,
             NbItem: cart.NbItem,
-            employee: idAccount
+            employee: idAccount,
+            address: address,
         })
 
         // update user info
@@ -41,32 +44,29 @@ async function createOrder(req,res){
             const user = await user_model.findById(id_user)
             await user.orders.push(order._id)
             
-
-
-            // Phải để sang phía sau khi rate/ sau khi nhận hàng
+            // nếu như cancel thì cần back lại giá trị cũ
             // update total money
-            if(req.session.AccountType == "Employee"){
-                user.totalMoney += order.price
-                user.NbItem += order.NbItem
-                // update point 
-                var point = Math.floor(PERCENT*order.price/1000)*1000
-                console.log(point)
-                user.point += point
-                // update rank
-                for(var i = rankList.length - 1; i >= 0; --i){
-                    if(user.totalMoney > rankList[i]){
-                        user.rank = i
-                        break
-                    }
+            user.totalMoney += (order.price - order.point_used)
+            user.NbItem += order.NbItem
+            // update point 
+            var pointBonus = Math.floor(PERCENT*order.price/1000)*1000
+            //console.log(pointBonus)
+            user.point += (pointBonus - Number(order.point_used))
+            // update rank
+            for(var i = rankList.length - 1; i >= 0; --i){
+                if(user.totalMoney > rankList[i]){
+                    user.rank = i
+                    break
                 }
             }
+            
             await user.save()
         }
 
         res.status(200).send(order)
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 }
 
@@ -93,7 +93,7 @@ async function viewOrder(req,res){
         // res.json(user)
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 
 }
@@ -116,7 +116,24 @@ async function cancelOrder(req,res){
 
             // update user
             var user = await user_model.findById(order.user)
-            
+
+            // update total money
+            user.totalMoney -= (order.price - order.point_used)
+            user.NbItem -= order.NbItem
+            // update point 
+            var pointBonus = Math.floor(PERCENT*order.price/1000)*1000
+            //console.log(pointBonus)
+            user.point -= (pointBonus - Number(order.point_used))
+            // update rank
+            for(var i = rankList.length - 1; i >= 0; --i){
+                if(user.totalMoney > rankList[i]){
+                    user.rank = i
+                    break
+                }
+            }
+
+            await user.save()
+            res.send(JSON.stringify("Your order canceled!"))
         }
         else{
             res.send(JSON.stringify("Your order can not cancel!"))
@@ -124,6 +141,19 @@ async function cancelOrder(req,res){
     }
     catch(err){
         throw err
+    }
+}
+
+
+async function receivedOrder(req, res){
+    try{
+        const {id_order} = req.body
+        const order = await order_model.findById(id_order)
+        order.status = "Completed"
+        res.send(JSON.stringify("Order completed!"))
+    }
+    catch(err){
+        res.json(err)
     }
 }
 
@@ -136,5 +166,8 @@ module.exports = (app) => {
     })
     app.put("/order/cancel", (req,res) => {
         cancelOrder(req,res)
+    })
+    app.get("/order/received", (req,res) => {
+        receivedOrder(req,res)
     })
 }

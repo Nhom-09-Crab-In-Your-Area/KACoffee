@@ -24,7 +24,7 @@ async function viewOrder(req,res){
         else res.send(JSON.stringify("Only employee can access!"))
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 }
 
@@ -44,7 +44,7 @@ async function viewPendingOrder(req,res){
         else res.send(JSON.stringify("Only employee can access!"))
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 }
 
@@ -70,7 +70,7 @@ async function viewFilterOrder(req,res){
         else res.send(JSON.stringify("Only employee can access!"))
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 }
 
@@ -91,7 +91,7 @@ async function changeStatus(req,res){
         else res.send(JSON.stringify("Only employee / admin can access!"))
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 }
 
@@ -105,7 +105,7 @@ async function changeStatus(req,res){
 //         else res.send(JSON.stringify("Only employee / admin can access!"))
 //     }
 //     catch(err){
-//         throw err
+//         res.json(err)
 //     }
 // }
 
