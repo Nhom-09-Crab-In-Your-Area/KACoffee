@@ -2,43 +2,71 @@ const cart_model = require("../../models/cart_model")
 const user_model = require("../../models/users_model")
 const order_model = require("../../models/order_model")
 
+const PERCENT = 0.03
+const rankList = [0, 300000, 800000, 1500000]
 
 async function createOrder(req,res){
     try{
-        const {id_cart} = req.body
+        const {id_cart, address, point_used, voucher} = req.body
         if(id_cart == null){
-            res.send(JSON.stringify("Shopping cart is empty!"))
+            return res.send(JSON.stringify("Shopping cart is empty!"))
         }
-
-        let status, typeOrder = 1, idAccount = req.session.idAccount
-
+        const cart = await cart_model.findById(id_cart)
+        const id_user = cart.user
+        let status, typeOrder, idAccount = req.session.idAccount
+        // set up attribute's order
         if(req.session.AccountType == "Customer") {
             status = "Verifying"
             idAccount = undefined // là khách hàng thì chưa gán employee
+            typeOrder = 1 // 0 means offline, 1 means online
         }
-        else status = "Processing"
+        else{
+            status = "Completed"
+            typeOrder = 0
+        }
 
-        const cart = await cart_model.findById(id_cart)
-        const id_user = cart.user
-        if(id_user == null) typeOrder = 0 // 0 means offline, 1 means online
+        // create order
         let order = await order_model.create({
             user: id_user,
             products: cart.products,
             storeID: cart.storeID,
             price: cart.priceTotal,
+            point_used: Number(point_used),
             status: status,
             type: typeOrder,
-            employee: idAccount
+            NbItem: cart.NbItem,
+            employee: idAccount,
+            address: address,
         })
-        await user_model.findByIdAndUpdate(
-            id_user,
-            {$addToSet: {orders: order._id}},
-            {new: true, useFindAndModify: false})
-        
-        res.status(200).send(JSON.stringify("Order created!"))
+
+        // update user info
+        if(id_user != null){ 
+            const user = await user_model.findById(id_user)
+            await user.orders.push(order._id)
+            
+            // nếu như cancel thì cần back lại giá trị cũ
+            // update total money
+            user.totalMoney += (order.price - order.point_used)
+            user.NbItem += order.NbItem
+            // update point 
+            var pointBonus = Math.floor(PERCENT*order.price/1000)*1000
+            //console.log(pointBonus)
+            user.point += (pointBonus - Number(order.point_used))
+            // update rank
+            for(var i = rankList.length - 1; i >= 0; --i){
+                if(user.totalMoney > rankList[i]){
+                    user.rank = i
+                    break
+                }
+            }
+            
+            await user.save()
+        }
+
+        res.status(200).send(order)
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 }
 
@@ -65,7 +93,7 @@ async function viewOrder(req,res){
         // res.json(user)
     }
     catch(err){
-        throw err
+        res.json(err)
     }
 
 }
@@ -77,11 +105,35 @@ async function cancelOrder(req,res){
         if(id_order == null){
             res.send(JSON.stringify("Id order is null"))
         }
+
+        
         const order = await order_model.findById(id_order)
         if(order.status == "Verifying"){
+            // update order
             order.status = "Canceled"
             res.send(JSON.stringify("Your order canceled!"))
             await order.save()
+
+            // update user
+            var user = await user_model.findById(order.user)
+
+            // update total money
+            user.totalMoney -= (order.price - order.point_used)
+            user.NbItem -= order.NbItem
+            // update point 
+            var pointBonus = Math.floor(PERCENT*order.price/1000)*1000
+            //console.log(pointBonus)
+            user.point -= (pointBonus - Number(order.point_used))
+            // update rank
+            for(var i = rankList.length - 1; i >= 0; --i){
+                if(user.totalMoney > rankList[i]){
+                    user.rank = i
+                    break
+                }
+            }
+
+            await user.save()
+            res.send(JSON.stringify("Your order canceled!"))
         }
         else{
             res.send(JSON.stringify("Your order can not cancel!"))
@@ -89,6 +141,19 @@ async function cancelOrder(req,res){
     }
     catch(err){
         throw err
+    }
+}
+
+
+async function receivedOrder(req, res){
+    try{
+        const {id_order} = req.body
+        const order = await order_model.findById(id_order)
+        order.status = "Completed"
+        res.send(JSON.stringify("Order completed!"))
+    }
+    catch(err){
+        res.json(err)
     }
 }
 
@@ -101,5 +166,8 @@ module.exports = (app) => {
     })
     app.put("/order/cancel", (req,res) => {
         cancelOrder(req,res)
+    })
+    app.get("/order/received", (req,res) => {
+        receivedOrder(req,res)
     })
 }

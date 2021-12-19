@@ -13,6 +13,7 @@ var cartSchema = new Schema({
         price: {type: Number, default: 0}
     }],
     priceTotal: {type: Number, default: 0},
+    NbItem: {type: Number, default: 0}, // tổng số sản phẩm 
     storeID: {type: Schema.Types.String, default: "1"},
 })
 

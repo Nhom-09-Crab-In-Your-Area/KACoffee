@@ -8,7 +8,12 @@ let userSchema = new Schema({
     'phone': {type: String},
     'address': {type: String, default: ''},
     cart: {type: Schema.Types.ObjectId, ref: "Shopping Cart"},
-    orders: [{type: Schema.Types.ObjectId, ref: "Order"}]
+    orders: [{type: Schema.Types.ObjectId, ref: "Order"}],
+    point: {type: Number, default: 0},
+    rank: {type: Number, enum: [0,1,2,3], default: 0},
+    totalMoney: {type: Number, default: 0}, // the total money paid
+    NbItem: {type: Number, default: 0} // the number of item which bought
+    //vouchers: [{type: Schema.Types.ObjectId, ref: "Voucher"}]
 }, {collection: 'Users'});
 
 module.exports = mongoose.model('Users', userSchema);
