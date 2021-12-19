@@ -5,10 +5,7 @@ const checkMedia = window.matchMedia('(max-width: 767.98px)')
 const loginButton = document.querySelector('.login')
 
 const guestHandler = () => {
-    loginButton.addEventListener('click', () => {
-        console.log('hi')
-        window.location = '/login'
-    })
+    window.location = '/loginstaff'
 }
 
 const customerHandler = (name) => {
@@ -48,8 +45,8 @@ const name = document.querySelector('.account-title272')
 const fetchState = async (url = '/check_self_profile') => {
     const data = await fetch(url, {method: 'GET'}).then((res) => {
         if (res.status == 401) {
-            guestHandler()
             localStorage.removeItem('login')
+            guestHandler()
             return null
         } else return res.json()
     })
