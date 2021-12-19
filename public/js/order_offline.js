@@ -150,6 +150,8 @@ function Reset_order() {
         }
     }
     display_current()
+    delete_order()
+    complete_order ()
 }
 
 function display_current() {
@@ -228,6 +230,7 @@ function delete_order() {
     var cancel_order = document.getElementsByClassName("cancel-order")
     for (let i = 0; i<cancel_order.length; i++) {
         cancel_order[i].onclick = function() {
+            console.log(cancel_order.length)
             let parent = cancel_order[i].parentNode
             let grand = parent.parentNode
             let great = grand.parentNode
