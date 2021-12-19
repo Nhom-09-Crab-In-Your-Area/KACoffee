@@ -21,7 +21,7 @@ async function viewCart(req, res) {
             res.json(cart)
         }
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
 
@@ -43,7 +43,7 @@ async function createCart(req, res) {
             res.json(cart)
         } else res.send(JSON.stringify('Only employee can access!'))
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
 
@@ -84,6 +84,9 @@ async function addProduct(req, res) {
         const products = cart.products
         const len = products.length
         cart.priceTotal += Number(amount) * price
+        cart.NbItem += Number(amount)
+        
+        // exist the same item (name product, level ice, ...)
         for (var i = 0; i < len; i++) {
             item = products[i]
             //console.log("i",i)
@@ -99,6 +102,7 @@ async function addProduct(req, res) {
                 return res.json(cart)
             }
         }
+        // create new item
         await products.push({
             info: id_product,
             size: size,
@@ -110,7 +114,7 @@ async function addProduct(req, res) {
         await cart.save()
         return res.json(cart)
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
 
@@ -124,12 +128,13 @@ async function changeAmount(req, res) {
         const item = cart.products.id(id_item)
         //console.log(item.amount)
         cart.priceTotal += (Number(amount) - item.amount) * item.price
+        cart.NbItem += (Number(amount) - item.amount)
         item.amount = amount
         await cart.save()
 
         return res.json(cart)
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
 
@@ -149,7 +154,7 @@ async function changeSize(req, res) {
 
         return res.json(cart)
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
 
@@ -169,11 +174,12 @@ async function deleteProduct(req, res) {
 
         const item = await cart.products.id(id_item)
         cart.priceTotal -= item.amount * item.price
+        cart.NbItem -= item.amount
         await cart.products.pull({ _id: id_item })
         await cart.save()
         res.json(cart)
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
 
@@ -201,9 +207,10 @@ async function deleteCart(req, res) {
             await cart_model.findByIdAndRemove(id_cart)
         }
     } catch (err) {
-        res.send(err)
+        res.json(err)
     }
 }
+
 module.exports = (app) => {
     app.post('/cart/view', (req, res) => {
         viewCart(req, res)

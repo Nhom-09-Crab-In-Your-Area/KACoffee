@@ -10,13 +10,12 @@ const register = require('./register')
 const log_in = require('./log_in')
 const session_config = require('./session_config')
 const log_out = require('./log_out')
-const account_utils = require('./alter_data/account_utils')
-const product = require('./store/product')
-const cart = require('./user/cart')
-const order = require('./user/order')
-const employee = require('./store/employee')
-const blog = require('./blog/blog')
 const authen = require('./authentication')
+
+const account_utils = require('./alter_data/account_utils')
+const userController = require('./user/userController')
+const storeController = require('./store/storeController')
+
 const emailSender = require('./email_manage/email_sender')
 const email_sender = require('./email_manage/email_sender')
 const email_utils = require('./email_manage/email_utils')
@@ -102,10 +101,9 @@ register(app) //route: /addCustomer, /addEmployee
 log_in(app) //route: /log_in
 log_out(app) //route: /log_out
 account_utils(app)
-product(app)
-blog(app)
-cart(app)
-order(app)
-employee(app)
+
+storeController(app)
+userController(app)
+
 authen(app) //authentication
 email_utils(app)

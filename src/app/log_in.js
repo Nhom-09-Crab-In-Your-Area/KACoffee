@@ -21,7 +21,7 @@ module.exports = (app)=> {
                                 if(err) throw err
                                 if(info == null) console.log("Account empty!")
                                 else req.session.idAccount = info.id
-                                console.log(typeof(req.session.idAccount))
+                                //console.log(typeof(req.session.idAccount))
                                 req.session.UserEmail = account.email;
                                 req.session.AccountType = account['account type'];
                                 res.send(JSON.stringify('log in accepted'));
