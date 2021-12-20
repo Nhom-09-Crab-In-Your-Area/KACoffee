@@ -1,5 +1,9 @@
 'use strict'
 
+const checkout = document.querySelector('.checkout')
+
+const checkoutBox = document.createElement('div')
+
 // if (checkMedia.matches) {
 //     dropdown.style.display = 'none'
 //     cart.addEventListener('click', () => {
@@ -8,7 +12,27 @@
 //     })
 // }
 
-const checkout = document.querySelector('.checkout')
+checkoutBox.innerHTML = `
+        <div class = 'title'>YOUR ORDER</div>
+        <div class="box_shadow-address-container">
+        <div class="lam_cho_dep"></div>
+        <div class="address-container">
+            <div class="address-header">
+                <div class="address-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <div class="address-name">Delivery Address</div>
+            </div>
+            <div class="address-detail">
+                <div class="name-order">Đỗ Đức Đỉnh</div>
+                <div class="phone">0123456789</div>
+                <div class="address">Nơ 2, Bán đảo Linh Đờm, Hoàng Liệt, Hà Nội</div>
+            </div>
+        </div>
+    </div>
+        <div class = 'productList1 row justify-content-center'></div>
+    `
+checkout.appendChild(checkoutBox)
 
 const productList1 = document.querySelector('.productList1')
 
@@ -69,41 +93,13 @@ const cartRender1 = async (id_user) => {
         body: JSON.stringify(data),
     }).then((data) => data.json())
 
+    console.log(data)
+
     const User = await fetch('check_self_profile', {method: 'GET'}).then(
         (res) => {
             return res.json()
         }
     )
-
-    console.log(User)
-
-    checkout.innerHTML = ''
-
-    const checkoutBox = document.createElement('div')
-
-    checkoutBox.innerHTML = `
-        <div class = 'title-checkout'>YOUR ORDER</div>
-        <div class="box_shadow-address-container">
-        <div class="address-container">
-            <div class="address-header">
-                <div class="address-icon">
-                    <i class="bi bi-geo-alt-fill"></i>
-                </div>
-                <div class="address-name">Delivery Address</div>
-            </div>
-            <div class="address-detail">
-                <div class="name-order">Name: ${User['first name']} ${User['last name']}.</div>
-                <div class="phone"> Phone: ${User['phone']}</div>
-            </div>
-            <div style="padding-bottom: 10px;padding-left: 10px;font-weight:bold;">
-                    <label for="order-address">Address: </label>
-                    <input type="text" id="order-address" class="address" value="${User['address']}">
-            </div>
-        </div>
-    </div>
-        <div class = 'productList1 row justify-content-center'></div>
-    `
-    checkout.appendChild(checkoutBox)
 
     const productList1 = document.querySelector('.productList1')
 
@@ -184,25 +180,6 @@ const cartRender1 = async (id_user) => {
     productList1.appendChild(mess)
 
     document.querySelector('.product-count').textContent = qty
-    document
-        .querySelector('.place-order-btn')
-        .addEventListener('click', async (e) => {
-            e.preventDefault()
-            await fetch('/order/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: JSON.stringify({
-                    id_cart,
-                    address: document.querySelector('#order-address').value,
-                    point_used: document.querySelector('.point-used').value,
-                }),
-            })
-
-            //window.location = '/'
-        })
 
     console.log(items)
 }
