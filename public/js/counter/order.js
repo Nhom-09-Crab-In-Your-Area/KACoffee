@@ -136,6 +136,8 @@ async function getorder(e) {
     data.sort(function (a, b) {
         return timeCompare(a.createAt, b.createAt)
     })
+    data = data.filter((x) => x.type === 1)
+    console.log(data)
     const orderlists = document.querySelector('.order-list-section')
     orderlists.innerHTML = ''
     const bars = document.createElement('div')
@@ -162,7 +164,7 @@ async function getorder(e) {
                 firstname: order.user['first name'],
                 lastname: order.user['last name'],
                 phone: order.user.phone,
-                address: order.user.address,
+                address: order.address,
             }
         }
         const itemContainer = document.createElement('div')
@@ -183,7 +185,7 @@ async function getorder(e) {
                 }</span>
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
-                <span class="order-address">${user.address} </span>
+                <span class="order-address">${order.address} </span>
                 <span class="order-price">${order.price} VNĐ</span>
                 </div>
             </button>
@@ -221,6 +223,8 @@ async function getorderdata(e) {
     data = data.sort(function (a, b) {
         return timeCompare(a.createAt, b.createAt)
     })
+    data = data.filter((x) => x.type === 1)
+
     i = 0
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
@@ -250,14 +254,12 @@ async function getpendingorder(e) {
     var data = await fetch('/store/view_pending_order', {
         method: 'GET',
     }).then((data) => data.json())
-    console.log(data)
-    data = data.sort(function (a, b) {
-        return timeCompare(a.createAt, b.createAt)
-    })
+
     data.sort(function (a, b) {
-        console.log(timeCompare(a.createAt, b.createAt))
         return timeCompare(a.createAt, b.createAt)
     })
+    data = data.filter((x) => x.type === 1)
+    console.log(data)
     u = i
     const orderlists = document.querySelector('.order-list-section')
     data.forEach((order) => {
@@ -273,7 +275,7 @@ async function getpendingorder(e) {
                 firstname: order.user['first name'],
                 lastname: order.user['last name'],
                 phone: order.user.phone,
-                address: order.user.address,
+                address: order.address,
             }
         }
 
@@ -294,7 +296,7 @@ async function getpendingorder(e) {
                 }</span>
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
-                <span class="order-address">${user.address} </span>
+                <span class="order-address">${order.address} </span>
                 <span class="order-price">${order.price} VNĐ</span>
                 </div>
             </button>
@@ -333,6 +335,8 @@ async function getpendingorderdata(e) {
     data.sort(function (a, b) {
         return timeCompare(a.createAt, b.createAt)
     })
+    data = data.filter((x) => x.type === 1)
+
     i = u
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
@@ -362,9 +366,9 @@ async function getpendingorderdata(e) {
 //Gui request lien tuc de cap nhat
 async function a() {
     setTimeout(getorder, 1000)
-    setTimeout(getorderdata, 1000)
-    setTimeout(getpendingorder, 1500)
-    setTimeout(getpendingorderdata, 2000)
+    setTimeout(getorderdata, 2000)
+    setTimeout(getpendingorder, 3000)
+    setTimeout(getpendingorderdata, 4000)
 }
 setTimeout(a, 1000)
-setInterval(a, 1000 * 60 * 5)
+setInterval(a, 1000 * 60)
