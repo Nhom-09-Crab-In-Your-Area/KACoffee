@@ -14,6 +14,21 @@ const checkoutBox = document.createElement('div')
 
 checkoutBox.innerHTML = `
         <div class = 'title'>YOUR ORDER</div>
+        <div class="box_shadow-address-container">
+        <div class="address-container">
+            <div class="address-header">
+                <div class="address-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <div class="address-name">Delivery Address</div>
+            </div>
+            <div class="address-detail">
+                <div class="name-order">Đỗ Đức Đỉnh</div>
+                <div class="phone">0123456789</div>
+                <div class="address">Nơ 2, Bán đảo Linh Đờm, Hoàng Liệt, Hà Nội</div>
+            </div>
+        </div>
+    </div>
         <div class = 'productList1 row justify-content-center'></div>
     `
 checkout.appendChild(checkoutBox)

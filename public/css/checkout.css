@@ -4,6 +4,10 @@
     }
 }
 
+body {
+    background: #f6f6f6;
+}
+
 .checkout {
     margin-top: 60px;
 }
@@ -11,6 +15,9 @@
 .productList1 {
     margin-left: 10vw;
     margin-right: 10vw;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
+    padding-top: 20px;
+    margin-bottom: 20px;
 }
 
 .title {
@@ -30,4 +37,41 @@
     border: none;
     padding: 5px;
     font-weight: bold;
+}
+
+.box_shadow-address-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.address-container {
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
+}
+
+.address-header {
+    display: flex;
+    color: chocolate;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.address-detail {
+    display: flex;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.name-order{
+    font-weight: 700;
+}
+
+.phone {
+    font-weight: 700;
+    margin-left: 20px;
+}
+
+.address {
+    margin-left: 20px;
 }
