@@ -162,7 +162,7 @@ async function getorder(e) {
                 firstname: order.user['first name'],
                 lastname: order.user['last name'],
                 phone: order.user.phone,
-                address: order.user.address,
+                address: order.address,
             }
         }
         const itemContainer = document.createElement('div')
@@ -183,7 +183,7 @@ async function getorder(e) {
                 }</span>
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
-                <span class="order-address">${user.address} </span>
+                <span class="order-address">${order.address} </span>
                 <span class="order-price">${order.price} VNĐ</span>
                 </div>
             </button>
@@ -221,6 +221,7 @@ async function getorderdata(e) {
     data = data.sort(function (a, b) {
         return timeCompare(a.createAt, b.createAt)
     })
+    console.log(data)
     i = 0
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
@@ -251,11 +252,7 @@ async function getpendingorder(e) {
         method: 'GET',
     }).then((data) => data.json())
     console.log(data)
-    data = data.sort(function (a, b) {
-        return timeCompare(a.createAt, b.createAt)
-    })
     data.sort(function (a, b) {
-        console.log(timeCompare(a.createAt, b.createAt))
         return timeCompare(a.createAt, b.createAt)
     })
     u = i
@@ -273,7 +270,7 @@ async function getpendingorder(e) {
                 firstname: order.user['first name'],
                 lastname: order.user['last name'],
                 phone: order.user.phone,
-                address: order.user.address,
+                address: order.address,
             }
         }
 
@@ -294,7 +291,7 @@ async function getpendingorder(e) {
                 }</span>
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
-                <span class="order-address">${user.address} </span>
+                <span class="order-address">${order.address} </span>
                 <span class="order-price">${order.price} VNĐ</span>
                 </div>
             </button>
@@ -362,9 +359,9 @@ async function getpendingorderdata(e) {
 //Gui request lien tuc de cap nhat
 async function a() {
     setTimeout(getorder, 1000)
-    setTimeout(getorderdata, 1000)
-    setTimeout(getpendingorder, 1500)
-    setTimeout(getpendingorderdata, 2000)
+    setTimeout(getorderdata, 1500)
+    setTimeout(getpendingorder, 2000)
+    setTimeout(getpendingorderdata, 3000)
 }
 setTimeout(a, 1000)
-setInterval(a, 1000 * 60 * 5)
+setInterval(a, 1000 * 60)
