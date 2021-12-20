@@ -84,7 +84,7 @@ async function addButtonClickHandle(id_product, id_form, price) {
 }
 
 const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
-    let data = { id_cart, id_item, amount }
+    let data = {id_cart, id_item, amount}
     if (amount == 0) {
         console.log(id_cart, id_item)
         await fetch('/cart/delete_product', {
@@ -93,7 +93,7 @@ const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
                 'Content-Type': 'application/json',
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({ id_cart, id_item }),
+            body: JSON.stringify({id_cart, id_item}),
         })
         await cartRender(id_user)
         return false
@@ -111,7 +111,7 @@ const adjustAmountHandler = async (id_cart, id_item, amount, id_user) => {
 }
 
 const cartRender = async (id_user) => {
-    const data = { id_user }
+    const data = {id_user}
     let items = await fetch('/cart/view', {
         method: 'POST',
         headers: {
@@ -182,12 +182,16 @@ const cartRender = async (id_user) => {
     })
 
     const mess = document.createElement('div')
-    if (items.length > 0)
+    if (items.length > 0) {
         mess.innerHTML = `<div style = "color:black; font-weight:bold; text-align: right" >TOTAL: ${total} VND</div>
-        <div style = "text-align: center"><button>CHECK OUT</button> </div>`
-    else mess.innerHTML = `YOUR CART IS EMPTY`
+        <div style = "text-align: center"><button class="checkout-btn">CHECK OUT</button> </div>`
+    } else mess.innerHTML = `YOUR CART IS EMPTY`
 
     productList.appendChild(mess)
+
+    document.querySelector('.checkout-btn')?.addEventListener('click', () => {
+        window.location = '/checkout'
+    })
 
     document.querySelector('.product-count').textContent = qty
 

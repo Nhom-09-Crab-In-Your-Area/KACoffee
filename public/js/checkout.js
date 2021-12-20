@@ -50,6 +50,22 @@ const adjustAmountHandler1 = async (id_cart, id_item, amount, id_user) => {
     await cartRender(id_user)
 }
 
+function hdPointChange(total, point) {
+    console.log(2)
+    if (
+        document.querySelector('.point-used').value == '' ||
+        isNaN(document.querySelector('.point-used').value) ||
+        Number(document.querySelector('.point-used').value) > Number(point)
+    ) {
+        document.querySelector('.point-error').style.display = 'block'
+    } else {
+        document.querySelector('.point-error').style.display = 'none'
+        document.querySelector('.cart-total').textContent = `${
+            total - Number(document.querySelector('.point-used').value)
+        }`
+    }
+}
+
 const cartRender1 = async (id_user) => {
     const data = {id_user}
     let items = await fetch('/cart/view', {
@@ -62,6 +78,12 @@ const cartRender1 = async (id_user) => {
     }).then((data) => data.json())
 
     console.log(data)
+
+    const User = await fetch('check_self_profile', {method: 'GET'}).then(
+        (res) => {
+            return res.json()
+        }
+    )
 
     const productList1 = document.querySelector('.productList1')
 
@@ -128,7 +150,14 @@ const cartRender1 = async (id_user) => {
 
     const mess = document.createElement('div')
     if (items.length > 0)
-        mess.innerHTML = `<div style = "color:black; font-weight:bold; text-align: right" >TOTAL: ${total} VND</div>
+        mess.innerHTML = `<div style = "color:black; font-weight:bold; text-align: right" >CART TOTAL: <spans class="cart-total">${total}</span> VND</div>
+        <div style = "color:black; font-weight:bold; text-align: right" >
+            Use Point (${User['point']}):  <input style="width:70px;" type="text" onChange="hdPointChange(${total},${User['point']})" value="0" name="point-used" class="point-used"> VND
+        </div>
+        <div class="point-error" style="text-align: right; display:none;">* Please enter valid value</div>
+        <div style = "margin-top: 10px;color:black; font-weight:bold; text-align: right" >
+            <span style = "border-top: 1px solid black">ORDER TOTAL: <spans class="cart-total">${total}</span></span> VND
+        </div>
         <div class = "place-order-box" style = "text-align: center"><button class="place-order-btn">PLACE YOUR ORDER</button> </div>`
     else mess.innerHTML = `YOUR CART IS EMPTY`
 
