@@ -217,6 +217,7 @@ function get_info(j) {
     total_bill[k].innerHTML = Number(total_bill[k].innerHTML) + Number(cost)
 
     list_products[k].appendChild(clone)
+    clone.style.display = "block"
     clone.appendChild(prd_name)
     clone.appendChild(prd_size)
     clone.appendChild(prd_sugar)
