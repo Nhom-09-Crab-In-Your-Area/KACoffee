@@ -105,8 +105,9 @@ function Add_add() {
     }
 }
 class a_product {
-    constructor(id, size, sugar, ice, num) {
+    constructor(id,price, size, sugar, ice, num) {
         this.id = id
+        this.price = price
         this.size = size
         this.sugar = sugar
         this.ice = ice
@@ -229,6 +230,7 @@ function get_info(j) {
 
     var a_new_product = new a_product(
         myJSON[j]._id,
+        myJSON[j].price,
         size[j].value,
         sugar[j].value,
         ice[j].value,
@@ -276,5 +278,5 @@ function complete_order() {
 async function post_to_database(name_customer, tel_email, order_i) {
     // name_customer : Tên khách hàng
     // tel_email : email hoặc số điện thoại
-    // order_i : list gồm các object là các sản phẩm gồm các thuộc tính (id, size, sugar, ice, number)
+    // order_i : list gồm các object là các sản phẩm gồm các thuộc tính (id, price ,size, sugar, ice, number)
 }
