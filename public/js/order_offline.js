@@ -273,7 +273,7 @@ function complete_order() {
     }
 }
 
-function post_to_database(name_customer, tel_email, order_i) {
+async function post_to_database(name_customer, tel_email, order_i) {
     // name_customer : Tên khách hàng
     // tel_email : email hoặc số điện thoại
     // order_i : list gồm các object là các sản phẩm gồm các thuộc tính (id, size, sugar, ice, number)
