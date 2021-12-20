@@ -85,6 +85,10 @@ app.get('/orderonline', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_online'), {})
 })
 
+app.get('/orderhistory', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/counter/order_history'), {})
+})
+
 app.get('/loginstaff', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/login'), {})
 })
