@@ -190,7 +190,8 @@ const cartRender1 = async (id_user) => {
                 }),
             })
 
-            //window.location = '/'
+            alert('Successfully Ordered! Back to the main page!')
+            window.location = '/'
         })
 
     console.log(items)

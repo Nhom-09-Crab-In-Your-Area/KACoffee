@@ -41,7 +41,7 @@ const customerHandler = (name) => {
         localStorage.removeItem('login')
         localStorage.removeItem('id')
         const res = await fetch('/log_out', {method: 'GET'})
-        window.location = '/loginstaff'
+        window.location = '/'
     })
 }
 
