@@ -271,7 +271,8 @@ function complete_order() {
 
             let name_customer = document.getElementsByClassName('name-order')
             let tel_email = document.getElementsByClassName('tel-email')
-            post_to_database(name_customer[i], tel_email[i], order[i])
+            console.log(order[i-1])
+            post_to_database(name_customer[i], tel_email[i].value, order[i-1])
             alert('Đã hoàn tất đơn hàng')
             order.splice(i - 1, 1)
             great_great.removeChild(great)
