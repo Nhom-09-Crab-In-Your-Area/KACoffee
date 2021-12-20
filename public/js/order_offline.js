@@ -228,13 +228,13 @@ function get_info(j) {
     clone.style.justifyContent = 'space-between'
     clone.style.flexWrap = 'wrap'
 
-    var cost = Number(myJSON[j].price);
-    if (size[j].value === "M") cost = cost + 5000;
-    if (size[j].value === "L") cost = cost + 10000;
+    var cost1 = Number(myJSON[j].price);
+    if (size[j].value === "M") cost1 = cost1 + 5000;
+    if (size[j].value === "L") cost1 = cost1 + 10000;
 
     var a_new_product = new a_product(
         myJSON[j]._id,
-        cost,
+        cost1,
         size[j].value,
         sugar[j].value,
         ice[j].value,
