@@ -15,6 +15,7 @@ const checkoutBox = document.createElement('div')
 checkoutBox.innerHTML = `
         <div class = 'title'>YOUR ORDER</div>
         <div class="box_shadow-address-container">
+        <div class="lam_cho_dep"></div>
         <div class="address-container">
             <div class="address-header">
                 <div class="address-icon">
