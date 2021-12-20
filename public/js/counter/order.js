@@ -66,14 +66,16 @@ function Filter_4() {
 
 function search_name() {
     var name_search = document.getElementById('search-name').value
-    var name = document.getElementsByClassName('name')
-    for (var i = 0; i < name.length; i++) {
+    var name = document.querySelectorAll('.order-name')
+    for (var i = 1; i < name.length; i++) {
         name[i].parentElement.parentElement.parentElement.style.display =
             'block'
     }
     console.log(name[1].innerHTML)
-    for (var i = 0; i < name.length; i++) {
-        if (name[i].innerHTML != name_search) {
+
+    for (var i = 1; i < name.length; i++) {
+        console.log(name[i].innerHTML)
+        if (!name[i].innerHTML.includes(name_search)) {
             name[i].parentElement.parentElement.parentElement.style.display =
                 'none'
         }
@@ -81,10 +83,26 @@ function search_name() {
 }
 
 function reset() {
-    var name = document.getElementsByClassName('name')
-    for (var i = 0; i < name.length; i++) {
+    var name = document.querySelectorAll('.order-name')
+    for (var i = 1; i < name.length; i++) {
         name[i].parentElement.parentElement.parentElement.style.display =
             'block'
+    }
+}
+
+function timeCompare(datetime1, datetime2) {
+    date1 = datetime1.substring(0, 10)
+    date2 = datetime2.substring(0, 10)
+    time1 = datetime1.substring(11, 19)
+    time2 = datetime2.substring(11, 19)
+    if (date1 != date2) {
+        date1 = date1.split('-').reverse().join('')
+        date2 = date2.split('-').reverse().join('')
+        return date1 > date2 ? -1 : 1
+    } else {
+        time1 = time1.split(':').reverse().join('')
+        time2 = time2.split(':').reverse().join('')
+        return time1 > time2 ? -1 : 1
     }
 }
 
@@ -111,16 +129,19 @@ async function changestatus(id, status) {
 }
 
 async function getorder(e) {
-    const data = await fetch('/store/view_order', {
+    var data = await fetch('/store/view_order', {
         method: 'GET',
     }).then((data) => data.json())
     i = 0
-    console.log(data)
+    data.sort(function (a, b) {
+        return timeCompare(a.createAt, b.createAt)
+    })
     const orderlists = document.querySelector('.order-list-section')
     orderlists.innerHTML = ''
     const bars = document.createElement('div')
     bars.innerHTML = `   <div class="fixed-container">
                 <div class="order-list-header text-center">
+                    <span class="order-time fw-bold">Thời gian</span>
                     <span class="order-name fw-bold">Người mua</span>
                     <span class="order-status fw-bold">Trạng thái</span>
                     <span class="order-phone fw-bold">Số điện thoại</span>
@@ -153,6 +174,10 @@ async function getorder(e) {
           <h2 class="accordion-header" id="flush-heading${i}">
             <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
+                <span class="order-time fw-bold">${order.createAt.substring(
+                    0,
+                    10
+                )}</span>
                 <span class="order-name name">${
                     user.firstname + ' ' + user.lastname
                 }</span>
@@ -190,11 +215,12 @@ async function getorder(e) {
     })
 }
 async function getorderdata(e) {
-    const data = await fetch('/store/view_order', {
+    var data = await fetch('/store/view_order', {
         method: 'GET',
     }).then((data) => data.json())
-
-    console.log(data)
+    data = data.sort(function (a, b) {
+        return timeCompare(a.createAt, b.createAt)
+    })
     i = 0
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
@@ -220,14 +246,18 @@ async function getorderdata(e) {
     })
 }
 
-{
-}
 async function getpendingorder(e) {
-    const data = await fetch('/store/view_pending_order', {
+    var data = await fetch('/store/view_pending_order', {
         method: 'GET',
     }).then((data) => data.json())
-
     console.log(data)
+    data = data.sort(function (a, b) {
+        return timeCompare(a.createAt, b.createAt)
+    })
+    data.sort(function (a, b) {
+        console.log(timeCompare(a.createAt, b.createAt))
+        return timeCompare(a.createAt, b.createAt)
+    })
     u = i
     const orderlists = document.querySelector('.order-list-section')
     data.forEach((order) => {
@@ -255,6 +285,10 @@ async function getpendingorder(e) {
           <h2 class="accordion-header" id="flush-heading${i}">
             <button class="accordion-button accordion-cus collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${i}" aria-expanded="false" aria-controls="flush-collapseOne">
                 <div class="order-list-data text-center">
+                <span class="order-time fw-bold">${order.createAt.substring(
+                    0,
+                    10
+                )}</span>
                 <span class="order-name name">${
                     user.firstname + ' ' + user.lastname
                 }</span>
@@ -292,11 +326,13 @@ async function getpendingorder(e) {
     })
 }
 async function getpendingorderdata(e) {
-    const data = await fetch('/store/view_pending_order', {
+    var data = await fetch('/store/view_pending_order', {
         method: 'GET',
     }).then((data) => data.json())
 
-    console.log(data)
+    data.sort(function (a, b) {
+        return timeCompare(a.createAt, b.createAt)
+    })
     i = u
     data.forEach((order) => {
         const itemInfo = document.createElement('div')
@@ -328,7 +364,7 @@ async function a() {
     setTimeout(getorder, 1000)
     setTimeout(getorderdata, 1000)
     setTimeout(getpendingorder, 1500)
-    setTimeout(getpendingorderdata, 1500)
+    setTimeout(getpendingorderdata, 2000)
 }
 setTimeout(a, 1000)
 setInterval(a, 1000 * 60 * 5)

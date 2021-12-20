@@ -160,15 +160,24 @@ body {
 }
 .order-address {
     margin-right: 16px;
-    min-width: 350px;
-    max-width: 350px;
+    min-width: 150px;
+    max-width: 150px;
 }
 .order-phone {
     margin-right: 16px;
     min-width: 150px;
     max-width: 150px;
 }
-
+.order-time {
+    margin-right: 16px;
+    min-width: 150px;
+    max-width: 150px;
+}
+.order-price {
+    margin-right: 16px;
+    min-width: 150px;
+    max-width: 150px;
+}
 .order-list-data {
     display: -webkit-box;
     display: -ms-flexbox;
