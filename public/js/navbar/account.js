@@ -6,6 +6,7 @@ const loginButton = document.querySelector('.login')
 
 const guestHandler = () => {
     loginButton.addEventListener('click', () => {
+        console.log('hi')
         window.location = '/login'
     })
 }
@@ -21,7 +22,7 @@ const customerHandler = (name) => {
 
     const hello = async (e) => {
         e.preventDefault()
-        const res = await fetch('/log_out', { method: 'GET' })
+        const res = await fetch('/log_out', {method: 'GET'})
         window.location = '/'
     }
 
@@ -39,13 +40,13 @@ const customerHandler = (name) => {
     logoutBtn.addEventListener('click', async () => {
         localStorage.removeItem('login')
         localStorage.removeItem('id')
-        const res = await fetch('/log_out', { method: 'GET' })
+        const res = await fetch('/log_out', {method: 'GET'})
         window.location = '/'
     })
 }
 
 const fetchState = async (url = '/check_self_profile') => {
-    const data = await fetch(url, { method: 'GET' }).then((res) => {
+    const data = await fetch(url, {method: 'GET'}).then((res) => {
         if (res.status == 401) {
             guestHandler()
             localStorage.removeItem('login')

@@ -5,6 +5,33 @@ var id = tmp[tmp.length - 1]
 //     alert(typeof(id))
 // }
 
+async function addButtonClickHandle(id_product, id_form) {
+    //console.log(id_form)
+    const form = document.querySelector(id_form)
+    const sugar = form.elements['sugar'].value
+    const ice = form.elements['ice'].value
+    const amount = form.elements['quantity'].value
+    const size = form.elements['size'].value
+    console.log(id_product, id_form, sugar, ice, amount)
+    await cartAddItem(
+        window.localStorage.getItem('id'),
+        id_product,
+        size,
+        sugar,
+        ice,
+        amount
+    )
+}
+
+function highlight() {
+    var img = document.getElementById("product-image")
+    img.classList.add('highlight')
+}
+function unhighlight() {
+    var img = document.getElementById("product-image")
+    img.classList.remove('highlight')
+}
+
 function add_info(product_info) {
     var product_type = document.getElementById('product-type')
     var product_name = document.getElementById('product-name')
@@ -18,7 +45,7 @@ function add_info(product_info) {
             product_type.innerHTML = product_info[i].type
             product_name.innerHTML = product_info[i].name
             product_cost.innerHTML = product_info[i].price
-            product_rate_number.innerHTML = product_info[i].rateNumber
+            product_rate_number.innerHTML = product_info[i].rateNumber // sửa lại đoạn nay sau khi cập nhập
             product_image.src = product_info[i].image
             product_description.innerHTML = product_info[i].description
             for (var j = 1; j <= 5; j++) {
@@ -28,7 +55,6 @@ function add_info(product_info) {
                 node.className = 'on'
                 product_rate_star.appendChild(node)
             }
-
             // console.log(product_info[i].type)
             break
         }
