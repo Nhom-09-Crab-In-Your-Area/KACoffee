@@ -49,7 +49,7 @@ function hdPointChange(total, point) {
         document.querySelector('.point-error').style.display = 'block'
     } else {
         document.querySelector('.point-error').style.display = 'none'
-        document.querySelector('.cart-total').textContent = `${
+        document.querySelector('.order-total').textContent = `${
             total - Number(document.querySelector('.point-used').value)
         }`
     }
@@ -166,7 +166,7 @@ const cartRender1 = async (id_user) => {
         </div>
         <div class="point-error" style="text-align: right; display:none;">* Please enter valid value</div>
         <div style = "margin-top: 10px;color:black; font-weight:bold; text-align: right" >
-            <span style = "border-top: 1px solid black">ORDER TOTAL: <spans class="cart-total">${total}</span></span> VND
+            <span style = "border-top: 1px solid black">ORDER TOTAL: <spans class="order-total">${total}</span></span> VND
         </div>
         <div class = "place-order-box" style = "text-align: center"><button class="place-order-btn">PLACE YOUR ORDER</button> </div>`
     else mess.innerHTML = `YOUR CART IS EMPTY`

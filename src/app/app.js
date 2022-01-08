@@ -61,6 +61,10 @@ app.get('/my_profile', (req, res) => {
     res.render(path.join(__dirname + '/../../views/profile/my_profile'), {})
 })
 
+app.get('/my_order', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/profile/my_order'), {})
+})
+
 app.get('/blog', (req, res) => {
     res.render(path.join(__dirname + '/../../views/blog'), {})
 })
@@ -89,8 +93,44 @@ app.get('/orderhistory', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_history'), {})
 })
 
-app.get('/loginstaff', (req, res) => {
+app.get('/login/staff', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/login'), {})
+})
+
+app.get('/adminlogin', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/login'), {})
+})
+
+app.get('/adminmain', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/main'), {})
+})
+
+app.get('/admincreatestaff', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/createstaff'), {})
+})
+
+app.get('/adminanalysis', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/analysis'), {})
+})
+
+app.get('/adminviewemployee', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/viewemployees'), {})
+})
+
+app.get('/adminviewuser', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/viewusers'), {})
+})
+
+app.get('/adminvoucher', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/voucher'), {})
+})
+
+app.get('/adminaddproduct', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/addproduct'), {})
+})
+
+app.get('/admindeleteproduct', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/admin/deleteproduct'), {})
 })
 
 app.get('/employee', (req, res) => {
