@@ -93,7 +93,7 @@ app.get('/orderhistory', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_history'), {})
 })
 
-app.get('/login/staff', (req, res) => {
+app.get('/loginstaff', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/login'), {})
 })
 
