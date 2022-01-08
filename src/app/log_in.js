@@ -1,7 +1,6 @@
 const authenticationModel = require("../models/authentication_model");
 const user_model = require("../models/users_model")
 const employee_model = require("../models/employees_model")
-const mongoose = require("mongoose")
 
 module.exports = (app)=> {  
     app.route('/log_in')

@@ -1,10 +1,10 @@
-const path = require("path");
-const code_verification_model = require('../../models/code_verification_model');
-const html_path_dict ={
-    'password_change': path.join(__dirname + '../../../views/login'),
-    'email_verify': path.join(__dirname + '../../../views/login'),
-}
 
+const code_verification_model = require('../../models/code_verification_model');
+const account_model = require('../../models/authentication_model');
+const html_path_dict ={
+    'password_change': '/changepassword',
+    'email_verify': '/login',
+}
 module.exports = (app)=>{
     app.get('/code_verify', (req, res)=>{
         let code = req.query.code;
@@ -18,7 +18,21 @@ module.exports = (app)=>{
                 }
                 else{
                     if(authen.code == code){
-                        res.status(200).render(html_path_dict[service_type], {});
+                        account_model.findOne({'email': email}, async (err, account)=>{
+                            if (err) throw err;
+                            else{
+                                if (service_type == 'password_change'){
+                                    let set_session = await function (req, email, account_type){
+                                        req.session.UserEmail = email;
+                                        req.session.AccountType = account_type;
+                                    }
+                                    set_session(req, authen.email, account['account_type']);
+                                }
+                                
+                                res.status(200).redirect(html_path_dict[service_type]);
+                            }
+                            
+                        })
                     }
                     else{
                         res.status(404).send(JSON.stringify('can not verify'));
