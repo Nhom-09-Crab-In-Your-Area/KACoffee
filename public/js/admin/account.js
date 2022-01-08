@@ -5,10 +5,7 @@ const checkMedia = window.matchMedia('(max-width: 767.98px)')
 const loginButton = document.querySelector('.login')
 
 const guestHandler = () => {
-    loginButton.addEventListener('click', () => {
-        console.log('hi')
-        window.location = '/login'
-    })
+    window.location = '/adminlogin'
 }
 
 const customerHandler = (name) => {
@@ -29,10 +26,6 @@ const customerHandler = (name) => {
     dropdown.innerHTML = `
         <p>${name.toUpperCase()}'s ACCOUNT </p>
         <hr>
-        <a href = '/my_profile'>My account</a>
-        <a href = '/my_order'>Orders</a>
-        <a href = '/my_voucher'>Vouchers</a> 
-        <hr>
         <button class = "logout-btn" >Log out</button>
     `
     loginButton.appendChild(dropdown)
@@ -41,24 +34,31 @@ const customerHandler = (name) => {
         localStorage.removeItem('login')
         localStorage.removeItem('id')
         const res = await fetch('/log_out', {method: 'GET'})
-        window.location = '/'
+        window.location = '/adminlogin'
     })
 }
+
+const name = document.querySelector('.account-title272')
 
 const fetchState = async (url = '/check_self_profile') => {
     const data = await fetch(url, {method: 'GET'}).then((res) => {
         if (res.status == 401) {
-            guestHandler()
             localStorage.removeItem('login')
+            guestHandler()
             return null
         } else return res.json()
     })
 
     if (data) {
         //localStorage.setItem('login', 'true')
+        name.textContent = `${data['first name'].toUpperCase()} ${data[
+            'last name'
+        ].toUpperCase()}`
         localStorage.setItem('id', data['_id'])
         customerHandler(data['first name'])
     }
 
     return data
 }
+
+fetchState()
