@@ -63,25 +63,16 @@ function create(req, res) {
 }
 
 async function displayAll(req, res) {
-    if (req.session.AccountType == 'Admin') {
-        voucherModel.find((err, voucher) => {
-            if (err) {
-                res.status(500).json(err)
-            } else {
-                res.json(voucher)
-            }
-        })
-    }
-    if (req.session.AccountType == 'Customer') {
-        const {idAccount} = req.session
-
-        const user = await userModel.findById(idAccount).populate('vouchers')
-        if (user == null) {
-            return res.status(404).send(JSON.stringify('Not found user'))
-        }
-        return res.json(user)
-    } else {
-        return res.status(400).send(JSON.stringify('Unauthorized'))
+  if(req.session.AccountType == "Admin"){
+    const vouchers = await voucherModel.find()
+    return res.json(vouchers)
+  }
+  if(req.session.AccountType == "Customer"){
+    const {idAccount} = req.session
+    
+    const user = await userModel.findById(idAccount).populate("vouchers")
+    if(user == null){
+      return res.status(404).send(JSON.stringify("Not found user"))
     }
 }
 
