@@ -95,19 +95,30 @@ async function changeStatus(req,res){
     }
 }
 
-// async function createOrder(req,res){
-//     try{
-//         if(req.session.AccountType == "Employee"){
-//             const { phone, status_order } = req.body
-//             const idAccount = req.session.idAccount
-
-//         }
-//         else res.send(JSON.stringify("Only employee / admin can access!"))
-//     }
-//     catch(err){
-//         res.json(err)
-//     }
-// }
+async function get_5t1_voucher(req,res){
+    try{
+        if(req.session.AccountType == "Employee"){
+            const { phone } = req.body
+            const user = await user_model.findOne({ phone: phone })
+            if(user == null){
+                return res.send(JSON.stringify("Number phone is not exist!"))
+            }
+            const remainder = user.NbItem - user.NumExchangeItem
+            if(remainder < 5){
+                return res.send(JSON.stringify("Customer has less than 5 item to exchange!"))
+            }
+            else{
+                user.NumExchangeItem += 5
+                await user.save()
+                return res.send(JSON.stringify("Get 5t1 voucher successfully!"))
+            }
+        }
+        else res.send(JSON.stringify("Only employee can access!"))
+    }
+    catch(err){
+        res.json(err)
+    }
+}
 
 module.exports = (app) =>{
     app.get("/store/view_order", (req,res) =>{
@@ -121,6 +132,9 @@ module.exports = (app) =>{
     })
     app.put("/store/status_order", (req,res) =>{
         changeStatus(req,res)
+    })
+    app.post("/voucher/get_5t1_voucher", (req,res) =>{
+        get_5t1_voucher(req,res)
     })
     // app.post("/store/create_order", (req,res) =>{
     //     createOrder(req,res)

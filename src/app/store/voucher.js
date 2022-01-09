@@ -146,36 +146,36 @@ function remove(req, res) {
   }
 }
 
-async function getVoucher5items(req, res){
-  try{
-    const {idAccount} = req.session
-    if(idAccount == null)
-      return res.status(400).send(JSON.stringify("Unauthorized"))
+// async function getVoucher5items(req, res){
+//   try{
+//     const {idAccount} = req.session
+//     if(idAccount == null)
+//       return res.status(400).send(JSON.stringify("Unauthorized"))
 
-    const user = await userModel.findById(idAccount)
-    if(user == null){
-      return res.send(JSON.stringify("Not found user"))
-    }
+//     const user = await userModel.findById(idAccount)
+//     if(user == null){
+//       return res.send(JSON.stringify("Not found user"))
+//     }
 
-    if(user.NbItem >= NbVoucher5items){
-      const voucher = await voucherModel.findOne({code: codeVoucher5items})
-      if(voucher == null)
-        return res.status(404).send(JSON.stringify("Not found voucher"))
-      user.NbItem -= NbVoucher5items
-      user.vouchers.push(voucher.id)
-      user.save()
+//     if(user.NbItem >= NbVoucher5items){
+//       const voucher = await voucherModel.findOne({code: codeVoucher5items})
+//       if(voucher == null)
+//         return res.status(404).send(JSON.stringify("Not found voucher"))
+//       user.NbItem -= NbVoucher5items
+//       user.vouchers.push(voucher.id)
+//       user.save()
 
-      res.json(user)
-    }
-    else{
-      return res.send(JSON.stringify("Buy more to get this voucher!"))
-    }
+//       res.json(user)
+//     }
+//     else{
+//       return res.send(JSON.stringify("Buy more to get this voucher!"))
+//     }
 
-  }
-  catch(err){
-    res.json(err)
-  }
-}
+//   }
+//   catch(err){
+//     res.json(err)
+//   }
+// }
 
 module.exports = (app) => {
   app.post("/voucher/create", (req, res) => {
@@ -193,7 +193,7 @@ module.exports = (app) => {
   app.delete("/voucher/delete", (req, res) => {
     remove(req, res);
   });
-  app.get("/voucher/getVoucher5items", (req,res) =>{
-    getVoucher5items(req,res);
-  })
+  // app.get("/voucher/getVoucher5items", (req,res) =>{
+  //   getVoucher5items(req,res);
+  // })
 };
