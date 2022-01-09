@@ -13,6 +13,7 @@
             crossorigin="anonymous"
         />
         <link rel="stylesheet" href="/css/admin/test.css" />
+        <link rel="stylesheet" href="/css/admin/addproduct.css" />
         <link rel="icon" href="/images/favicon.jpg" />
         <script
             src="https://kit.fontawesome.com/a10c199002.js"
@@ -102,11 +103,51 @@
             </div>
 
             <div class="col-10">
-            CODE O PHAN NAY
+                <div class="addproduct">
+                    <div class="page-content-wrapper">
+                        <p>Add Product</p>
+                        <div class="lam_cho_dep"></div>
+                        <div class="mb-4">
+                            <label for="form1" class="form-label">Product name</label>
+                            <label for="form1" class="help-block">*</label>
+                            <input type="text" id="name" placeholder="Name" class="form-control">
+                            <div class="p-2 d-none warning" id="warning-name">Please enter product name</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="form1" class="form-label">Product price</label>
+                            <label for="form1" class="help-block">*</label>
+                            <input type="text" id="price" placeholder="Price" class="form-control">
+                            <div class="p-2 d-none warning" id="warning-price">Please enter product price</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="form1" class="form-label">Product type</label>
+                            <label for="form1" class="help-block">*</label>
+                            <input type="text" id="type" placeholder="Type" class="form-control">
+                            <div class="p-2 d-none warning" id="warning-type">Please enter product type</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="form1" class="form-label">Product description</label>
+                            <label for="form1" class="help-block">*</label>
+                            <textarea type="text" id="description" placeholder="Description" class="form-control"></textarea>
+                            <div class="p-2 d-none warning" id="warning-description">Please enter product description</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="form1" class="form-label">Product image</label>
+                            <label for="form1" class="help-block">*</label>
+                            <input type="file" id="image" placeholder="Upload" class="form-control file-upload">
+                            <div class="p-2 d-none warning" id="warning-image">Please upload product image</div>
+                        </div>
+                        <div class="mb-4">
+                            <span class="help-block">*Required fields</span>
+                        </div>
+                        <button type="submit" id="submit_add_product" class="btn btn-danger">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
 
         <script src="/js/admin/test.js" crossorigin="anonymous"></script>
+        <script src="/js/admin/addproduct.js"></script>
 
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

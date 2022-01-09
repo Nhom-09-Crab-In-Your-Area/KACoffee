@@ -65,6 +65,17 @@ app.get('/my_order', (req, res) => {
     res.render(path.join(__dirname + '/../../views/profile/my_order'), {})
 })
 
+app.get('/my_subscription', (req, res) => {
+    res.render(
+        path.join(__dirname + '/../../views/profile/my_subscription'),
+        {}
+    )
+})
+
+app.get('/my_voucher', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/profile/my_voucher'), {})
+})
+
 app.get('/blog', (req, res) => {
     res.render(path.join(__dirname + '/../../views/blog'), {})
 })
