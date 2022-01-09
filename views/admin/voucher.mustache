@@ -13,6 +13,7 @@
             crossorigin="anonymous"
         />
         <link rel="stylesheet" href="/css/admin/test.css" />
+        <link rel="stylesheet" href="/css/admin/voucher.css" />
         <link rel="icon" href="/images/favicon.jpg" />
         <script
             src="https://kit.fontawesome.com/a10c199002.js"
@@ -102,15 +103,39 @@
             </div>
 
             <div class="col-10">
-                <form action="/adminvoucher">
-                    <label for="birthday">Birthday:</label>
-                    <input type="date" id="birthday" name="birthday">
+                <div class="add-voucher-form">
+                <div class='title'>CREATE VOUCHER </div>
+                <hr>
+                <form class="create-form" action="/voucher/create" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description">
+                    <label for="activeDate">Active Date:</label>
+                    <input type="date" id="activeDate" name="activeDate">
+                    <label for="expireDate">Expire Date:</label>
+                    <input type="date" id="expireDate" name="expireDate">
+                    <label for="minPaid">Min paid:</label>
+                    <input type="text" id="minPaid" name="minPaid">
+                    <label for="money">Money:</label>
+                    <input type="text" id="money" name="money">
+                    <label for="activeRank">Active rank:</label>
+                    <input type="text" id="activeRank" name="activeRank">
                     <input type="submit">
                 </form>
+                </div>
+                <div class="disply-voucher-list">
+                <div class='title'>VOUCHERS LIST</div>
+                <hr>
+                <div class="voucher-list">
+                    
+                </div>
+                </div>
             </div>
         </div>
 
         <script src="/js/admin/test.js" crossorigin="anonymous"></script>
+        <script src="/js/admin/voucher.js" crossorigin="anonymous"></script>
 
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
