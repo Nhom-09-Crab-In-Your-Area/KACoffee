@@ -23,6 +23,10 @@ sendmailbtn.addEventListener('click', async (e) => {
                     warning.classList.add('d-none')
                     warning1.classList.remove('d-none')
                 } else if (data == 'email sent') {
+                    alert(
+                        'A verification email has been sent to the address provided. If you don’t receive it in the next 30 minutes, please contact us. '
+                    )
+
                     window.location = '/login'
                 }
             })
@@ -32,4 +36,3 @@ sendmailbtn.addEventListener('click', async (e) => {
         warning.classList.remove('d-none')
     }
 })
-

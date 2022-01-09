@@ -1,18 +1,54 @@
 const productModel = require("../../models/product_model");
+const multer = require('multer')
+
+function formatDate(date, format) {
+  const map = {
+      mm: date.getMonth() + 1,
+      dd: date.getDate(),
+      yy: date.getFullYear().toString().slice(-2),
+      yyyy: date.getFullYear(),
+      hh: date.getHours(),
+      mi: date.getMinutes(),
+      ss: date.getSeconds()
+  }
+
+  return format.replace(/mm|dd|yy|yyyy|mi|hh|ss/gi, matched => map[matched])
+}
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, './public/images/product_images/')
+  },
+  filename: function(req, file, cb){
+    const {type} = req.body
+    const file_type = file.mimetype.split("/")[1]
+    const date = new Date()
+    const format = "dd_mm_yy_hh_mi"
+    cb(null, type + "_" + formatDate(date, format) + "." + file_type)
+  }
+})
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png')
+    cb(null, true)
+  else
+    cb(null, false)
+}
+
+const upload = multer({
+  storage: storage, 
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+})
 
 function create(req, res) {
   if (req.session.AccountType == "Admin") {
-    const { name, price, type, description, image } = req.body;
-    // productModel.findOne({'id': id}, function(err, product){
-    //     if(err){
-    //         res.status(500).json(err)
-    //     }
-    //     else if(product != null){
-    //         res.send("Product id existed")
-    //     }
-    // else{
+    //console.log(req.file)
+    const { name, price, type, description} = req.body;
+    let image = req.file.path
     productModel.create({
-      //id,
       name,
       price,
       type,
@@ -20,8 +56,7 @@ function create(req, res) {
       image,
     });
     res.send(JSON.stringify("created"));
-    //         }
-    //     })
+ 
   } else {
     res.send(JSON.stringify("Only admin can create products"));
   }
@@ -109,8 +144,10 @@ function rate(req, res){
     
   })
 }
+
+
 module.exports = (app) => {
-  app.post("/product/create", (req, res) => {
+  app.post("/product/create", upload.single("image_file"), (req, res) => {
     create(req, res);
   });
   app.post("/product/view", (req, res) => {
