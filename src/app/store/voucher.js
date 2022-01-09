@@ -73,7 +73,7 @@ async function displayAll(req, res) {
         const user = await userModel.findById(idAccount).populate('vouchers')
         if (user == null) {
             return res.status(404).send(JSON.stringify('Not found user'))
-        }
+        } else return res.json(user)
     }
 }
 

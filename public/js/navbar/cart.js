@@ -36,8 +36,7 @@ const cartAddItem = async (
 ) => {
     try {
         const total =
-            Number(amount) *
-            (price + (size == 'M' ? 5000 : 0) + (size == 'L' ? 10000 : 0))
+            price + (size == 'M' ? 5000 : 0) + (size == 'L' ? 10000 : 0)
         const data = {
             id_user,
             id_product,
