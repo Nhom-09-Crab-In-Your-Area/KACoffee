@@ -25,6 +25,6 @@ document
         }
     })
 
-fetch('/voucher/view', {method: 'GET'}).then(data => data.json()).then(data =>{
-    data.
-})
+fetch('/voucher/view', {method: 'GET'})
+    .then((data) => data.json())
+    .then((data) => {})

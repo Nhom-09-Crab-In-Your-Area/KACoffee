@@ -104,6 +104,10 @@ app.get('/orderhistory', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_history'), {})
 })
 
+app.get('/buy5get1', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/counter/buy5get1'), {})
+})
+
 app.get('/loginstaff', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/login'), {})
 })
