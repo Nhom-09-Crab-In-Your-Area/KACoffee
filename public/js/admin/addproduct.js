@@ -32,7 +32,17 @@ async function addProduct(e){
     const price = document.querySelector('#price').value;
     const type = document.querySelector('#type').value;
     const description = document.querySelector('#description').value;
+    const image = document.querySelector('#image').files[0];
+    const formData = new FormData();
+    formData.append('image_file', image);
+    const product = {name: name, price: price, type: type, description: description};
+    formData.append('product', JSON.stringify(product));
     if(checkBeforeSubmit(name, price, type, description)){
         console.log(name + ' ' + description);
+        await fetch('/product/create', {
+            method: 'POST',
+            body: formData,   
+        })
+            .then((res) => res.json())
     }
 }
