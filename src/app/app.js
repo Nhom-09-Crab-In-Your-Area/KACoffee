@@ -80,7 +80,7 @@ app.get('/blog', (req, res) => {
     res.render(path.join(__dirname + '/../../views/blog'), {})
 })
 
-app.get('/viewblog', (req, res) => {
+app.get('/post', (req, res) => {
     res.render(path.join(__dirname + '/../../views/viewpostblog'), {})
 })
 
