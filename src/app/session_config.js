@@ -20,7 +20,7 @@ module.exports.init = (app) => {
             genid: function (req) {
                 return shortid.generate()
             },
-            secret: 'thisismysecrctekeyfhrgfgrfrty84fwir767',
+            secret: DBconfig.pw,
             cookie: {
                 //secure need to be set to true when implement
                 secure: false,
