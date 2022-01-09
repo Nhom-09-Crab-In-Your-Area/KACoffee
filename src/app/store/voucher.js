@@ -53,13 +53,8 @@ function create(req, res) {
 
 async function displayAll(req, res) {
   if(req.session.AccountType == "Admin"){
-    voucherModel.find((err, voucher) => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.json(voucher);
-      }
-    });
+    const vouchers = await voucherModel.find()
+    return res.json(vouchers)
   }
   if(req.session.AccountType == "Customer"){
     const {idAccount} = req.session
