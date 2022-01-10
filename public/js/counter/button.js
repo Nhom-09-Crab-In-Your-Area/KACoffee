@@ -16,3 +16,11 @@ if (document.querySelector('.order-online')) {
         document.querySelector('.account-info27').style.display = 'none'
     })
 }
+
+document.querySelector('.order-history').addEventListener('click', () => {
+    window.location = '/orderhistory'
+})
+
+document.querySelector('.order-b5g1').addEventListener('click', () => {
+    window.location = '/buy5get1'
+})

@@ -1,10 +1,14 @@
-fetch('check_self_profile', {method: 'GET'})
-    .then((res) => res.json())
-    .then((data) => {
-        let div = document.createElement('div')
-        div.innerHTML = `
-            <div> TOTAL MONEY PAID: ${data.totalMoney} VND</div>
-            <div> RANK: ${data.rank} </div>
-        `
-        document.querySelector('#vouchers-display').appendChild(div)
+fetch('voucher/view', {method: 'GET'})
+    .then((data) => data.json())
+    .then(({vouchers}) => {
+        vouchers.forEach((e) => {
+            let div = document.createElement('div')
+            div.style.border = '1px solid black'
+            div.style.padding = '2px'
+            div.style.margin = '2px'
+            div.innerHTML = `
+                <div> CODE: <span style="font-weight:bold;">${e.code}</span> discount ${e.money} VND for Min. ${e.minPaid} VND</div>
+            `
+            document.querySelector('#vouchers-display').appendChild(div)
+        })
     })
