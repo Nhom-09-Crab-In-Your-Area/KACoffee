@@ -70,11 +70,11 @@
             </div>
         </div>
         <script src="/js/counter/account.js"></script>
-        {{!
+        
         <script>
             fetchState()
         </script>
-        }}
+       
         <div class="row m-0 p-0">
             <div
                 class="col-2"
@@ -105,10 +105,19 @@
             </div>
 
             <div class="col-10">
+                <label></label>
             </div>
         </div>
-        <script src="/js/counter/profile.js"></script>
+        
         <script src="/js/counter/button.js"></script>
+        <script>
+            document.querySelector('.order-on').addEventListener('click', () => {
+        window.location = '/orderonline'
+        })
+        document.querySelector('.order-off').addEventListener('click', () => {
+        window.location = '/employee'
+    })
+        </script>
 
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
