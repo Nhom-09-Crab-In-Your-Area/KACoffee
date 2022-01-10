@@ -105,11 +105,16 @@
             </div>
 
             <div class="col-10">
-                <label></label>
+                <form class="phoneForm">
+                    <label for="phoneNUMBER">Phone number:</label><br>
+                    <input type="text" id="phonNUMBER" name="phoneNUMBER"><br>
+                    <input type="submit" style="margin-top:5px;" value="Submit">
+                </form>
             </div>
         </div>
         
         <script src="/js/counter/button.js"></script>
+        <script src="/js/counter/buy5get1.js"></script>
         <script>
             document.querySelector('.order-on').addEventListener('click', () => {
         window.location = '/orderonline'
