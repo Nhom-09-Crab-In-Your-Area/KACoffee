@@ -55,7 +55,7 @@ async function getrevenues() {
                 x += u.price
             }
             const child = document.createElement('div')
-            child.innerHTML = `<p class="card-title">${x}VNĐ<p>`
+            child.innerHTML = `<p class="card-title">${x}</p><p class="card-title">VND</p>`
             revenues.appendChild(child)
         })
 }
@@ -79,7 +79,7 @@ async function getbudget() {
                 x += u.price
             }
             const child = document.createElement('div')
-            child.innerHTML = `<p class="card-title">${x}VNĐ<p>`
+            child.innerHTML = `<p class="card-title">${x}</p><p class="card-title">VND</p>`
             budget.appendChild(child)
         })
 }
