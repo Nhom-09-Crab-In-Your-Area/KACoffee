@@ -14,7 +14,7 @@ async function stats_by_date(req, res){
             }
             //console.log(ending_date.getDate())
             //console.log(starting_date.getDate())
-            const orders = await orderModel.find({createAt: {$gte: starting_date, $lt: ending_date}})
+            const orders = await orderModel.find({createAt: {$gte: starting_date, $lt: ending_date}}).populate({path: "products.info"}).populate("user")
             return res.json(orders)
         }
         else{
