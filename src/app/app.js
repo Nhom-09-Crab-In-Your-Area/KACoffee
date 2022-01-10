@@ -65,6 +65,17 @@ app.get('/my_order', (req, res) => {
     res.render(path.join(__dirname + '/../../views/profile/my_order'), {})
 })
 
+app.get('/my_subscription', (req, res) => {
+    res.render(
+        path.join(__dirname + '/../../views/profile/my_subscription'),
+        {}
+    )
+})
+
+app.get('/my_voucher', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/profile/my_voucher'), {})
+})
+
 app.get('/blog', (req, res) => {
     res.render(path.join(__dirname + '/../../views/blog'), {})
 })
@@ -93,7 +104,7 @@ app.get('/orderhistory', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_history'), {})
 })
 
-app.get('/login/staff', (req, res) => {
+app.get('/loginstaff', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/login'), {})
 })
 
