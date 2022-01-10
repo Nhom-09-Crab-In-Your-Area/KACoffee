@@ -48,6 +48,8 @@ function create(req, res) {
     //console.log(req.file)
     const { name, price, type, description} = req.body;
     let image = req.file.path
+    image = image.slice(7,)
+    // console.log(image)
     productModel.create({
       name,
       price,

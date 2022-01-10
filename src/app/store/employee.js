@@ -136,7 +136,4 @@ module.exports = (app) =>{
     app.post("/voucher/get_5t1_voucher", (req,res) =>{
         get_5t1_voucher(req,res)
     })
-    // app.post("/store/create_order", (req,res) =>{
-    //     createOrder(req,res)
-    // })
 }
