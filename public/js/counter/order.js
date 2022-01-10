@@ -186,7 +186,7 @@ async function getorder(e) {
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
                 <span class="order-address">${order.address} </span>
-                <span class="order-price">${order.price} VNĐ</span>
+                <span class="order-price">${order.total} VNĐ</span>
                 </div>
             </button>
           </h2>
@@ -245,6 +245,20 @@ async function getorderdata(e) {
             `
             itemInfo.appendChild(item)
         }
+        const item = document.createElement('div')
+        item.innerHTML = `
+        <div class="row">
+            <div class="col-sm">Giảm giá</div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            <div class="col-sm">${
+                parseInt(order.total) - parseInt(order.price)
+            }VNĐ</div>
+        </div>    
+    `
+        itemInfo.appendChild(item)
         temp.appendChild(itemInfo)
         i++
     })
@@ -297,7 +311,7 @@ async function getpendingorder(e) {
                 <span class="order-status">${order.status}</span>
                 <span class="order-phone">${user.phone}</span>
                 <span class="order-address">${order.address} </span>
-                <span class="order-price">${order.price} VNĐ</span>
+                <span class="order-price">${order.total} VNĐ</span>
                 </div>
             </button>
           </h2>
@@ -357,6 +371,20 @@ async function getpendingorderdata(e) {
             `
             itemInfo.appendChild(item)
         }
+        const item = document.createElement('div')
+        item.innerHTML = `
+            <div class="row">
+                <div class="col-sm">Giảm giá</div>
+                <div class="col-sm"></div>
+                <div class="col-sm"></div>
+                <div class="col-sm"></div>
+                <div class="col-sm"></div>
+                <div class="col-sm">${
+                    parseInt(order.total) - parseInt(order.price)
+                }VNĐ</div>
+            </div>    
+        `
+        itemInfo.appendChild(item)
         temp.appendChild(itemInfo)
         i++
     })

@@ -10,7 +10,7 @@ function addBlog(blogInfo) {
         title.innerHTML = blogInfo[i].title;
 
         var blogLink = document.querySelectorAll(`.blog__link-${i+1}`);
-        var link = 'http://localhost:3000/viewblog?id=';
+        var link = 'http://localhost:3000/post?id=';
         link += String(blogInfo[i]._id);
         blogLink[0].href = link;
         blogLink[1].href = link;

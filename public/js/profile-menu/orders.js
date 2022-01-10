@@ -36,7 +36,7 @@ fetch('order/view', {method: 'GET'})
                         aria-expanded="true"
                         aria-controls="collapse${i}"
                     >
-                        ${e.createAt.slice(0, 10)} | ${e.price} VND | ${
+                        ${e.createAt.slice(0, 10)} | ${e.total} VND | ${
                 e.status
             }
                     </button>

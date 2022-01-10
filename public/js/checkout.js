@@ -10,6 +10,8 @@
 
 const checkout = document.querySelector('.checkout')
 
+let voucherUsed = localStorage.getItem('voucher')
+
 const productList1 = document.querySelector('.productList1')
 
 const adjustAmountHandler1 = async (id_cart, id_item, amount, id_user) => {
@@ -50,11 +52,14 @@ function hdPointChange(total, point) {
     } else {
         document.querySelector('.point-error').style.display = 'none'
         document.querySelector('.order-total').textContent = `${
-            total - Number(document.querySelector('.point-used').value)
+            total -
+            Number(document.querySelector('.point-used').value) -
+            Number(voucherUsed ? voucherUsed : 0)
         }`
     }
 }
 const cartRender1 = async (id_user) => {
+    let voucherUsed = localStorage.getItem('voucher')
     const data = {id_user}
     let items = await fetch('/cart/view', {
         method: 'POST',
@@ -121,6 +126,7 @@ const cartRender1 = async (id_user) => {
             (item.size == 'L' ? 10000 : 0)
         //console.log(item.info.price)
         total += price * item.amount
+        console.log(price, item.amount)
         itemContainer.innerHTML = `
             <div class = "cart-item row">
                 <div class = "col-6 col-md-6">
@@ -159,37 +165,92 @@ const cartRender1 = async (id_user) => {
         productList1.appendChild(itemContainer)
     })
     const mess = document.createElement('div')
-    if (items.length > 0)
+    if (items.length > 0) {
         mess.innerHTML = `<div style = "color:black; font-weight:bold; text-align: right" >CART TOTAL: <spans class="cart-total">${total}</span> VND</div>
         <div style = "color:black; font-weight:bold; text-align: right" >
-            Use Point (${User['point']}):  <input style="width:70px;" type="text" onChange="hdPointChange(${total},${User['point']})" value="0" name="point-used" class="point-used"> VND
+            Use Point (${
+                User['point']
+            }):  <input style="width:70px;" type="text" onChange="hdPointChange(${total},${
+            User['point']
+        })" value="0" name="point-used" class="point-used"> VND
+        </div>
+        <div style = "color:black; font-weight:bold; text-align: right; margin:5px;">
+        <div class='voucherlist'></div>
+        <div>Voucher used: -${voucherUsed ? voucherUsed : 'none'}</div>
         </div>
         <div class="point-error" style="text-align: right; display:none;">* Please enter valid value</div>
         <div style = "margin-top: 10px;color:black; font-weight:bold; text-align: right" >
-            <span style = "border-top: 1px solid black">ORDER TOTAL: <spans class="order-total">${total}</span></span> VND
+            <span style = "border-top: 1px solid black">ORDER TOTAL: <spans class="order-total">${
+                total - Number(voucherUsed ? voucherUsed : 0)
+            }</span></span> VND
         </div>
-        <div class = "place-order-box" style = "text-align: center"><button class="place-order-btn">PLACE YOUR ORDER</button> </div>`
-    else mess.innerHTML = `YOUR CART IS EMPTY`
-    productList1.appendChild(mess)
+        <div class = "place-order-box" style = "text-align: center"><button class="place-order-btn">PLACE YOUR ORDER</button> </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        </div>`
+
+        const {vouchers} = await fetch('voucher/view', {method: 'GET'}).then(
+            (data) => data.json()
+        )
+        productList1.appendChild(mess)
+
+        const listVouchers = document.querySelector('.voucherlist')
+
+        console.log(vouchers)
+
+        vouchers
+            .filter((e) => {
+                if (Date.now() < Date.parse(e.activeDate)) return false
+                if (Date.now() > Date.parse(e.expireDate)) return false
+                if (Number(e.minPaid) > total) return false
+                return true
+            })
+            .forEach((e) => {
+                const btn = document.createElement('button')
+                btn.textContent = `Discount ${e.money} VND`
+                btn.style.border = '1px solid black'
+                btn.style.margin = '2px'
+
+                btn.addEventListener('click', () => {
+                    localStorage.setItem('voucher', e.money)
+                    localStorage.setItem('voucher_id', e._id)
+                    cartRender1()
+                })
+                listVouchers.appendChild(btn)
+            })
+    } else {
+        mess.innerHTML = `YOUR CART IS EMPTY`
+        productList1.appendChild(mess)
+    }
 
     document.querySelector('.product-count').textContent = qty
     document
         .querySelector('.place-order-btn')
         .addEventListener('click', async (e) => {
             e.preventDefault()
+            let body
+            if (voucherUsed)
+                body = {
+                    id_cart,
+                    address: document.querySelector('#order-address').value,
+                    point_value: document.querySelector('.point-used').value,
+                    id_voucher: localStorage.getItem('voucher_id'),
+                }
+            else
+                body = {
+                    id_cart,
+                    address: document.querySelector('#order-address').value,
+                    point_value: document.querySelector('.point-used').value,
+                }
             await fetch('/order/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify({
-                    id_cart,
-                    address: document.querySelector('#order-address').value,
-                    point_used: document.querySelector('.point-used').value,
-                }),
+                body: JSON.stringify(body),
             })
 
+            localStorage.removeItem('voucher')
+            localStorage.removeItem('voucher_id')
             alert('Successfully Ordered! Back to the main page!')
             window.location = '/'
         })

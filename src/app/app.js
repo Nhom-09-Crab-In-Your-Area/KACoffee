@@ -80,7 +80,7 @@ app.get('/blog', (req, res) => {
     res.render(path.join(__dirname + '/../../views/blog'), {})
 })
 
-app.get('/viewblog', (req, res) => {
+app.get('/post', (req, res) => {
     res.render(path.join(__dirname + '/../../views/viewpostblog'), {})
 })
 
@@ -102,6 +102,10 @@ app.get('/orderonline', (req, res) => {
 
 app.get('/orderhistory', (req, res) => {
     res.render(path.join(__dirname + '/../../views/counter/order_history'), {})
+})
+
+app.get('/buy5get1', (req, res) => {
+    res.render(path.join(__dirname + '/../../views/counter/buy5get1'), {})
 })
 
 app.get('/loginstaff', (req, res) => {

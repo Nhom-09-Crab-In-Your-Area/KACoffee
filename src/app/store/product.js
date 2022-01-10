@@ -46,8 +46,10 @@ const upload = multer({
 function create(req, res) {
   if (req.session.AccountType == "Admin") {
     //console.log(req.file)
-    const { name, price, type, description} = req.body;
+    const { name, price, type, description} = JSON.parse(req.body.product);
     let image = req.file.path
+    // console.log(req)
+    // console.log(typeof(req.body.product))
     productModel.create({
       name,
       price,
