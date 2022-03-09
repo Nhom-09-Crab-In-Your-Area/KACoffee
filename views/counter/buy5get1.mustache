@@ -70,11 +70,11 @@
             </div>
         </div>
         <script src="/js/counter/account.js"></script>
-        {{!
+        
         <script>
             fetchState()
         </script>
-        }}
+       
         <div class="row m-0 p-0">
             <div
                 class="col-2"
@@ -105,10 +105,24 @@
             </div>
 
             <div class="col-10">
+                <form class="phoneForm">
+                    <label for="phoneNUMBER">Phone number:</label><br>
+                    <input type="text" id="phoneNUMBER" name="phoneNUMBER"><br>
+                    <input type="submit" style="margin-top:5px;" value="Submit">
+                </form>
             </div>
         </div>
-        <script src="/js/counter/profile.js"></script>
+        
         <script src="/js/counter/button.js"></script>
+        <script src="/js/counter/buy5get1.js"></script>
+        <script>
+            document.querySelector('.order-on').addEventListener('click', () => {
+        window.location = '/orderonline'
+        })
+        document.querySelector('.order-off').addEventListener('click', () => {
+        window.location = '/employee'
+    })
+        </script>
 
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

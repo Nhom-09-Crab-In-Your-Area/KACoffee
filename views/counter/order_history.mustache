@@ -90,6 +90,7 @@
                     <div class="sidebar-item order-off">Create order</div>
                     <div class="sidebar-item order-on">Online order</div>
                     <div class="sidebar-item order-history">Order history</div>
+                    <div class="sidebar-item order-b5g1">Buy 5 get 1</div>
                 </div>
                 <div
                     class="sidebar-footer"
@@ -436,9 +437,14 @@
                 </div>
             </div>
         </div>
+        
         <script src="/js/counter/profile.js"></script>
         <script src="/js/counter/button.js"></script>
-
+        <script>
+            document.querySelector('.order-on').addEventListener('click', () => {
+        window.location = '/orderonline'
+        })
+        </script>
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

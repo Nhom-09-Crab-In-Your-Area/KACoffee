@@ -8,15 +8,15 @@ document.querySelector('.btn-analysis').addEventListener('click', (e) => {
     window.location = '/adminanalysis'
 })
 
-document.querySelector('.btn-vieweacc').addEventListener('click', (e) => {
-    e.preventDefault()
-    window.location = '/adminviewemployee'
-})
+// document.querySelector('.btn-vieweacc').addEventListener('click', (e) => {
+//     e.preventDefault()
+//     window.location = '/adminviewemployee'
+// })
 
-document.querySelector('.btn-viewuacc').addEventListener('click', (e) => {
-    e.preventDefault()
-    window.location = '/adminviewuser'
-})
+// document.querySelector('.btn-viewuacc').addEventListener('click', (e) => {
+//     e.preventDefault()
+//     window.location = '/adminviewuser'
+// })
 
 document.querySelector('.btn-voucher').addEventListener('click', (e) => {
     e.preventDefault()
